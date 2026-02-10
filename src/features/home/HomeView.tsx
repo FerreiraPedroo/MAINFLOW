@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@utils/createPageUrl";
 
-export default function Home() {
+export function HomeView() {
   return (
-    <div className="h-full bg-linear-to-br from-emerald-100 via-teal-50 to-cyan-100 flex items-center justify-center p-4">
+    <div className="h-full bg-linear-to-br from-emerald-100 via-teal-50 to-cyan-100 flex items-start justify-center p-8">
       <div className="max-w-4xl w-full">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-emerald-500 to-teal-600 mb-6 shadow-lg shadow-emerald-500/25">

@@ -1,3 +1,6 @@
+import {  useNavigate } from "react-router-dom";
+
 export function createPageUrl(page: string) {
-  return page;
+  console.log(location)
+  return "";
 }

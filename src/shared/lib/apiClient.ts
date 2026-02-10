@@ -1,6 +1,12 @@
-import { CONFIG } from "@config/config";
+import { CONFIG } from "@/config/config";
 
-export const ApiService = async (url: string, config = { headers: {} }) => {
+interface ConfigImp {
+  method: string;
+  headers?: { [key: string]: string };
+  body?: any;
+}
+
+export async function apiClient(url: string, config: ConfigImp = { method: "GET", headers: {} }) {
   const configDefault = {
     headers: {
       "Content-type": "application/json",
@@ -18,19 +24,13 @@ export const ApiService = async (url: string, config = { headers: {} }) => {
     const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
     const responseJson = await response.json();
 
-    if (
-      responseJson.codStatus &&+
-      (responseJson.codStatus == 201 || responseJson.codStatus == 200)
-    ) {
+    if (responseJson.codStatus && +(responseJson.codStatus == 201 || responseJson.codStatus == 200)) {
       return responseJson;
     } else {
       throw responseJson;
     }
   } catch (error: any) {
-    if (
-      error.message?.includes("Failed to fetch") ||
-      error.message?.includes("ERR_CONNECTION_REFUSED")
-    ) {
+    if (error.message?.includes("Failed to fetch") || error.message?.includes("ERR_CONNECTION_REFUSED")) {
       throw {
         codStatus: 404,
         message: "Servidor indisponível ou conexão recusada.",
@@ -45,4 +45,4 @@ export const ApiService = async (url: string, config = { headers: {} }) => {
       };
     }
   }
-};
+}
