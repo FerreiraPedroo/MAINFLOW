@@ -1,7 +1,7 @@
-import type { Epi } from "../../../features/safety/interfaces/epi";
-import { CheckInput } from "../input/CheckInput";
-import { DateInput } from "../input/DateInput";
-import { TextInput } from "../input/TextInput";
+import type { Epi } from "../../interfaces/epi";
+import { CheckInput } from "../../../../shared/components/input/CheckInput";
+import { DateInput } from "../../../../shared/components/input/DateInput";
+import { TextInput } from "../../../../shared/components/input/TextInput";
 
 export function EpiCertificateApproval({
   formData,

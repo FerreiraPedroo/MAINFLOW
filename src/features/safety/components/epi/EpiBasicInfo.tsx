@@ -1,8 +1,8 @@
-import type { Epi } from "../../../features/safety/interfaces/epi";
-import { ImagemUpload } from "../input/Imagem";
-import { SelectInput } from "../input/SelectInput";
-import { Textarea } from "../input/Textarea";
-import { TextInput } from "../input/TextInput";
+import type { Epi } from "../../interfaces/epi";
+import { ImagemUpload } from "../../../../shared/components/input/Imagem";
+import { SelectInput } from "../../../../shared/components/input/SelectInput";
+import { Textarea } from "../../../../shared/components/input/Textarea";
+import { TextInput } from "../../../../shared/components/input/TextInput";
 
 const inputCompose = [
   { type: "text", name: "code", required: false, placeholder: "", cols: 1, options: [{ id: 1, name: "opção 1" }] },

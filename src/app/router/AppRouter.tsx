@@ -10,9 +10,9 @@ export const Approuter = createBrowserRouter(
       <Route path="/" element={<Navigate to={"/painel"} />} />
 
       <Route element={<Layout />}>
-        {Object.entries(Pages).map(([path, Page]) => (
-          <Route key={path} path={`/${path}`} element={<Page />} />
-        ))}
+        {Object.entries(Pages).map(([path, Page]) => {
+          return <Route key={path} path={`/${path}`} element={<Page />} />
+        })}
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

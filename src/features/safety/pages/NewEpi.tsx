@@ -7,8 +7,8 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { PageMainContainer } from "../../../shared/components/PageMainContainer";
 import { BackButton } from "../../../shared/components/button/BackButton";
 import { Header } from "../../../shared/components/header/Header";
-import { EpiBasicInfo } from "../../../shared/components/epiComponents/EpiBasicInfo";
-import { EpiCertificateApproval } from "../../../shared/components/epiComponents/EpiCertificateApproval";
+import { EpiBasicInfo } from "../components/epi/EpiBasicInfo";
+import { EpiCertificateApproval } from "../components/epi/EpiCertificateApproval";
 import { SubmitButtom } from "../../../shared/components/button/SubmitButtom";
 
 const categoriesList = [
@@ -68,9 +68,9 @@ export function NewEpiView() {
   return (
     <PageMainContainer>
       <div className="w-full space-y-6 pb-20">
-        <div className="space-y-4">
-          <Header title="Cadastrar EPI" subTitle="Cadastre um novo equipamento de proteção" />
+        <div className="flex gap-4">
           <BackButton />
+          <Header title="Cadastrar EPI" subTitle="Cadastre um novo equipamento de proteção" />
         </div>
 
         {isSaving && (
