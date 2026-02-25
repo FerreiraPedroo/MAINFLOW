@@ -1,3 +1,5 @@
+import React from "react";
+
 export function SubmitButtom({ text }: { text: string }) {
   return (
     <div className="flex items-center justify-center gap-4">

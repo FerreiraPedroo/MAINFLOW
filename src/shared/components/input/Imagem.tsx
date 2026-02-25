@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { gridCols } from "./utils/gridCols";
 
 export function ImagemUpload({
@@ -16,9 +16,11 @@ export function ImagemUpload({
   cols?: number | string;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
 }) {
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const selectFile = event.target.files?.[0];
-    console.log(selectFile)
+    console.log(selectFile);
     if (!selectFile) return;
 
     const imageUrl = URL.createObjectURL(selectFile);
@@ -34,7 +36,7 @@ export function ImagemUpload({
     };
   }, [value]);
 
-  const cl = `${gridCols[cols]} rounded-2xl border border-slate-200 p-6`;
+  const cl = `${gridCols[cols]} bg-white rounded-2xl border border-slate-200 p-6`;
 
   return (
     <div className={cl}>
@@ -53,7 +55,14 @@ export function ImagemUpload({
           ) : (
             <div className="w-24 h-24 rounded-xl bg-slate-100 flex items-center justify-center p-4">
               <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-                <rect x="0" y="0" width="200" height="150" rx="12" fill="#E5E7EB" />
+                <rect
+                  x="0"
+                  y="0"
+                  width="200"
+                  height="150"
+                  rx="12"
+                  fill="#E5E7EB"
+                />
                 <circle cx="55" cy="45" r="18" fill="#9CA3AF" />
                 <path d="M20 120 L80 70 L120 120 Z" fill="#9CA3AF" />
                 <path d="M70 120 L140 50 L200 120 Z" fill="#6B7280" />

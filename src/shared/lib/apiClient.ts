@@ -6,12 +6,15 @@ interface ConfigImp {
   body?: any;
 }
 
-export async function apiClient(url: string, config: ConfigImp = { method: "GET", headers: {} }) {
+export async function apiClient(
+  url: string,
+  config: ConfigImp = { method: "GET", headers: {} },
+) {
   const configDefault = {
     headers: {
       "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("X-Mainflow-Token")}`,
-      "X-Mainflow-Version": `${localStorage.getItem("mainflow-dataVersion")}`,
+      Authorization: `Bearer ${localStorage.getItem("X-DiferencialFlow-Token")}`,
+      "X-DiferencialFlow-Version": `${localStorage.getItem("diferencialFlow-dataVersion")}`,
     },
   };
 
@@ -24,13 +27,19 @@ export async function apiClient(url: string, config: ConfigImp = { method: "GET"
     const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
     const responseJson = await response.json();
 
-    if (responseJson.codStatus && +(responseJson.codStatus == 201 || responseJson.codStatus == 200)) {
+    if (
+      responseJson.codStatus &&
+      +(responseJson.codStatus == 201 || responseJson.codStatus == 200)
+    ) {
       return responseJson;
     } else {
       throw responseJson;
     }
   } catch (error: any) {
-    if (error.message?.includes("Failed to fetch") || error.message?.includes("ERR_CONNECTION_REFUSED")) {
+    if (
+      error.message?.includes("Failed to fetch") ||
+      error.message?.includes("ERR_CONNECTION_REFUSED")
+    ) {
       throw {
         codStatus: 404,
         message: "Servidor indisponível ou conexão recusada.",

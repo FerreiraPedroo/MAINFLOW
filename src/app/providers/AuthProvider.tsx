@@ -13,11 +13,12 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [user, setUser] = useState(null);
   const [appSettings, setAppSettings] = useState();
 
-  const [authentication, setAutentication] = useState<UserAutenticationInterface>({
-    authError: null,
-    isAuthenticated: false,
-    isLoading: true,
-  });
+  const [authentication, setAutentication] =
+    useState<UserAutenticationInterface>({
+      authError: null,
+      isAuthenticated: false,
+      isLoading: true,
+    });
 
   const updateStatus = useCallback((status: any) => {
     setAutentication((prev) => {

@@ -22,7 +22,9 @@ export function CheckInput({
           <input
             type="checkbox"
             checked={value}
-            onChange={(e) => setFormValue((prev) => ({ ...prev, [name]: e.target.checked }))}
+            onChange={(e) =>
+              setFormValue((prev) => ({ ...prev, [name]: e.target.checked }))
+            }
             className="sr-only peer"
           />
           <div className="w-11 h-6 bg-slate-200 peer-checked:bg-emerald-500 rounded-full transition-colors" />

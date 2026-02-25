@@ -1,4 +1,9 @@
-import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+  Route,
+} from "react-router-dom";
 
 import { pagesConfig } from "@config/pages.config.ts";
 
@@ -11,7 +16,7 @@ export const Approuter = createBrowserRouter(
 
       <Route element={<Layout />}>
         {Object.entries(Pages).map(([path, Page]) => {
-          return <Route key={path} path={`/${path}`} element={<Page />} />
+          return <Route key={path} path={`/${path}`} element={<Page />} />;
         })}
       </Route>
 

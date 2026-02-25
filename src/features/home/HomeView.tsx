@@ -7,7 +7,12 @@ export function HomeView() {
       <div className="max-w-4xl w-full">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-emerald-500 to-teal-600 mb-6 shadow-lg shadow-emerald-500/25">
-            <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-10 h-10 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -16,9 +21,13 @@ export function HomeView() {
               />
             </svg>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">MainFlow</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+            Diferencial Flow
+          </h1>
 
-          <p className="text-lg text-slate-600 mb-8">Sistema de gestão operacional por deparamento.</p>
+          <p className="text-lg text-slate-600 mb-8">
+            Sistema de gestão operacional por deparamento.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -27,7 +36,12 @@ export function HomeView() {
             className="group bg-white rounded-2xl border border-slate-200 p-8 hover:shadow-xl hover:shadow-slate-200/50 hover:border-emerald-200 transition-all duration-300"
           >
             <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className="w-7 h-7 text-blue-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -39,7 +53,9 @@ export function HomeView() {
             <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-emerald-700 transition-colors">
               Dashboard
             </h3>
-            <p className="text-slate-600">Visão geral e estatísticas do sistema</p>
+            <p className="text-slate-600">
+              Visão geral e estatísticas do sistema
+            </p>
           </Link>
         </div>
 

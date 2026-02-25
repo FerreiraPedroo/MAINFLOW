@@ -4,4 +4,9 @@ export type DepartmentType = {
   url: string;
 };
 
-export type MenuItemsType = { name: string; department_id: number; url: string; icon: string };
+export type MenuItemsType = {
+  name: string;
+  department_id: number;
+  url: string;
+  icon: string;
+};
