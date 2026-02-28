@@ -14,7 +14,7 @@ export function SelectInput({
   text: string;
   name: string;
   value: any;
-  options: { id: number; name: string }[] | [];
+  options: Array<{ id: number; name: string } | string>;
   required?: boolean;
   cols?: number | string;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
@@ -37,14 +37,23 @@ export function SelectInput({
         onChange={(e) =>
           setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
         }
-        className="w-full bg-white px-4 py-2.5 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+        className="w-full bg-white px-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
       >
         <option value="">Selecione...</option>
-        {options.map((opt) => (
-          <option key={opt.name} value={opt.id}>
-            {opt.name}
-          </option>
-        ))}
+        {options.map((opt) => {
+          if (typeof opt == "string") {
+            return (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            );
+          }
+          return (
+            <option key={opt.name} value={opt.id}>
+              {opt.name}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

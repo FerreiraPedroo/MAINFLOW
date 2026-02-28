@@ -1,7 +1,7 @@
-import { sideBarConfig } from "@/config/sidebar.config";
-
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { sideBarConfig } from "@config/sidebar.config";
 import type { MenuItemsType } from "./SideBarTypes";
 
 export function SideBar() {
@@ -111,7 +111,7 @@ export function SideBar() {
                           setShowDeptMenu(false);
                           navigate(dept.url);
                         }}
-                        className={`text-sm lg:text-base w-full text-left px-4 py-3 hover:bg-slate-100 transition-colors border-b border-slate-100 last:border-b-0 ${
+                        className={`text-sm lg:text-lg w-full text-left px-4 py-3 hover:bg-slate-100 transition-colors border-b border-slate-100 last:border-b-0 ${
                           selectedDept === dept.id
                             ? "bg-emerald-50 text-emerald-700 font-medium"
                             : "text-slate-700"

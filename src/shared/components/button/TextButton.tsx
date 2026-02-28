@@ -7,7 +7,7 @@ const baseWhite =
 
 const types = {
   red: `${base} bg-rose-500 hover:bg-rose-600`,
-  stone: `${base} bg-stone-500 hover:bg-stone-600`,
+  stone: `${base} bg-slate-400 hover:bg-slate-500`,
   blue: `${base} bg-blue-500 hover:bg-blue-600`,
   white: `${baseWhite} bg-slate-100 text-slate-700 hover:bg-slate-200`,
 };

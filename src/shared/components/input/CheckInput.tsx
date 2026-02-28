@@ -1,3 +1,4 @@
+import React from "react";
 import { gridCols } from "./utils/gridCols";
 
 export function CheckInput({

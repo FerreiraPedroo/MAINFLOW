@@ -135,7 +135,7 @@ export function ListPersonView() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-50 border-b border-slate-200">
+                  <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
                     <th className="px-6 py-4 font-medium">Registro</th>
                     <th className="px-6 py-4 font-medium">Nome</th>
                     <th className="px-6 py-4 font-medium">Status</th>

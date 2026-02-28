@@ -6,8 +6,18 @@ type Category = {
 };
 
 export const categoriesList: Category[] = [
-  { id: 1, name: "Cabeça", icon: "M12 14l9-5-9-5-9 5 9 5z", color: "bg-blue-100 text-blue-600" },
-  { id: 2, name: "Olhos/Face", icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z", color: "bg-purple-100 text-purple-600" },
+  {
+    id: 1,
+    name: "Cabeça",
+    icon: "M12 14l9-5-9-5-9 5 9 5z",
+    color: "bg-blue-100 text-blue-600",
+  },
+  {
+    id: 2,
+    name: "Olhos/Face",
+    icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+    color: "bg-purple-100 text-purple-600",
+  },
   {
     id: 3,
     name: "Auditivo",
@@ -38,7 +48,12 @@ export const categoriesList: Category[] = [
     icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
     color: "bg-emerald-100 text-emerald-600",
   },
-  { id: 8, name: "Quedas", icon: "M13 10V3L4 14h7v7l9-11h-7z", color: "bg-red-100 text-red-600" },
+  {
+    id: 8,
+    name: "Quedas",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    color: "bg-red-100 text-red-600",
+  },
   {
     id: 9,
     name: "Outros",

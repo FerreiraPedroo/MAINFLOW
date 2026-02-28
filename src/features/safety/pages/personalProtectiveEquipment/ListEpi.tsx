@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import type { Epi } from "../interfaces/epi";
+import type { Epi } from "../../interfaces/epi";
 import { apiClient } from "@/shared/lib/apiClient";
 
-import { PageMainContainer } from "../../../shared/components/PageMainContainer";
-import { Header } from "../../../shared/components/header/Header";
-import { LinkButton } from "../../../shared/components/button/LinkButton";
-import { SearchInput } from "../../../shared/components/input/SearchInput";
-import { SelectInput } from "../../../shared/components/input/SelectInput";
+import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Header } from "@shared/components/header/Header";
+import { LinkButton } from "@shared/components/button/LinkButton";
+import { SearchInput } from "@shared/components/input/SearchInput";
+import { SelectInput } from "@shared/components/input/SelectInput";
 
-import { categoriesList } from "../utils/categoriesList";
+import { categoriesList } from "../../utils/categoriesList";
 
 const categories = categoriesList.reduce((acc: any, cur) => {
-  acc[cur.id] = { id: cur.id, icon: cur.icon, name: cur.name, color: cur.color };
+  acc[cur.id] = {
+    id: cur.id,
+    icon: cur.icon,
+    name: cur.name,
+    color: cur.color,
+  };
   return acc;
 }, {});
 
@@ -87,7 +92,8 @@ const epiList = [
     id: 6,
     code: "EPI-00006",
     name: "Máscara PFF2",
-    description: "Respirador descartável para proteção contra poeiras e aerossóis.",
+    description:
+      "Respirador descartável para proteção contra poeiras e aerossóis.",
     imagem_url: null,
     category_id: 4, // Respiratório
     active: true,
@@ -135,7 +141,8 @@ const epiList = [
     id: 10,
     code: "EPI-00010",
     name: "Máscara facial transparente",
-    description: "Protetor facial para proteção contra respingos e impactos leves.",
+    description:
+      "Protetor facial para proteção contra respingos e impactos leves.",
     imagem_url: null,
     category_id: 9, // Outros
     active: true,
@@ -150,7 +157,9 @@ export function ListEpiView() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [categories, setCategories] = useState(categoriesList);
-  const [filterCategory, setFilterCategories] = useState({ search_category: "" });
+  const [filterCategory, setFilterCategories] = useState({
+    search_category: "",
+  });
   console.log(filterCategory);
   const [epis, setEpis] = useState(epiList);
 
@@ -170,7 +179,9 @@ export function ListEpiView() {
       epi.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       epi.ca?.includes(searchTerm);
 
-    const matchCategory = !filterCategory.search_category || epi.category_id == Number(filterCategory.search_category);
+    const matchCategory =
+      !filterCategory.search_category ||
+      epi.category_id == Number(filterCategory.search_category);
 
     return matchSearch && matchCategory;
   });
@@ -179,8 +190,14 @@ export function ListEpiView() {
     <PageMainContainer>
       <div className="w-full space-y-6">
         {/* Header */}
-        <Header title="Equipamento de proteção individual" subTitle="Gerencie os equipamentos de proteção individual" />
-        <LinkButton to="/epi/new" />
+        <Header
+          title="Equipamento de proteção individual"
+          subTitle="Gerencie os equipamentos de proteção individual"
+        />
+        <div className="flex gap-4">
+          <LinkButton to="/epi/new" text="Novo EPI" />
+          {/* <LinkButton to="/epi/release" text="Liberar EPI" /> */}
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
@@ -208,7 +225,10 @@ export function ListEpiView() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-2xl border border-slate-200 p-6 animate-pulse">
+              <div
+                key={i}
+                className="bg-white rounded-2xl border border-slate-200 p-6 animate-pulse"
+              >
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-xl bg-slate-200" />
                   <div className="flex-1">
@@ -222,7 +242,12 @@ export function ListEpiView() {
         ) : filteredEPIs.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-10 h-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className="w-10 h-10 text-slate-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -231,14 +256,28 @@ export function ListEpiView() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-2">Nenhum EPI encontrado</h3>
-            <p className="text-slate-500 mb-6">Cadastre um novo EPI para começar</p>
+            <h3 className="text-lg font-semibold text-slate-800 mb-2">
+              Nenhum EPI encontrado
+            </h3>
+            <p className="text-slate-500 mb-6">
+              Cadastre um novo EPI para começar
+            </p>
             <Link
               to={"CadastroEPI"}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white font-medium rounded-xl hover:bg-emerald-600 transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
               </svg>
               Cadastrar EPI
             </Link>
@@ -253,12 +292,21 @@ export function ListEpiView() {
               >
                 <div className="flex items-start gap-4">
                   {epi.imagem_url ? (
-                    <img src={epi.imagem_url} alt={epi.name} className="w-16 h-16 rounded-xl object-cover" />
+                    <img
+                      src={epi.imagem_url}
+                      alt={epi.name}
+                      className="w-16 h-16 rounded-xl object-cover"
+                    />
                   ) : (
                     <div
                       className={`w-16 h-16 rounded-md ${getCategory(epi.category_id).color} flex items-center justify-center`}
                     >
-                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg
+                        className="w-8 h-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -269,12 +317,22 @@ export function ListEpiView() {
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-slate-800 truncate">{epi.name}</h3>
-                    <p className="text-sm text-slate-500 truncate">Código: {epi.code}</p>
+                    <h3 className="font-semibold text-slate-800 truncate">
+                      {epi.name}
+                    </h3>
+                    <p className="text-sm text-slate-500 truncate">
+                      Código: {epi.code}
+                    </p>
                     <div className="flex gap-4">
-                      {epi.ca && <p className="text-xs text-slate-400 mt-1">CA: {epi.ca}</p>}
+                      {epi.ca && (
+                        <p className="text-xs text-slate-400 mt-1">
+                          CA: {epi.ca}
+                        </p>
+                      )}
                       {epi.expiration_date && (
-                        <p className="text-xs text-slate-400 mt-1">Validade: {epi.expiration_date}</p>
+                        <p className="text-xs text-slate-400 mt-1">
+                          Validade: {epi.expiration_date}
+                        </p>
                       )}
                     </div>
                   </div>

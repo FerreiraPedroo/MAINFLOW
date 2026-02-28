@@ -68,7 +68,7 @@ export function DashboardView() {
 
   return (
     <PageMainContainer>
-      <div className="space-y-8">
+      <div className="space-y-8 w-full">
         {/* Header */}
         <div>
           <h1 className="text-3xl lg:text-4xl font-bold text-slate-800">
@@ -84,7 +84,7 @@ export function DashboardView() {
               key={index}
               className="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300"
             >
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-medium text-slate-500">
                     {stat.label}
@@ -126,72 +126,6 @@ export function DashboardView() {
 
         {/* Quick Actions & Recent */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Quick Actions */}
-          {/* <div className="bg-white rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Ações Rápidas</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <Link
-                to={"CadastroFuncionario"}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-slate-700">Novo Funcionário</span>
-              </Link>
-              <Link
-                to={"CadastroEPI"}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-slate-700">Novo EPI</span>
-              </Link>
-              <Link
-                to={"LiberacaoEPI"}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-slate-700">Nova Liberação</span>
-              </Link>
-              <Link
-                to={"Funcionarios"}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-slate-700">Ver Funcionários</span>
-              </Link>
-            </div>
-          </div> */}
-
           {/* Recent Liberacoes */}
           {/* <div className="bg-white rounded-2xl border border-slate-200 p-6">
             <div className="flex items-center justify-between mb-4">

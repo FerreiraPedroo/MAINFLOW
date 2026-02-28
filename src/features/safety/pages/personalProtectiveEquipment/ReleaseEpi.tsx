@@ -41,11 +41,6 @@ export default function DetailsEpiView() {
     // setLoadingLib(false);
   };
 
-  const handleDelete = async () => {
-    // await base44.entities.EPI.delete(epiId);
-    // navigate(createPageUrl("EPIs"));
-  };
-
   if (loadingEPI || loadingLib) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -58,7 +53,12 @@ export default function DetailsEpiView() {
     return (
       <div className="text-center py-16">
         <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-10 h-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            className="w-10 h-10 text-slate-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -67,7 +67,9 @@ export default function DetailsEpiView() {
             />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold text-slate-800 mb-2">EPI não encontrado</h3>
+        <h3 className="text-lg font-semibold text-slate-800 mb-2">
+          EPI não encontrado
+        </h3>
         <Link to={"EPIs"} className="text-emerald-600 hover:text-emerald-700">
           Voltar para lista
         </Link>
@@ -81,7 +83,7 @@ export default function DetailsEpiView() {
         {/* Header */}
         <div className="flex items-center gap-4">
           <BackButton />
-          <Header title="Detalhes do EPI"/>
+          <Header title="Detalhes do EPI" />
         </div>
 
         {/* Alerts */}
@@ -145,7 +147,12 @@ export default function DetailsEpiView() {
                 <div
                   className={`w-24 h-24 rounded-2xl ${getCategory(epi.category_id)?.color} flex items-center justify-center`}
                 >
-                  <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -161,10 +168,14 @@ export default function DetailsEpiView() {
               <div className="flex flex-col gap-1">
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <p className="text-nowrap text-slate-500 mt-1">Código: {epi.code}</p>
+                    <p className="text-nowrap text-slate-500 mt-1">
+                      Código: {epi.code}
+                    </p>
                     <span
                       className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                        epi.active !== false ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"
+                        epi.active !== false
+                          ? "bg-emerald-100 text-emerald-700"
+                          : "bg-rose-100 text-rose-700"
                       }`}
                     >
                       {epi.active !== false ? "Ativo" : "Inativo"}
@@ -176,7 +187,12 @@ export default function DetailsEpiView() {
                       to={`CadastroEPI?id=${id}`}
                       className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors"
                     >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -190,7 +206,12 @@ export default function DetailsEpiView() {
                       onClick={() => setShowDeleteModal(true)}
                       className="inline-flex items-center gap-2 px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 font-medium rounded-xl transition-colors"
                     >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -202,11 +223,15 @@ export default function DetailsEpiView() {
                     </button>
                   </div>
                 </div>
-                <h2 className="text-2xl font-medium text-slate-800">{epi.name}</h2>
+                <h2 className="text-2xl font-medium text-slate-800">
+                  {epi.name}
+                </h2>
               </div>
 
               <div className="flex">
-                {epi.description && <p className="w-full text-slate-600">{epi.description}</p>}
+                {epi.description && (
+                  <p className="w-full text-slate-600">{epi.description}</p>
+                )}
               </div>
             </div>
           </div>
@@ -214,7 +239,9 @@ export default function DetailsEpiView() {
           {/** CARDS */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
             <div className="bg-slate-50 rounded-xl p-4">
-              <p className="text-xs text-slate-500 uppercase tracking-wide">Categoria</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Categoria
+              </p>
               <span
                 className={`inline-block mt-2 px-2.5 py-1 rounded-lg text-xs font-medium ${getCategory(epi.category_id)?.color}`}
               >
@@ -222,15 +249,25 @@ export default function DetailsEpiView() {
               </span>
             </div>
             <div className="bg-slate-50 rounded-xl p-4">
-              <p className="text-xs text-slate-500 uppercase tracking-wide">Estoque Atual</p>
-              <p className={`text-2xl font-bold mt-1 ${"isEstoqueBaixo" ? "text-rose-600" : "text-slate-800"}`}>{1}</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Estoque Atual
+              </p>
+              <p
+                className={`text-2xl font-bold mt-1 ${"isEstoqueBaixo" ? "text-rose-600" : "text-slate-800"}`}
+              >
+                {1}
+              </p>
             </div>
             <div className="bg-slate-50 rounded-xl p-4">
-              <p className="text-xs text-slate-500 uppercase tracking-wide">Em Uso</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Em Uso
+              </p>
               <p className="text-2xl font-bold text-emerald-600 mt-1">{1}</p>
             </div>
             <div className="bg-slate-50 rounded-xl p-4">
-              <p className="text-xs text-slate-500 uppercase tracking-wide">Devolvidos</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wide">
+                Devolvidos
+              </p>
               <p className="text-2xl font-bold text-blue-600 mt-1">{1}</p>
             </div>
           </div>
@@ -240,17 +277,31 @@ export default function DetailsEpiView() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Certification */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">Certificado de Aprovação</h3>
+            <h3 className="text-lg font-semibold text-slate-800 mb-4">
+              Certificado de Aprovação
+            </h3>
             <div className="space-y-4">
               <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wide">Numero do CA</p>
-                <p className="text-lg font-semibold text-slate-800 mt-1">{epi.ca || "-"}</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wide">
+                  Numero do CA
+                </p>
+                <p className="text-lg font-semibold text-slate-800 mt-1">
+                  {epi.ca || "-"}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wide">Validade do CA</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wide">
+                  Validade do CA
+                </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <p className={`text-lg font-semibold ${"isCAVencido" ? "text-rose-600" : "text-slate-800"}`}>
-                    {epi.expiration_date ? new Date(epi.expiration_date).toLocaleDateString("pt-BR") : "-"}
+                  <p
+                    className={`text-lg font-semibold ${"isCAVencido" ? "text-rose-600" : "text-slate-800"}`}
+                  >
+                    {epi.expiration_date
+                      ? new Date(epi.expiration_date).toLocaleDateString(
+                          "pt-BR",
+                        )
+                      : "-"}
                   </p>
                   {"isCAVencido" && (
                     <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-700">
@@ -260,26 +311,41 @@ export default function DetailsEpiView() {
                 </div>
               </div>
               <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wide">Fabricante</p>
-                <p className="text-lg font-semibold text-slate-800 mt-1">{epi.manufacturer || "-"}</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wide">
+                  Fabricante
+                </p>
+                <p className="text-lg font-semibold text-slate-800 mt-1">
+                  {epi.manufacturer || "-"}
+                </p>
               </div>
             </div>
           </div>
 
           {/* Stock */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">Controle de Estoque</h3>
+            <h3 className="text-lg font-semibold text-slate-800 mb-4">
+              Controle de Estoque
+            </h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 rounded-xl bg-slate-50">
                 <div>
-                  <p className="text-xs text-slate-500 uppercase tracking-wide">Estoque Atual</p>
-                  <p className={`text-2xl font-bold mt-1 ${"isEstoqueBaixo" ? "text-rose-600" : "text-slate-800"}`}>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">
+                    Estoque Atual
+                  </p>
+                  <p
+                    className={`text-2xl font-bold mt-1 ${"isEstoqueBaixo" ? "text-rose-600" : "text-slate-800"}`}
+                  >
                     {1} unidades
                   </p>
                 </div>
                 {"isEstoqueBaixo" && (
                   <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg
+                      className="w-6 h-6 text-rose-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -291,8 +357,12 @@ export default function DetailsEpiView() {
                 )}
               </div>
               <div>
-                <p className="text-xs text-slate-500 uppercase tracking-wide">Estoque Mínimo</p>
-                <p className="text-lg font-semibold text-slate-800 mt-1">{"epi.estoque_minimo"} unidades</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wide">
+                  Estoque Mínimo
+                </p>
+                <p className="text-lg font-semibold text-slate-800 mt-1">
+                  {"epi.estoque_minimo"} unidades
+                </p>
               </div>
             </div>
           </div>
@@ -300,11 +370,18 @@ export default function DetailsEpiView() {
 
         {/* Recent Usage */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6">
-          <h3 className="text-lg font-semibold text-slate-800 mb-4">Últimas Liberações</h3>
+          <h3 className="text-lg font-semibold text-slate-800 mb-4">
+            Últimas Liberações
+          </h3>
           {"liberacoesEPI.length" === 0 ? (
             <div className="text-center py-8">
               <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3">
-                <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  className="w-8 h-8 text-slate-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -313,7 +390,9 @@ export default function DetailsEpiView() {
                   />
                 </svg>
               </div>
-              <p className="text-slate-500">Nenhuma liberação registrada para este EPI</p>
+              <p className="text-slate-500">
+                Nenhuma liberação registrada para este EPI
+              </p>
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -349,10 +428,16 @@ export default function DetailsEpiView() {
                           </Link>
                         </td>
                         <td className="py-3 text-slate-600">
-                          {new Date(lib.data_liberacao + 1).toLocaleDateString("pt-BR")}
+                          {new Date(lib.data_liberacao + 1).toLocaleDateString(
+                            "pt-BR",
+                          )}
                         </td>
                         <td className="py-3 text-slate-600">
-                          {lib.data_devolucao ? new Date(lib.data_devolucao + 1).toLocaleDateString("pt-BR") : "-"}
+                          {lib.data_devolucao
+                            ? new Date(
+                                lib.data_devolucao + 1,
+                              ).toLocaleDateString("pt-BR")
+                            : "-"}
                         </td>
                         <td className="py-3">
                           <span
@@ -382,7 +467,12 @@ export default function DetailsEpiView() {
           <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl max-w-md w-full p-6">
               <div className="w-14 h-14 rounded-full bg-rose-100 flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  className="w-7 h-7 text-rose-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -391,9 +481,12 @@ export default function DetailsEpiView() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 text-center mb-2">Excluir EPI?</h3>
+              <h3 className="text-xl font-bold text-slate-800 text-center mb-2">
+                Excluir EPI?
+              </h3>
               <p className="text-slate-500 text-center mb-6">
-                Esta ação não poderá ser desfeita. Todos os dados do EPI serão removidos permanentemente.
+                Esta ação não poderá ser desfeita. Todos os dados do EPI serão
+                removidos permanentemente.
               </p>
               <div className="flex gap-3">
                 <button

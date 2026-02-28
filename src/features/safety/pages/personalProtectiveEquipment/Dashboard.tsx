@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PageMainContainer } from "../../../shared/components/PageMainContainer";
+import { PageMainContainer } from "@shared/components/PageMainContainer";
 
 export function DashboardView() {
   const [funcionarios, setFuncionarios] = useState([]);
@@ -8,13 +8,21 @@ export function DashboardView() {
   const [liberacoes, setLiberacoes] = useState([]);
 
   const loadData = async () => {
-    const [functData, episData, libData] = { funcData: [], episData: [], libData: [] }; //await apiClient("safety-dashboard");
+    const [functData, episData, libData] = {
+      funcData: [],
+      episData: [],
+      libData: [],
+    }; //await apiClient("safety-dashboard");
   };
 
-  const funcionariosAtivos = funcionarios.filter((f) => f.ativo !== false).length;
+  const funcionariosAtivos = funcionarios.filter(
+    (f) => f.ativo !== false,
+  ).length;
   const episAtivos = epis.filter((e) => e.ativo !== false).length;
   const episEmUso = liberacoes.filter((l) => l.status === "Em uso").length;
-  const episEstoqueBaixo = epis.filter((e) => e.estoque_atual <= e.estoque_minimo).length;
+  const episEstoqueBaixo = epis.filter(
+    (e) => e.estoque_atual <= e.estoque_minimo,
+  ).length;
 
   const stats = [
     {
@@ -63,7 +71,9 @@ export function DashboardView() {
       <div className="space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl lg:text-4xl font-bold text-slate-800">Dashboard</h1>
+          <h1 className="text-3xl lg:text-4xl font-bold text-slate-800">
+            Dashboard
+          </h1>
           <p className="text-slate-500 mt-1">Visão geral</p>
         </div>
 
@@ -76,10 +86,16 @@ export function DashboardView() {
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-500">{stat.label}</p>
-                  <p className="text-3xl font-bold text-slate-800 mt-2">{stat.value}</p>
+                  <p className="text-sm font-medium text-slate-500">
+                    {stat.label}
+                  </p>
+                  <p className="text-3xl font-bold text-slate-800 mt-2">
+                    {stat.value}
+                  </p>
                 </div>
-                <div className={`w-12 h-12 rounded-xl ${stat.bgLight} flex items-center justify-center`}>
+                <div
+                  className={`w-12 h-12 rounded-xl ${stat.bgLight} flex items-center justify-center`}
+                >
                   <svg
                     className={`w-6 h-6 bg-linear-to-br ${stat.color} bg-clip-text`}
                     fill="none"
@@ -95,7 +111,12 @@ export function DashboardView() {
                             : "#f43f5e",
                     }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.icon} />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={stat.icon}
+                    />
                   </svg>
                 </div>
               </div>
@@ -107,14 +128,21 @@ export function DashboardView() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Quick Actions */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Ações Rápidas</h2>
+            <h2 className="text-lg font-semibold text-slate-800 mb-4">
+              Ações Rápidas
+            </h2>
             <div className="grid grid-cols-2 gap-3">
               <Link
                 to={"CadastroFuncionario"}
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -123,25 +151,44 @@ export function DashboardView() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-slate-700">Novo Funcionário</span>
+                <span className="text-sm font-medium text-slate-700">
+                  Novo Funcionário
+                </span>
               </Link>
               <Link
                 to={"CadastroEPI"}
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-slate-700">Novo EPI</span>
+                <span className="text-sm font-medium text-slate-700">
+                  Novo EPI
+                </span>
               </Link>
               <Link
                 to={"LiberacaoEPI"}
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -150,14 +197,21 @@ export function DashboardView() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-slate-700">Nova Liberação</span>
+                <span className="text-sm font-medium text-slate-700">
+                  Nova Liberação
+                </span>
               </Link>
               <Link
                 to={"Funcionarios"}
                 className="flex flex-col items-center gap-3 p-4 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -166,7 +220,9 @@ export function DashboardView() {
                     />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-slate-700">Ver Funcionários</span>
+                <span className="text-sm font-medium text-slate-700">
+                  Ver Funcionários
+                </span>
               </Link>
             </div>
           </div>
@@ -174,15 +230,25 @@ export function DashboardView() {
           {/* Recent Liberacoes */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-slate-800">Últimas Liberações</h2>
-              <Link to={"LiberacaoEPI"} className="text-sm text-emerald-600 hover:text-emerald-700 font-medium">
+              <h2 className="text-lg font-semibold text-slate-800">
+                Últimas Liberações
+              </h2>
+              <Link
+                to={"LiberacaoEPI"}
+                className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+              >
                 Ver todas
               </Link>
             </div>
             {recentLiberacoes.length === 0 ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    className="w-8 h-8 text-slate-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -191,7 +257,9 @@ export function DashboardView() {
                     />
                   </svg>
                 </div>
-                <p className="text-slate-500 text-sm">Nenhuma liberação registrada</p>
+                <p className="text-slate-500 text-sm">
+                  Nenhuma liberação registrada
+                </p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -209,7 +277,12 @@ export function DashboardView() {
                             : "bg-rose-100 text-rose-600"
                       }`}
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -219,8 +292,12 @@ export function DashboardView() {
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-800 truncate">{lib.epi_nome || "EPI"}</p>
-                      <p className="text-xs text-slate-500 truncate">{lib.funcionario_nome || "Funcionário"}</p>
+                      <p className="text-sm font-medium text-slate-800 truncate">
+                        {lib.epi_nome || "EPI"}
+                      </p>
+                      <p className="text-xs text-slate-500 truncate">
+                        {lib.funcionario_nome || "Funcionário"}
+                      </p>
                     </div>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${

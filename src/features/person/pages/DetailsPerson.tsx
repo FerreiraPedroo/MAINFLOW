@@ -101,7 +101,7 @@ export function DetailsPersonView() {
   }
 
   return (
-    <PageMainContainer>
+    <PageMainContainer className="bg-slate-50">
       <div className="space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -120,11 +120,11 @@ export function DetailsPersonView() {
                   <img
                     src={person.photo_url}
                     alt={person.name}
-                    className="w-64 h-80 rounded-2xl object-cover ring-4 ring-slate-100"
+                    className="w-64 h-80 rounded-2xl object-cover ring-4 ring-slate-100 bg-white"
                   />
                 ) : (
                   <div
-                    className={`w-64 h-80 rounded-2xl border flex items-center justify-center`}
+                    className={`w-64 h-80 rounded-2xl border flex items-center justify-center bg-white`}
                   >
                     {iconList["person"]}
                   </div>
@@ -371,6 +371,20 @@ export function DetailsPersonView() {
           </div>
         </div>
 
+        {/* Delete Modal */}
+        {showDeleteModal && (
+          <Modal
+            title="Deseja excluir a pessoa"
+            info="Pedro Henrique"
+            description="Esta ação não poderá ser desfeita. Todos os dados da pessoa serão removidos permanentemente."
+            type="red"
+            buttons={[
+              { text: "Excluir", type: "red", onClick: () => null },
+              { text: "Cancelar", type: "white", onClick: () => null },
+            ]}
+          />
+        )}
+
         {/* Recent Usage */}
         {/* <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <h3 className="text-lg font-semibold text-slate-800 mb-4">Últimas Liberações</h3>
@@ -448,22 +462,6 @@ export function DetailsPersonView() {
             </div>
           )}
         </div> */}
-
-        {/* Delete Modal */}
-        {!showDeleteModal && (
-          <Modal
-            title="Deseja excluir a pessoa"
-            info="Pedro Henrique"
-            description="Esta ação não poderá ser desfeita. Todos os dados da pessoa serão removidos permanentemente."
-            type="red"
-            buttons={[
-              { text: "Excluir", type: "red", onClick: () => null },
-              { text: "Cancelar", type: "white", onClick: () => null },
-            ]}
-          />
-        )}
-
-        {/* Alerts */}
 
         {/* <div className="space-y-3">
           <Notification type="error" title="Erro ao carregr" text="Erro ao carregar" />

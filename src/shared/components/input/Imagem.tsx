@@ -11,7 +11,7 @@ export function ImagemUpload({
 }: {
   text: string;
   name: string;
-  value: string;
+  value: string | null;
   required?: boolean;
   cols?: number | string;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
@@ -20,7 +20,7 @@ export function ImagemUpload({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectFile = event.target.files?.[0];
-    console.log(selectFile);
+
     if (!selectFile) return;
 
     const imageUrl = URL.createObjectURL(selectFile);
@@ -36,7 +36,7 @@ export function ImagemUpload({
     };
   }, [value]);
 
-  const cl = `${gridCols[cols]} bg-white rounded-2xl border border-slate-200 p-6`;
+  const cl = `${gridCols[cols]} bg-white rounded-2xl border border-slate-300 p-6`;
 
   return (
     <div className={cl}>

@@ -7,6 +7,7 @@ export type DepartmentType = {
 export type MenuItemsType = {
   name: string;
   department_id: number;
+  order: number;
   url: string;
   icon: string;
 };

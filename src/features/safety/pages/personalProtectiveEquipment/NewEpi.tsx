@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { BackButton } from "../components/button/BackButton";
-import type { Epi } from "../interfaces/epi";
+import type { Epi } from "../../interfaces/epi";
 import { apiClient } from "@/shared/lib/apiClient";
 
-import { PageMainContainer } from "../../../shared/components/PageMainContainer";
-import { BackButton } from "../../../shared/components/button/BackButton";
-import { Header } from "../../../shared/components/header/Header";
-import { EpiBasicInfo } from "../components/epi/EpiBasicInfo";
-import { EpiCertificateApproval } from "../components/epi/EpiCertificateApproval";
-import { SubmitButtom } from "../../../shared/components/button/SubmitButtom";
+import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { SubmitButtom } from "@shared/components/button/SubmitButtom";
+import { BackButton } from "@shared/components/button/BackButton";
+import { Header } from "@shared/components/header/Header";
+import { EpiBasicInfo } from "../../components/epi/EpiBasicInfo";
+import { EpiCertificateApproval } from "../../components/epi/EpiCertificateApproval";
 
 const categoriesList = [
   { id: 1, name: "Cabeça" },
@@ -60,7 +60,10 @@ export function NewEpiView() {
     const form = e.currentTarget;
     const dados = new FormData(form);
 
-    const response = await apiClient("/safety-epi-new", { method: "POST", body: dados });
+    const response = await apiClient("/safety-epi-new", {
+      method: "POST",
+      body: dados,
+    });
 
     // navigate("/epi");
   };
@@ -70,7 +73,10 @@ export function NewEpiView() {
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
           <BackButton />
-          <Header title="Cadastrar EPI" subTitle="Cadastre um novo equipamento de proteção" />
+          <Header
+            title="Cadastrar EPI"
+            subTitle="Cadastre um novo equipamento de proteção"
+          />
         </div>
 
         {isSaving && (
@@ -84,8 +90,16 @@ export function NewEpiView() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <EpiBasicInfo formData={formData} setFormData={setFormData} categories={categories} loading={isLoading} />
-            <EpiCertificateApproval formData={formData} setFormData={setFormData} />
+            <EpiBasicInfo
+              formData={formData}
+              setFormData={setFormData}
+              categories={categories}
+              loading={isLoading}
+            />
+            <EpiCertificateApproval
+              formData={formData}
+              setFormData={setFormData}
+            />
             <SubmitButtom text="Cadastrar" />
           </form>
         )}

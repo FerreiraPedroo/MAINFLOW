@@ -15,7 +15,7 @@ export function OccupationPerson({
   setFormData: React.Dispatch<React.SetStateAction<any>>;
 }) {
   return (
-    <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+    <div className="bg-white rounded-2xl border border-slate-200 p-6">
       <h2 className="text-xl font-semibold text-slate-800 mb-4">Ocupação</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SelectInput
