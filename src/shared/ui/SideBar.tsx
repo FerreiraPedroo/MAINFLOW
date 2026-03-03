@@ -42,7 +42,9 @@ export function SideBar() {
   const isActive = useCallback(
     (pageUrl: string) => {
       if (!pageUrl) return false;
-      return pageUrl == `/${location.pathname.split("/")[1]}`;
+      const pathName = location.pathname;
+      const wordRegex = new RegExp("^" + pathName + "$", "i").test(pageUrl);
+      return wordRegex;
     },
     [location],
   );
@@ -129,36 +131,100 @@ export function SideBar() {
           {/* Navigation */}
           <nav className="flex-1 px-2 lg:px-3 py-1 lg:py-2 space-y-1 overflow-y-auto">
             {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.url}
-                className={`flex items-center gap-3 px-2 lg:px-4 py-1 lg:py-3 rounded-md transition-all duration-200 group ${
-                  isActive(item.url)
-                    ? "bg-emerald-100 text-emerald-700"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                <svg
-                  className={`min-w-5 min-h-5 w-5 h-5 ${
+              <div key={item.name} className="group">
+                <div
+                  className={`flex transition-all duration-200 group-hover:text-slate-800 ${
                     isActive(item.url)
-                      ? "text-emerald-600"
-                      : "text-slate-400 group-hover:text-slate-600"
+                      ? "bg-emerald-100 text-emerald-700"
+                      : "text-slate-600 hover:bg-slate-100"
                   }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d={item.icon}
-                  />
-                </svg>
-                <span className="text-sm lg:text-md font-medium">
-                  {item.name}
-                </span>
-              </Link>
+                  <Link
+                    to={item.url}
+                    className={`flex w-full items-center gap-3 px-2 lg:px-4 py-1 lg:py-3 rounded-md`}
+                  >
+                    <svg
+                      className={`min-w-5 min-h-5 w-5 h-5 ${
+                        isActive(item.url)
+                          ? "text-emerald-600"
+                          : "text-slate-400 group-hover:text-slate-600"
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d={item.icon}
+                      />
+                    </svg>
+                    <span className="text-sm lg:text-md font-medium">
+                      {item.name}
+                    </span>
+                  </Link>
+                  {item.subMenu?.length ? (
+                    <>
+                      <input type="checkbox" className="peer hidden sr-only" />
+                      <label
+                        className={`inline-flex items-center cursor-pointer`}
+                      >
+                        <input type="checkbox" className="peer sr-only" />
+
+                        <div className="w-6 h-full flex items-center justify-center transition-transform duration-300 peer-checked:rotate-180">
+                          <svg
+                            className="w-4 h-4  text-gray-600 transition-transform duration-300 peer-checked:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </div>
+                      </label>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div className="transition-transform duration-300 ease-in-out hidden group-has-[input:checked]:block">
+                  {item.subMenu?.map((submenu) => (
+                    <Link
+                      key={submenu.name}
+                      to={submenu.url}
+                      className={`flex items-center gap-0 pl-4.5 pr-2 py-1 lg:pl-6 lg:pr-4 lg:py-2 rounded-md transition-all duration-200 hover:text-slate-900 ${
+                        isActive(submenu.url)
+                          ? "bg-emerald-100 text-emerald-700"
+                          : "text-slate-600 hover:bg-slate-100"
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="0.8"
+                        className="stroke-current "
+                      >
+                        <path d="M 1 1 L 1 14 L 16 14" />
+                      </svg>
+
+                      <span className="text-sm lg:text-md font-medium">
+                        {submenu.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </nav>
 

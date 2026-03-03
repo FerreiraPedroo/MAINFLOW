@@ -14,6 +14,7 @@ export const PAGES: Record<string, React.FC> = {
   manager: manager.ManagerHome,
   "manager/localizations": manager.LocalizationList,
   "manager/localizations/new": manager.LocalizationNew,
+  "manager/localizations/buildings": manager.ListBuilding,
   // "manager/projects": manager.ProjectList,
   // "manager/cost-center": manager.CostCenterList,
   // "manager/payment-group": manager.PaymentGroupList,

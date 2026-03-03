@@ -1,5 +1,6 @@
 export const painelMenuItems = [
   {
+    id: 6,
     name: "Painel",
     department_id: 1,
     order: 1,

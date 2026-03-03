@@ -5,51 +5,60 @@ import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
 import { LinkButton } from "@shared/components/button/LinkButton";
+
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-import type { Localization } from "../interfaces/localization";
+import type { Building } from "../interfaces/buildings";
 import { TextInput } from "@/shared/components/input/TextInput";
 
-const localizationList: Localization[] = [
+const buildingList: Building[] = [
   {
     id: 1,
-    name: "Sala google do segundo andar",
-    building_id: 1,
-    block: "B",
-    floor: "2°",
-    photo: "string",
-    type: "Sala",
-    unique_name: "string",
-    building: {
-      id: 1,
-      name: "SEDE",
-      address: "Av. Paris 84",
-      maps: null,
-      photos: [],
-      gps: { lat: "-45.142546", lon: "-45.879876" },
-    },
+    name: "string",
+    address: "string",
+    maps: "string | null",
+    photos: ["string[]"],
+    gps: { lat: "string", lon: "string" },
+  },
+  {
+    id: 1,
+    name: "string",
+    address: "string",
+    maps: "string | null",
+    photos: ["string[]"],
+    gps: { lat: "string", lon: "string" },
+  },
+  {
+    id: 1,
+    name: "string",
+    address: "string",
+    maps: "string | null",
+    photos: ["string[]"],
+    gps: { lat: "string", lon: "string" },
   },
 ];
 
-export function ListLocalizationView() {
+export function ListBuildingView() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterStatus, setFilterStatus] = useState({ search_status: "" });
+  const [filterStatus, setFilterStatus] = useState({
+    search_name: "",
+    search_address: "",
+  });
   const [status, setStatus] = useState(1);
-  const [localizations, setLocalizations] =
-    useState<Localization[]>(localizationList);
+  const [buildings, setBuildings] = useState<Building[]>(buildingList);
 
   useEffect(() => {
-    const loadLocalization = async () => {
+    const loadBuilding = async () => {
       setIsLoading(true);
-      const data = await apiClient("localizations-list");
-      setLocalizations(data);
+      const data = await apiClient("building-list");
+      setBuildings(data);
       setIsLoading(false);
     };
-    // loadLocalization();
+    // loadBuilding();
   }, []);
 
   return (
@@ -57,67 +66,31 @@ export function ListLocalizationView() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
-          title="Localização"
-          subTitle="Cadastre locais fisicos que serão utilizados para identificar um
-              lugar especifico."
+          title="Prédios"
+          subTitle="Cadastre os predios para identificar o endereço de uma localização."
         />
         <div className="flex gap-4">
-          <LinkButton
-            to="/manager/localizations/new"
-            text="Cadastrar localização"
-          />
+          <LinkButton to="#" text="Cadastrar prédio" />
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
-          <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-7 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
             <TextInput
               name={"search_name"}
-              value={status}
+              value={filterStatus?.["search_name"]}
               required={false}
               setFormValue={setFilterStatus}
               text={"Nome"}
               cols={2}
             />
-            <SelectInput
-              name={"search_building"}
-              options={[]}
-              value={status}
+            <TextInput
+              name={"search_address"}
+              value={filterStatus?.["search_address"]}
               required={false}
               setFormValue={setFilterStatus}
-              text={"Prédio"}
-              hiddenText={false}
+              text={"Endereço"}
               cols={2}
-            />
-            <SelectInput
-              name={"search_block"}
-              options={[]}
-              value={status}
-              required={false}
-              setFormValue={setFilterStatus}
-              text={"Bloco"}
-              hiddenText={false}
-              cols={1}
-            />
-            <SelectInput
-              name={"search_floor"}
-              options={[]}
-              value={status}
-              required={false}
-              setFormValue={setFilterStatus}
-              text={"Andar"}
-              hiddenText={false}
-              cols={1}
-            />
-            <SelectInput
-              name={"search_type"}
-              options={[]}
-              value={status}
-              required={false}
-              setFormValue={setFilterStatus}
-              text={"Tipo"}
-              hiddenText={false}
-              cols={1}
             />
           </div>
         </div>
@@ -125,16 +98,16 @@ export function ListLocalizationView() {
         {/* Grid */}
         {isLoading ? (
           <></>
-        ) : localizations.length === 0 ? (
+        ) : buildings.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <h3 className="text-lg font-semibold text-slate-800 mb-2">
-              Nenhuma localização encontrada
+              Nenhum prédio encontrada
             </h3>
             <p className="text-slate-500 mb-6">
-              Cadastre uma nova localização para começar
+              Cadastre uma novo predio para começar
             </p>
             <Link
-              to={"/manager/localizations/new"}
+              to={"#"}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white font-medium rounded-xl hover:bg-emerald-600 transition-colors"
             >
               <svg
@@ -150,7 +123,7 @@ export function ListLocalizationView() {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Cadastrar localização
+              Cadastrar prédio
             </Link>
           </div>
         ) : (
@@ -159,52 +132,43 @@ export function ListLocalizationView() {
               <table className="w-full">
                 <thead>
                   <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
-                    <th className="px-6 py-4 font-medium">Id</th>
-                    <th className="px-4 py-4 font-medium">Nome</th>
-                    <th className="px-4 py-4 font-medium">Prédio</th>
-                    <th className="px-4 py-4 font-medium">Bloco</th>
-                    <th className="px-4 py-4 font-medium">Andar</th>
-                    <th className="px-4 py-4 font-medium">Tipo</th>
-                    {/* <th className="px-6 py-4 font-medium"></th> */}
+                    <th className="w-1/10 px-6 py-4 font-medium">Id</th>
+                    <th className="w-3/10 px-4 py-4 font-medium">Nome</th>
+                    <th className="w-4/10 px-4 py-4 font-medium">Endereço</th>
+                    <th className="w-1/10 px-4 py-4 font-medium">Mapa</th>
+                    <th className="w-1/10 px-4 py-4 font-medium">Foto</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {localizations.map((localization) => (
+                  {buildings.map((building) => (
                     <tr
-                      key={localization.id}
+                      key={building.id}
                       onClick={() =>
-                        navigate(`/manager/localizations/${localization.id}`)
+                        navigate(`/manager/localizations/${building.id}`)
                       }
                       className="text-sm hover:bg-slate-50 transition-colors hover:cursor-pointer"
                     >
                       <td className="px-6 py-4">
                         <span className="font-medium text-slate-800">
-                          {localization.id}
+                          {building.id}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4">
+                        <span className="text-slate-700">{building.name}</span>
+                      </td>
+                      <td className="px-4 py-4">
+                        <span className="text-slate-700">
+                          {building.address}
                         </span>
                       </td>
                       <td className="px-4 py-4">
                         <span className="text-slate-700">
-                          {localization.name}
+                          {building.maps ? "SIM" : "NÃO"}
                         </span>
                       </td>
                       <td className="px-4 py-4">
                         <span className="text-slate-700">
-                          {localization?.building?.name}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className="text-slate-700">
-                          {localization.block}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className="text-slate-700">
-                          {localization.floor}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className="text-slate-700">
-                          {localization.type}
+                          {building.photos.length ? "SIM" : "NÃO"}
                         </span>
                       </td>
                     </tr>
