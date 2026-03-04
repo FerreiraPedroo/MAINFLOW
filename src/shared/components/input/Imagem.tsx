@@ -7,6 +7,7 @@ export function ImagemUpload({
   value = "",
   required = true,
   cols = 2,
+  disable = false,
   setFormValue,
 }: {
   text: string;
@@ -14,6 +15,7 @@ export function ImagemUpload({
   value: string | null;
   required?: boolean;
   cols?: number | string;
+  disable: boolean;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const handleImageUpload = async (
@@ -36,11 +38,11 @@ export function ImagemUpload({
     };
   }, [value]);
 
-  const cl = `${gridCols[cols]} bg-white rounded-2xl border border-slate-300 p-6`;
+  const cl = `${gridCols[cols]} bg-white rounded-md border border-slate-300 p-5`;
 
   return (
     <div className={cl}>
-      <h2 className="text-lg font-semibold text-slate-800 mb-4">
+      <h2 className="text-lg font-semibold text-slate-800 mb-2">
         {text}
         {required && <span className="text-red-500">*</span>}
       </h2>
@@ -101,6 +103,7 @@ export function ImagemUpload({
               onChange={handleImageUpload}
               className="hidden"
               required={required}
+              disabled={disable}
             />
           </label>
           <p className="text-sm text-slate-500 mt-2">JPG ou PNG, máximo 5MB</p>

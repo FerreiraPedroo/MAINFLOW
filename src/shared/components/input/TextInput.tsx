@@ -9,6 +9,7 @@ export function TextInput({
   readOnly,
   cols = 2,
   value = "",
+  disable = false,
   setFormValue,
 }: {
   text: string;
@@ -17,6 +18,7 @@ export function TextInput({
   readOnly?: boolean;
   placeholder?: string;
   cols?: number | string;
+  disable?: boolean;
   value: any;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
 }) {
@@ -38,6 +40,7 @@ export function TextInput({
         }
         className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
         placeholder={`${placeholder && "Ex: " + placeholder}`}
+        disabled={disable}
       />
     </div>
   );

@@ -11,6 +11,8 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 
 import type { Building } from "../interfaces/buildings";
 import { TextInput } from "@/shared/components/input/TextInput";
+import { ImagemUpload } from "@/shared/components/input/Imagem";
+import { TextButton } from "@/shared/components/button/TextButton";
 
 const buildingList: Building[] = [
   {
@@ -49,7 +51,19 @@ export function ListBuildingView() {
     search_address: "",
   });
   const [status, setStatus] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    maps: "",
+    photo: null,
+    gps_lat: "",
+    gps_lon: "",
+  });
+
   const [buildings, setBuildings] = useState<Building[]>(buildingList);
+
+  const [showModal, setShowModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const loadBuilding = async () => {
@@ -70,7 +84,11 @@ export function ListBuildingView() {
           subTitle="Cadastre os predios para identificar o endereço de uma localização."
         />
         <div className="flex gap-4">
-          <LinkButton to="#" text="Cadastrar prédio" />
+          <TextButton
+            text="Cadastrar prédio"
+            type="stone"
+            onClick={() => setShowModal(true)}
+          />
         </div>
 
         {/* Filters */}
@@ -179,6 +197,120 @@ export function ListBuildingView() {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-slate-800">Novo prédio</h2>
+              <button
+                onClick={() => setShowModal(false)}
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                <svg
+                  className="w-5 h-5 text-slate-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <form
+              id="topForm"
+              onSubmit={() => "handleSubmit"}
+              className="p-6 grid grid-cols-2 gap-4"
+            >
+              <TextInput
+                name="name"
+                text="Nome"
+                value={formData.name}
+                setFormValue={() => null}
+                cols={2}
+                required={true}
+                disable={isSaving}
+              />
+              <TextInput
+                name="address"
+                text="Endereço"
+                value={formData.address}
+                setFormValue={() => null}
+                cols={2}
+                required={true}
+                disable={isSaving}
+              />
+              <TextInput
+                name="maps"
+                text="Link Google Maps"
+                value={formData.maps}
+                setFormValue={() => null}
+                cols={2}
+                required={false}
+                disable={isSaving}
+              />
+
+              <ImagemUpload
+                name="photo"
+                setFormValue={() => null}
+                text="Foto"
+                value={formData.photo}
+                cols={2}
+                required={false}
+                disable={isSaving}
+              />
+
+              <TextInput
+                name="gps_lat"
+                text="GPS Latitude"
+                value={formData.gps_lat}
+                setFormValue={() => null}
+                cols={0.5}
+                required={false}
+                disable={isSaving}
+              />
+
+              <TextInput
+                name="gps_lon"
+                text="GPS Longitude"
+                value={formData.gps_lat}
+                setFormValue={() => null}
+                cols={0.5}
+                required={false}
+                disable={isSaving}
+              />
+            </form>
+
+            {/* Actions */}
+            <div className="flex items-center justify-end gap-4 p-4 border-t border-slate-200">
+              <TextButton
+                type="white"
+                text="Cancelar"
+                disable={isSaving}
+                onClick={() => setShowModal(false)}
+              />
+
+              <TextButton
+                type={"green"}
+                text={"Cadastrar"}
+                disable={isSaving}
+                onClick={() => null}
+              />
+
+              {isSaving && (
+                <div className="w-4 h-4 border-2 border-red border-t-transparent rounded-full animate-spin" />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </PageMainContainer>
   );
 }
