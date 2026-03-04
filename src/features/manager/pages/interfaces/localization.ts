@@ -16,4 +16,3 @@ export interface Localization {
   update_at?: string[];
   deleted_at?: string | null;
 }
-

@@ -12,7 +12,7 @@ export function ImagemUpload({
 }: {
   text: string;
   name: string;
-  value: string | null;
+  value: string | null | undefined;
   required?: boolean;
   cols?: number | string;
   disable: boolean;

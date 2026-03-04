@@ -1,7 +1,7 @@
 import React from "react";
 
-const base = "px-6 py-2.5 rounded-xl text-white font-medium  transition-colors";
-const baseWhite = "px-6 py-2.5 rounded-xl font-medium  transition-colors";
+const base = "px-6 py-2 rounded-xl text-white font-medium  transition-colors";
+const baseWhite = "px-6 py-2 rounded-xl font-medium  transition-colors";
 
 const types = {
   red: `${base} bg-rose-500 hover:bg-rose-600`,
