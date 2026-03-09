@@ -6,41 +6,41 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { SpaceTypes } from "../interfaces/spaceTypes";
+import type { BuildingDivision } from "../interfaces/buildingDivision";
+import { SelectInput } from "@/shared/components/input/SelectInput";
 
-const typeList: SpaceTypes[] = [
+const buildingDivisionList: BuildingDivision[] = [
   {
     id: 1,
     name: "Corredor",
-    imagem: "string",
+    type: "string",
   },
   {
     id: 2,
     name: "Escada",
-    imagem: "string",
+    type: "string",
   },
   {
     id: 3,
     name: "Sala",
-    imagem: "string",
+    type: "string",
   },
   {
     id: 4,
     name: "Rampa",
-    imagem: "string",
+    type: "string",
   },
   {
     id: 5,
     name: "Pátio",
-    imagem: "string",
+    type: "string",
   },
 ];
 
-export function ListSpaceTypesView() {
+export function ListBuildingDivisionView() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,39 +48,42 @@ export function ListSpaceTypesView() {
   const [showModal, setShowModal] = useState("");
   const [searchTerm, setSearchTerm] = useState({
     search_name: "",
-    search_address: "",
+    search_type: "",
   });
 
-  const [spaceTypes, setSpaceTypes] = useState<SpaceTypes[]>(typeList);
+  const [buildingDivision, setBuildingDivision] =
+    useState<BuildingDivision[]>(buildingDivisionList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<SpaceTypes>>({
+  const [formDataNew, setFormDataNew] = useState<Partial<BuildingDivision>>({
     name: "",
-    imagem: "",
+    type: "",
   });
-  function handleFormDataNew(modal: string) {
+  function handleNewModal(modal: string) {
     setFormDataNew({
       name: "",
-      imagem: "",
+      type: "",
     });
     setShowModal(modal);
   }
 
-  const [formDataEdit, setFormDataEdit] = useState<Partial<SpaceTypes> | null>(
-    null,
-  );
-  function handleEditSpaceType(spaceType: SpaceTypes | null, modal: string) {
-    setFormDataEdit(spaceType);
+  const [formDataEdit, setFormDataEdit] =
+    useState<Partial<BuildingDivision> | null>(null);
+  function handleEditModal(
+    buildingDivision: BuildingDivision | null,
+    modal: string,
+  ) {
+    setFormDataEdit(buildingDivision);
     setShowModal(modal);
   }
 
   useEffect(() => {
-    const loadSpaceTypes = async () => {
+    const loadBuildingDivision = async () => {
       setIsLoading(true);
-      const data = await apiClient("spacetypes-list");
-      setSpaceTypes(data);
+      const data = await apiClient("building-division-list");
+      setBuildingDivision(data);
       setIsLoading(false);
     };
-    // loadSpaceTypes();
+    // loadBuildingDivision();
   }, []);
 
   return (
@@ -88,14 +91,14 @@ export function ListSpaceTypesView() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
-          title="Tipos de espaço"
-          subTitle="Cadastre um novo tipo de espaço para ser usando na localização."
+          title="Divisão"
+          subTitle="Cadastre uma nova divisão para ser utilizada na estrutura de localização do edifício."
         />
         <div className="flex gap-4">
           <TextButton
-            text="Cadastrar espaço"
+            text="Cadastrar divisão"
             type="stone"
-            onClick={() => handleFormDataNew("new")}
+            onClick={() => handleNewModal("new")}
           />
         </div>
 
@@ -111,8 +114,8 @@ export function ListSpaceTypesView() {
               cols={2}
             />
             <TextInput
-              name={"search_address"}
-              value={searchTerm?.["search_address"]}
+              name={"search_type"}
+              value={searchTerm?.["search_type"]}
               required={false}
               setFormValue={setSearchTerm}
               text={"Endereço"}
@@ -124,13 +127,13 @@ export function ListSpaceTypesView() {
         {/* Grid */}
         {isLoading ? (
           <></>
-        ) : spaceTypes.length === 0 ? (
+        ) : buildingDivision.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <h3 className="text-lg font-semibold text-slate-800 mb-2">
-              Nenhum prédio encontrada
+              Nenhuma divisão encontrada
             </h3>
             <p className="text-slate-500 mb-6">
-              Cadastre uma novo predio para começar
+              Cadastre uma nova divisão para começar
             </p>
             <Link
               to={"#"}
@@ -149,7 +152,7 @@ export function ListSpaceTypesView() {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Cadastrar prédio
+              Cadastrar divisão
             </Link>
           </div>
         ) : (
@@ -160,38 +163,33 @@ export function ListSpaceTypesView() {
                   <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
                     <th className="w-1/10 px-6 py-4 font-medium">Id</th>
                     <th className="w-6/10 px-4 py-4 font-medium">Nome</th>
-                    <th className="w-3/10 px-4 py-4 font-medium">Imagem</th>
-                    <th className="w-1/10 px-4 py-4 font-medium">Ações</th>
+                    <th className="w-3/10 px-4 py-4 font-medium">Tipo</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {spaceTypes.map((spacetype) => (
+                  {buildingDivision.map((division) => (
                     <tr
-                      key={spacetype.id}
+                      key={division.id}
                       onClick={() => null}
                       className="text-sm hover:bg-slate-50 transition-colors hover:cursor-pointer"
                     >
                       <td className="px-6 py-3">
                         <span className="font-medium text-slate-800">
-                          {spacetype.id}
+                          {division.id}
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700">{spacetype.name}</span>
+                        <span className="text-slate-700">{division.name}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700 ">
-                          {spacetype.imagem && <img src={spacetype.imagem} />}
-                        </span>
+                        <span className="text-slate-700">{division.type}</span>
                       </td>
                       <td className="px-4 py-2">
                         <span className="text-slate-700">
                           <TextButton
                             type="white"
                             text="Editar"
-                            onClick={() =>
-                              handleEditSpaceType(spacetype, "edit")
-                            }
+                            onClick={() => handleEditModal(division, "edit")}
                           />
                         </span>
                       </td>
@@ -209,9 +207,9 @@ export function ListSpaceTypesView() {
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-800">Novo espaço</h2>
+              <h2 className="text-xl font-bold text-slate-800">Nova divisão</h2>
               <button
-                onClick={() => handleFormDataNew("")}
+                onClick={() => handleNewModal("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -245,14 +243,14 @@ export function ListSpaceTypesView() {
                 disable={isSaving}
               />
 
-              <ImagemUpload
-                name="imagem"
-                text="Imagem"
-                value={formDataNew.imagem}
-                setFormValue={setFormDataNew}
-                cols={2}
-                required={false}
-                disable={isSaving}
+              <SelectInput
+                text={"type"}
+                name={"Tipo"}
+                value={formDataNew.type}
+                options={["Bloco", "Ala", "Divisão"]}
+                setFormValue={function (value: any): void {
+                  throw new Error("Function not implemented.");
+                }}
               />
             </form>
 
@@ -286,10 +284,10 @@ export function ListSpaceTypesView() {
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
-                Editar espaço
+                Editar divisão
               </h2>
               <button
-                onClick={() => handleEditSpaceType(null, "")}
+                onClick={() => handleEditModal(null, "")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -322,14 +320,13 @@ export function ListSpaceTypesView() {
                 required={true}
                 disable={isSaving}
               />
-
-              <ImagemUpload
-                name="imagem"
-                text="Imagem"
-                value={formDataEdit.imagem}
+              <TextInput
+                name="name"
+                text="Nome"
+                value={formDataEdit.type}
                 setFormValue={setFormDataEdit}
                 cols={2}
-                required={false}
+                required={true}
                 disable={isSaving}
               />
             </form>
@@ -340,7 +337,7 @@ export function ListSpaceTypesView() {
                 type="white"
                 text="Cancelar"
                 disable={isSaving}
-                onClick={() => handleEditSpaceType(null, "")}
+                onClick={() => handleEditModal(null, "")}
               />
 
               <TextButton
