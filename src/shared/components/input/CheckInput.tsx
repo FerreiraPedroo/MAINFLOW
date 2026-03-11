@@ -6,16 +6,17 @@ export function CheckInput({
   name,
   cols = 2,
   value = "",
+  disable = false,
   setFormValue,
 }: {
   text: string;
   name: string;
   value: any;
+  disable: boolean;
   cols?: number | string;
   setFormValue: React.Dispatch<React.SetStateAction<any>>;
 }) {
   const cl = `${gridCols[cols]} flex items-end pb-2`;
-
   return (
     <div className={cl}>
       <label className="flex items-center gap-3 cursor-pointer">
@@ -23,8 +24,12 @@ export function CheckInput({
           <input
             type="checkbox"
             checked={value}
+            disabled={disable}
             onChange={(e) =>
-              setFormValue((prev) => ({ ...prev, [name]: e.target.checked }))
+              setFormValue((prev: any) => ({
+                ...prev,
+                [name]: e.target.checked,
+              }))
             }
             className="sr-only peer"
           />

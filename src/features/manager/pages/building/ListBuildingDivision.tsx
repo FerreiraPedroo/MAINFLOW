@@ -15,27 +15,42 @@ import { SelectInput } from "@/shared/components/input/SelectInput";
 const buildingDivisionList: BuildingDivision[] = [
   {
     id: 1,
-    name: "Corredor",
+    name: "Principal",
     type: "string",
   },
   {
     id: 2,
-    name: "Escada",
+    name: "Bloco A",
     type: "string",
   },
   {
     id: 3,
-    name: "Sala",
+    name: "Bloco B",
     type: "string",
   },
   {
     id: 4,
-    name: "Rampa",
+    name: "Bloco C",
     type: "string",
   },
   {
     id: 5,
-    name: "Pátio",
+    name: "Bloco D",
+    type: "string",
+  },
+  {
+    id: 3,
+    name: "Bloco E",
+    type: "string",
+  },
+  {
+    id: 4,
+    name: "Bloco F",
+    type: "string",
+  },
+  {
+    id: 5,
+    name: "Bloco G",
     type: "string",
   },
 ];
