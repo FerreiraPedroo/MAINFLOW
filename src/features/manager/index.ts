@@ -7,3 +7,5 @@ export { ListBuildingView } from "./pages/building/ListBuilding";
 export { ListBuildingFloorView } from "./pages/building/ListBuildingFloor";
 export { ListBuildingSpaceView } from "./pages/building/ListBuildingSpace";
 export { ListBuildingDivisionView } from "./pages/building/ListBuildingDivision";
+
+export { ListPaymentGroupView } from "./pages/paymentGroup/ListPaymentGroup";

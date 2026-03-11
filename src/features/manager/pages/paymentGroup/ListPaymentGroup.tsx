@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
@@ -6,41 +6,53 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { buildingSpace } from "../interfaces/buildingSpace";
+import type { PaymentGroup } from "../interfaces/paymentGroup";
+import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
+import { CheckInput } from "@/shared/components/input/CheckInput";
+import { PillBadge } from "@/shared/components/badges/PillBadge";
 
-const typeList: buildingSpace[] = [
+const itemList: PaymentGroup[] = [
   {
     id: 1,
-    name: "Corredor",
-    imagem: "string",
+    name: "1321305 - Adiantamento para imobilização",
+    active: true,
   },
   {
     id: 2,
-    name: "Escada",
-    imagem: "string",
+    name: "45050330 - Material HID/SER/ELE/MAR/CIV",
+    active: true,
   },
   {
     id: 3,
-    name: "Sala",
-    imagem: "string",
+    name: "45090109	- ENERGIA ELETRICA",
+    active: true,
   },
   {
     id: 4,
-    name: "Rampa",
-    imagem: "string",
+    name: "45090101	- AGUA E ESGOTO",
+    active: true,
   },
   {
     id: 5,
-    name: "Pátio",
-    imagem: "string",
+    name: "45010101	- Alugueis - Imoveis",
+    active: true,
+  },
+  {
+    id: 6,
+    name: "45050317	- MATERIAL P/COPA, COZINHA E REFEITORIO",
+    active: true,
+  },
+  {
+    id: 7,
+    name: "45030191	- OUTROS SERVICOS PRESTADOS POR P.JURIDICA",
+    active: true,
   },
 ];
 
-export function ListBuildingSpaceView() {
+export function ListPaymentGroupView() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,38 +60,44 @@ export function ListBuildingSpaceView() {
   const [showModal, setShowModal] = useState("");
   const [searchTerm, setSearchTerm] = useState({
     search_name: "",
-    search_address: "",
   });
 
-  const [buildingSpace, setBuildingSpace] = useState<BuildingSpace[]>(typeList);
+  const [items, setItems] = useState<PaymentGroup[]>(itemList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingSpace>>({
+  const [formDataNew, setFormDataNew] = useState<Partial<PaymentGroup>>({
     name: "",
-    imagem: "",
+    active: true,
   });
-  function handleFormDataNew(modal: string) {
-    setFormDataNew({
-      name: "",
-      imagem: "",
-    });
+  const handleModalNew = useCallback((modal: string) => {
+    setFormDataNew({ name: "", active: true });
     setShowModal(modal);
-  }
+  }, []);
 
   const [formDataEdit, setFormDataEdit] =
-    useState<Partial<BuildingSpace> | null>(null);
-  function handleEditSpaceType(spaceType: BuildingSpace | null, modal: string) {
-    setFormDataEdit(spaceType);
-    setShowModal(modal);
-  }
+    useState<Partial<PaymentGroup> | null>(null);
+  const handleModalEdit = useCallback(
+    (item: PaymentGroup | null, modal: string) => {
+      setFormDataEdit(item);
+      setShowModal(modal);
+    },
+    [],
+  );
+
+  const handleSearch = async () => {
+    setIsLoading(true);
+    const data = await apiClient("payment-groups");
+    setItems(data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const loadBuildingSpace = async () => {
+    const loadList = async () => {
       setIsLoading(true);
-      const data = await apiClient("buildingspace-list");
-      setBuildingSpace(data);
+      const data = await apiClient("payment-groups");
+      setItems(data);
       setIsLoading(false);
     };
-    // loadBuildingSpace();
+    // loadList();
   }, []);
 
   return (
@@ -87,34 +105,27 @@ export function ListBuildingSpaceView() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
-          title="Tipos de espaço"
-          subTitle="Cadastre um novo tipo de espaço para ser usando na localização."
+          title="Grupo de pagamento"
+          subTitle="Cadastre um novo grupo de pagamento para organizar as configurações de pagamento."
         />
         <div className="flex gap-4">
           <TextButton
-            text="Cadastrar espaço"
+            text="Cadastrar grupo de pagamento"
             type="stone"
-            onClick={() => handleFormDataNew("new")}
+            onClick={() => handleModalNew("new")}
           />
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
-            <TextInput
+            <SearchButtonTextInput
               name={"search_name"}
-              value={searchTerm?.["search_name"]}
-              required={false}
-              setFormValue={setSearchTerm}
               text={"Nome"}
-              cols={2}
-            />
-            <TextInput
-              name={"search_address"}
-              value={searchTerm?.["search_address"]}
+              value={searchTerm.search_name}
               required={false}
-              setFormValue={setSearchTerm}
-              text={"Endereço"}
+              setSearchValue={setSearchTerm}
+              handleSearch={handleSearch}
               cols={2}
             />
           </div>
@@ -123,13 +134,13 @@ export function ListBuildingSpaceView() {
         {/* Grid */}
         {isLoading ? (
           <></>
-        ) : buildingSpace.length === 0 ? (
+        ) : items.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <h3 className="text-lg font-semibold text-slate-800 mb-2">
-              Nenhum prédio encontrada
+              Nenhum grupo de pagamento encontrada
             </h3>
             <p className="text-slate-500 mb-6">
-              Cadastre uma novo predio para começar
+              Cadastre uma novo grupo de pagamento para começar
             </p>
             <Link
               to={"#"}
@@ -148,7 +159,7 @@ export function ListBuildingSpaceView() {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Cadastrar prédio
+              Cadastrar grupo de pagamento
             </Link>
           </div>
         ) : (
@@ -158,29 +169,31 @@ export function ListBuildingSpaceView() {
                 <thead>
                   <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
                     <th className="w-1/10 px-6 py-4 font-medium">Id</th>
-                    <th className="w-6/10 px-4 py-4 font-medium">Nome</th>
-                    <th className="w-3/10 px-4 py-4 font-medium">Imagem</th>
-                    <th className="w-1/10 px-4 py-4 font-medium">Ações</th>
+                    <th className="w-8/10 px-4 py-4 font-medium">Nome</th>
+                    <th className="w-2/10 px-4 py-4 font-medium">Ativo</th>
+                    <th className="w-1/10 px-4 py-4 font-medium text-center">
+                      Ação
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {buildingSpace.map((spacetype) => (
+                  {items.map((item) => (
                     <tr
-                      key={spacetype.id}
+                      key={item.id}
                       onClick={() => null}
-                      className="text-sm hover:bg-slate-50 transition-colors hover:cursor-pointer"
+                      className="text-sm transition-colors " //hover:bg-slate-50 hover:cursor-pointer"
                     >
                       <td className="px-6 py-3">
                         <span className="font-medium text-slate-800">
-                          {spacetype.id}
+                          {item.id}
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700">{spacetype.name}</span>
+                        <span className="text-slate-700">{item.name}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700 ">
-                          {spacetype.imagem && <img src={spacetype.imagem} />}
+                        <span className="text-slate-700">
+                          <PillBadge name={item.active ? "Ativo" : "Inativo"} />
                         </span>
                       </td>
                       <td className="px-4 py-2">
@@ -188,9 +201,7 @@ export function ListBuildingSpaceView() {
                           <TextButton
                             type="white"
                             text="Editar"
-                            onClick={() =>
-                              handleEditSpaceType(spacetype, "edit")
-                            }
+                            onClick={() => handleModalEdit(item, "edit")}
                           />
                         </span>
                       </td>
@@ -208,9 +219,11 @@ export function ListBuildingSpaceView() {
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-800">Novo espaço</h2>
+              <h2 className="text-xl font-bold text-slate-800">
+                Novo grupo de pagamento
+              </h2>
               <button
-                onClick={() => handleFormDataNew("")}
+                onClick={() => handleModalNew("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -243,14 +256,11 @@ export function ListBuildingSpaceView() {
                 required={true}
                 disable={isSaving}
               />
-
-              <ImagemUpload
-                name="imagem"
-                text="Imagem"
-                value={formDataNew.imagem}
+              <CheckInput
+                text={"Ativo"}
+                name={"active"}
+                value={formDataNew.active}
                 setFormValue={setFormDataNew}
-                cols={2}
-                required={false}
                 disable={isSaving}
               />
             </form>
@@ -285,10 +295,10 @@ export function ListBuildingSpaceView() {
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
-                Editar espaço
+                Editar grupo de pagamento
               </h2>
               <button
-                onClick={() => handleEditSpaceType(null, "")}
+                onClick={() => handleModalEdit(null, "")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -321,14 +331,11 @@ export function ListBuildingSpaceView() {
                 required={true}
                 disable={isSaving}
               />
-
-              <ImagemUpload
-                name="imagem"
-                text="Imagem"
-                value={formDataEdit.imagem}
+              <CheckInput
+                name={"active"}
+                text={"Ativo"}
+                value={formDataEdit.active}
                 setFormValue={setFormDataEdit}
-                cols={2}
-                required={false}
                 disable={isSaving}
               />
             </form>
@@ -339,7 +346,7 @@ export function ListBuildingSpaceView() {
                 type="white"
                 text="Cancelar"
                 disable={isSaving}
-                onClick={() => handleEditSpaceType(null, "")}
+                onClick={() => handleModalEdit(null, "")}
               />
 
               <TextButton

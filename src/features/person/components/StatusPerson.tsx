@@ -24,7 +24,7 @@ export const statusComponent: any = {
     name: "Demitido",
     icon: "M12 14l9-5-9-5-9 5 9 5z",
     color: "bg-rose-100 text-rose-700",
-  }
+  },
 };
 
 export function StatusPerson({ status }: { status: string }) {

@@ -1,7 +1,7 @@
-export interface BuildingDivision {
+export interface PaymentGroup {
   id: number;
   name: string;
-  type: string; // esse tipo pode ser.Ex: Bloco, Ala,
+  active: boolean;
 
   created_at?: string;
   update_at?: string[];

@@ -1,3 +1,4 @@
+import React from "react";
 import { SideBar } from "@/shared/ui/SideBar";
 import { Outlet } from "react-router-dom";
 

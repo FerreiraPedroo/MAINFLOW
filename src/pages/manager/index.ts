@@ -7,3 +7,5 @@ export { ListBuilding } from "./building/BuildingList";
 export { ListBuildingFloor } from "./building/BuildingFloor";
 export { ListBuildingSpace } from "./building/BuildingSpace";
 export { ListBuildingDivision } from "./building/BuildingDivision";
+
+export { ListPaymentGroup } from "./paymentGroup/ListPaymentGroup";

@@ -66,7 +66,7 @@ export function ManagerHomeView() {
           </Link>
 
           <Link
-            to={"/manager/payment-group"}
+            to={"/manager/payment-groups"}
             className="group bg-white rounded-2xl border border-slate-200 p-8 hover:shadow-xl hover:shadow-slate-200/50 hover:border-emerald-200 transition-all duration-300"
           >
             <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-emerald-700 transition-colors">
