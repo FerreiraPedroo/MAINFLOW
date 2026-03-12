@@ -12,6 +12,7 @@ export default defineConfig(js.configs.recommended, [
     plugins: { js, prettier },
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
+
     rules: {
       ...configPrettier.rules,
       "prettier/prettier": "error",

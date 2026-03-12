@@ -2,9 +2,10 @@ export type DepartmentType = {
   id: number;
   name: string;
   url: string;
+  icon: string;
 };
 
-export type MenuItemsType = {
+export interface MenuItemsType {
   id: number;
   name: string;
   department_id: number;
@@ -12,7 +13,7 @@ export type MenuItemsType = {
   url: string;
   icon: string;
   subMenu?: SubMenuItemsType[];
-};
+}
 
 export type SubMenuItemsType = {
   id: number;
