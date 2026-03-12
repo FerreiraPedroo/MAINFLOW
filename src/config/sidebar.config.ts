@@ -15,10 +15,10 @@ type LayoutConfigType = {
 
 export const sideBarConfig: LayoutConfigType = {
   departaments: [
-    { id: 1, name: "Painel", url: "/painel" },
-    { id: 4, name: "Gerenciamento", url: "/manager" },
-    { id: 3, name: "Pessoas", url: "/persons" },
-    { id: 2, name: "QSMS", url: "/qsms" },
+    { id: 1, name: "Painel", url: "/painel", icon: "painel" },
+    { id: 4, name: "Gerenciamento", url: "/manager", icon: "menuManager" },
+    { id: 3, name: "Pessoas", url: "/persons", icon: "menuPersons" },
+    { id: 2, name: "QSMS", url: "/qsms", icon: "menuQsms" },
   ],
   menuItems: [
     ...painelMenuItems,
