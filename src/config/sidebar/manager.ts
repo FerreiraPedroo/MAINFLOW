@@ -5,7 +5,8 @@ export const managerMenuItems = [
     department_id: 4,
     order: 1,
     url: "/manager",
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    icon: "menuItemDefault",
+    description: "",
   },
   {
     id: 2,
@@ -13,15 +14,17 @@ export const managerMenuItems = [
     department_id: 4,
     order: 2,
     url: "/manager/cost-center",
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    icon: "menuItemDefault",
+    description: "",
   },
   {
     id: 3,
     name: "Grupo de pagamento",
     department_id: 4,
     order: 3,
-    url: "/manager/payment-group",
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    url: "/manager/payment-groups",
+    icon: "menuItemDefault",
+    description: "",
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ export const managerMenuItems = [
     department_id: 4,
     order: 4,
     url: "/manager/localizations",
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    icon: "menuItemDefault",
+    description: "",
     subMenu: [
       {
         id: 1,
@@ -37,7 +41,7 @@ export const managerMenuItems = [
         name: "Andar",
         order: 1,
         url: "/manager/localizations/building-floors",
-        icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+        icon: "menuItemDefault",
       },
       {
         id: 2,
@@ -45,7 +49,7 @@ export const managerMenuItems = [
         name: "Prédio",
         order: 3,
         url: "/manager/localizations/buildings",
-        icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+        icon: "menuItemDefault",
       },
       {
         id: 3,
@@ -53,7 +57,7 @@ export const managerMenuItems = [
         name: "Divisão",
         order: 2,
         url: "/manager/localizations/building-divisions",
-        icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+        icon: "menuItemDefault",
       },
       {
         id: 4,
@@ -61,7 +65,7 @@ export const managerMenuItems = [
         name: "Tipo de espaço",
         order: 4,
         url: "/manager/localizations/building-spaces",
-        icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+        icon: "menuItemDefault",
       },
     ],
   },
@@ -71,6 +75,7 @@ export const managerMenuItems = [
     department_id: 4,
     order: 5,
     url: "/manager/projects",
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+    icon: "menuItemDefault",
+    description: "",
   },
 ];

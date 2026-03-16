@@ -9,3 +9,5 @@ export { ListBuildingSpace } from "./building/BuildingSpace";
 export { ListBuildingDivision } from "./building/BuildingDivision";
 
 export { ListCostCenter } from "./centerCost/CenterCost";
+
+export { ListPaymentGroup } from "./paymentGroup/ListPaymentGroup";

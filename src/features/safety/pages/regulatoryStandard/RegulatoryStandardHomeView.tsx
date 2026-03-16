@@ -70,7 +70,8 @@ export function RegulatoryStandardHomeView() {
               </h3>
             </div>
             <p className="text-slate-600 ">
-              Eestabeleca o requisitos mínimos de segurança para o trabalho em altura
+              Eestabeleca o requisitos mínimos de segurança para o trabalho em
+              altura
             </p>
           </Link>
 

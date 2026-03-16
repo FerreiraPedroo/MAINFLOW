@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { sideBarConfig } from "@config/sidebar.config";
 import type { MenuItemsType } from "./SideBarTypes";
+import { getImagem } from "@/utils/getImagem";
 
 export function SideBar() {
   const location = useLocation();
@@ -62,27 +63,22 @@ export function SideBar() {
                 onClick={() => setShowDeptMenu(!showDeptMenu)}
                 className="min-h-12 max-h-12 lg:min-h-20 lg:max-h-20 w-full flex items-center gap-3 rounded-xl"
               >
-                <div className="w-6 lg:w-10 h-6 lg:h-10 rounded-sm lg:rounded-md bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <svg
-                    className="w-4 lg:w-6 h-4 lg:h-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
+                <div className="flex items-center justify-center w-8 lg:w-12 h-6 lg:h-10 rounded-sm">
+                  <img
+                    src={getImagem(
+                      departments.find((d) => d.id == selectedDept)
+                        ?.icon as string,
+                    )}
+                  />
                 </div>
+
                 <div className="flex-1 text-left min-w-0">
                   <p className="text-sm lg:text-xl font-semibold text-slate-600">
                     {departments.find((d) => d.id == selectedDept)?.name}
                   </p>
                   {/* <p className="text-xs text-slate-500"></p> */}
                 </div>
+
                 <svg
                   className={`w-3 lg:w-5 h-3 lg:h-5 text-slate-400 transition-transform shrink-0 ${showDeptMenu ? "rotate-180" : ""}`}
                   fill="none"
@@ -129,13 +125,13 @@ export function SideBar() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-2 lg:px-3 py-1 lg:py-2 space-y-1 overflow-y-auto">
+          <nav className="flex-1 px-1 lg:px-2 py-1 lg:py-2 space-y-1 overflow-x-hidden overflow-y-auto">
             {menuItems.map((item) => (
               <div key={item.name} className="group">
                 <div
-                  className={`flex transition-all duration-200 group-hover:text-slate-800 ${
+                  className={`flex rounded-md transition-all duration-200 group-hover:text-slate-800 ${
                     isActive(item.url)
-                      ? "bg-emerald-100 text-emerald-700"
+                      ? "bg-blue-100 text-blue-900"
                       : "text-slate-600 hover:bg-slate-100"
                   }`}
                 >
@@ -143,23 +139,7 @@ export function SideBar() {
                     to={item.url}
                     className={`flex w-full items-center gap-3 px-2 lg:px-4 py-1 lg:py-3 rounded-md`}
                   >
-                    <svg
-                      className={`min-w-5 min-h-5 w-5 h-5 ${
-                        isActive(item.url)
-                          ? "text-emerald-600"
-                          : "text-slate-400 group-hover:text-slate-600"
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d={item.icon}
-                      />
-                    </svg>
+                    <img src={getImagem(item.icon)} className="w-6" />
                     <span className="text-sm lg:text-md font-medium">
                       {item.name}
                     </span>
@@ -201,7 +181,7 @@ export function SideBar() {
                       to={submenu.url}
                       className={`flex items-center gap-0 pl-4.5 pr-2 py-1 lg:pl-6 lg:pr-4 lg:py-2 rounded-md transition-all duration-200 hover:text-slate-900 ${
                         isActive(submenu.url)
-                          ? "bg-emerald-100 text-emerald-700"
+                          ? "bg-blue-100 text-blue-900"
                           : "text-slate-600 hover:bg-slate-100"
                       }`}
                     >
