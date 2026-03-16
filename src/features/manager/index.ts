@@ -8,4 +8,6 @@ export { ListBuildingFloorView } from "./pages/building/ListBuildingFloor";
 export { ListBuildingSpaceView } from "./pages/building/ListBuildingSpace";
 export { ListBuildingDivisionView } from "./pages/building/ListBuildingDivision";
 
+export { ListCostCenterView } from "./pages/costCenter/ListCostCenter";
+
 export { ListPaymentGroupView } from "./pages/paymentGroup/ListPaymentGroup";
