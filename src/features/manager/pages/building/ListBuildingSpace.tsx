@@ -10,7 +10,7 @@ import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { buildingSpace } from "../interfaces/buildingSpace";
+import type { buildingSpace } from "../../interfaces/buildingSpace";
 
 const typeList: buildingSpace[] = [
   {

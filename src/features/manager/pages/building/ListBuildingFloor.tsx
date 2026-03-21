@@ -9,7 +9,7 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { BuildingFloor } from "../interfaces/buildingFloor";
+import type { BuildingFloor } from "../../interfaces/buildingFloor";
 
 const typeList: BuildingFloor[] = [
   {

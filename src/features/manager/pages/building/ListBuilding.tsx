@@ -9,7 +9,7 @@ import { LinkButton } from "@shared/components/button/LinkButton";
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-import type { Building } from "../interfaces/buildings";
+import type { Building } from "../../interfaces/buildings";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextButton } from "@/shared/components/button/TextButton";

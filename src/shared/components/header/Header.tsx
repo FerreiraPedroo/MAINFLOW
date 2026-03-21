@@ -1,14 +1,18 @@
 import React from "react";
+import { BackButton } from "../button/BackButton";
 
 export function Header({
   title,
   subTitle,
+  backButton = false,
 }: {
   title: string;
   subTitle?: string;
+  backButton?: boolean;
 }) {
   return (
     <header className="flex gap-4">
+      {backButton && <BackButton />}
       <div>
         <h1 className="p-0 text-2xl lg:text-3xl font-bold text-slate-800">
           {title}

@@ -13,7 +13,7 @@ import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
 import { SelectInput } from "@/shared/components/input/SelectInput";
 
-import type { Localization } from "../interfaces/localization";
+import type { Localization } from "../../interfaces/localization";
 import { Modal } from "@/shared/components/modal/Modal";
 
 const categoriesList = [];

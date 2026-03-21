@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { sideBarConfig } from "@config/sidebar.config";
 import type { MenuItemsType } from "./SideBarTypes";
-import { getImagem } from "@/utils/getImagem";
+
+import { sideBarConfig } from "@config/sidebar.config";
+import { getImagem } from "@/shared/utils/getImagem";
 
 export function SideBar() {
   const location = useLocation();
@@ -145,30 +146,27 @@ export function SideBar() {
                     </span>
                   </Link>
                   {item.subMenu?.length ? (
-                    <>
-                      <input type="checkbox" className="peer hidden sr-only" />
-                      <label
-                        className={`inline-flex items-center cursor-pointer`}
-                      >
-                        <input type="checkbox" className="peer sr-only" />
+                    <label
+                      className={`inline-flex items-center cursor-pointer`}
+                    >
+                      <input type="checkbox" className="peer sr-only" />
 
-                        <div className="w-6 h-full flex items-center justify-center transition-transform duration-300 peer-checked:rotate-180">
-                          <svg
-                            className="w-4 h-4  text-gray-600 transition-transform duration-300 peer-checked:rotate-180"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </div>
-                      </label>
-                    </>
+                      <div className="w-6 h-full flex items-center justify-center transition-transform duration-300 peer-checked:rotate-180">
+                        <svg
+                          className="w-4 h-4  text-gray-600 transition-transform duration-300 peer-checked:rotate-180"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </div>
+                    </label>
                   ) : (
                     ""
                   )}
@@ -179,7 +177,7 @@ export function SideBar() {
                     <Link
                       key={submenu.name}
                       to={submenu.url}
-                      className={`flex items-center gap-0 pl-4.5 pr-2 py-1 lg:pl-6 lg:pr-4 lg:py-2 rounded-md transition-all duration-200 hover:text-slate-900 ${
+                      className={`flex items-center gap-0 pl-5 pr-2 py-1 lg:pl-6 lg:pr-4 lg:py-2 rounded-md transition-all duration-200 hover:text-slate-900 ${
                         isActive(submenu.url)
                           ? "bg-blue-100 text-blue-900"
                           : "text-slate-600 hover:bg-slate-100"
@@ -187,15 +185,15 @@ export function SideBar() {
                     >
                       <svg
                         xmlns="http://www.w3.org"
-                        viewBox="0 0 24 24"
-                        width="24"
+                        viewBox="0 0 16 24"
+                        width="16"
                         height="24"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="0.8"
                         className="stroke-current "
                       >
-                        <path d="M 1 1 L 1 14 L 16 14" />
+                        <path d="M 1 5 L 1 14 L 8 14" />
                       </svg>
 
                       <span className="text-sm lg:text-md font-medium">

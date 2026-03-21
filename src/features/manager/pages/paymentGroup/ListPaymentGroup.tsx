@@ -9,7 +9,7 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { PaymentGroup } from "../interfaces/paymentGroup";
+import type { PaymentGroup } from "../../interfaces/paymentGroup";
 import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
 import { CheckInput } from "@/shared/components/input/CheckInput";
 import { PillBadge } from "@/shared/components/badges/PillBadge";

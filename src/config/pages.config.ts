@@ -1,10 +1,11 @@
-import { Layout } from "@/shared/layouts/Layout";
-import { NotFoundPage } from "@/pages/errors/NotFoundPage";
+
+
 import { HomePainel } from "@/pages/home/HomePainel";
 
-import * as safety from "@/pages/safety";
+
 import * as person from "@/pages/person";
 import * as manager from "@/pages/manager";
+
 
 export const PAGES: Record<string, React.FC> = {
   ///////////////////////////////////////////////////////////////////////
@@ -22,24 +23,11 @@ export const PAGES: Record<string, React.FC> = {
   "manager/localizations/building-floors": manager.ListBuildingFloor,
   "manager/localizations/building-divisions": manager.ListBuildingDivision,
   "manager/localizations/building-spaces": manager.ListBuildingSpace,
-  
+
   // "manager/projects": manager.ProjectList,
   "manager/cost-center": manager.ListCostCenter,
   "manager/payment-groups": manager.ListPaymentGroup,
   // "manager/payment-group": manager.PaymentGroupList,
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////
-  // QSMS /////////////////////////////////////////////////////////////////
-  qsms: safety.SafetyHome,
-  "qsms-dashboard": safety.SafetyDashboard,
-  //// EPI
-  epi: safety.SafetyListEpi,
-  "epi/new": safety.SafetyNewEpi,
-  "epi/:id": safety.SafetyDetailsEpi,
-  //// NR
-  nr: safety.RegulatoryStandardHome,
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 

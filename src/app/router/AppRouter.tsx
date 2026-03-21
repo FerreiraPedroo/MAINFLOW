@@ -1,27 +1,30 @@
-import React from "react";
+import { Layout } from "@/shared/layouts/Layout";
+import React, { lazy } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
   Route,
+  Routes,
 } from "react-router-dom";
 
-import { pagesConfig } from "@config/pages.config.ts";
+// import { Layout } from "@/shared/layouts/Layout";
+// import { NotFoundPage } from "@/pages/errors/NotFoundPage";
 
-const { Pages, Layout, NotFoundPage } = pagesConfig;
+const SafetyModule = lazy(() =>
+  import("@/features/safety/SafetyRoutes").then((m) => ({
+    default: m.SafetyRouter,
+  })),
+);
 
 export const Approuter = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Navigate to={"/painel"} />} />
-
       <Route element={<Layout />}>
-        {Object.entries(Pages).map(([path, Page]) => {
-          return <Route key={path} path={`/${path}`} element={<Page />} />;
-        })}
+        <Route path="safety/*" element={<SafetyModule />} />
       </Route>
-
-      <Route path="*" element={<NotFoundPage />} />
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Route>,
   ),
 );
