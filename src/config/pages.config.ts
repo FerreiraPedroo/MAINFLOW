@@ -1,11 +1,7 @@
-
-
 import { HomePainel } from "@/pages/home/HomePainel";
-
 
 import * as person from "@/pages/person";
 import * as manager from "@/pages/manager";
-
 
 export const PAGES: Record<string, React.FC> = {
   ///////////////////////////////////////////////////////////////////////

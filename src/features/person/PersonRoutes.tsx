@@ -1,11 +1,10 @@
 import React, { useCallback } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { safetyEpiPages } from "./epi/epi-routes";
-import { riskManagementPages } from "./risk-management/risk-management-routes";
-import { safetyHomePages } from "./home/home-router";
+import { personHomePages } from "./home/home-router";
+import { personPersonPages } from "./person/person-routes";
 
-export function SafetyRouter() {
+export function PersonRouter() {
   const createRoute = useCallback((pageList: any) => {
     return pageList.map(
       ({
@@ -22,9 +21,8 @@ export function SafetyRouter() {
 
   return (
     <Routes>
-      {createRoute(safetyHomePages)}
-      {createRoute(safetyEpiPages)}
-      {createRoute(riskManagementPages)}
+      {createRoute(personHomePages)}
+      {createRoute(personPersonPages)}
     </Routes>
   );
 }

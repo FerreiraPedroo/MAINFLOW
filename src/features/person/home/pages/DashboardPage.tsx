@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-export function EpiDashboardPage() {
+export function DashboardPage() {
   const [funcionarios, setFuncionarios] = useState([]);
   const [epis, setEpis] = useState([]);
   const [liberacoes, setLiberacoes] = useState([]);
