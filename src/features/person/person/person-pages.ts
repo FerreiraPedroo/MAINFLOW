@@ -2,27 +2,27 @@ import * as person from "./index";
 
 export const personPersonPages = [
   {
-    path: "/person",
+    path: "/",
     element: person.PersonHomePage,
     permission: "person:person",
   },
   {
-    path: "/person/dashboard",
+    path: "/dashboard",
     element: person.PersonDashboardPage,
     permission: "person:person",
   },
   {
-    path: "/person/person/:id",
+    path: "/persons/:id",
     element: person.PersonDetailsPage,
     permission: "person:person",
   },
   {
-    path: "/person/person",
+    path: "/persons",
     element: person.PersonListPage,
     permission: "person:person",
   },
   {
-    path: "/person/person/new",
+    path: "/persons/new",
     element: person.PersonNewPage,
     permission: "person:person",
   },

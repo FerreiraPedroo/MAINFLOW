@@ -1,13 +1,13 @@
-export { ManagerHomeView } from "./pages/ManagerHome";
+export { ManagerHome } from "./pages/home/ManagerHome";
 
-export { ListLocalizationView } from "./pages/localization/ListLocalization";
-export { NewLocalizationView } from "./pages/localization/NewLocalization";
+export { LocalizationList } from "./pages/localization/LocalizationList";
+export { LocalizationNew } from "./pages/localization/LocalizationNew";
 
-export { ListBuildingView } from "./pages/building/ListBuilding";
-export { ListBuildingFloorView } from "./pages/building/ListBuildingFloor";
-export { ListBuildingSpaceView } from "./pages/building/ListBuildingSpace";
-export { ListBuildingDivisionView } from "./pages/building/ListBuildingDivision";
+export { BuildingList } from "./pages/building/BuildingList";
+export { BuildingFloorList } from "./pages/building/BuildingFloorList";
+export { BuildingSpaceList } from "./pages/building/BuildingSpaceList";
+export { BuildingDivisionList } from "./pages/building/BuildingDivisionList";
 
-export { ListCostCenterView } from "./pages/costCenter/ListCostCenter";
+export { CostCenterList } from "./pages/cost-center/CostCenterList";
 
-export { ListPaymentGroupView } from "./pages/paymentGroup/ListPaymentGroup";
+export { PaymentGroupList } from "./pages/payment-group/PaymentGroupList";

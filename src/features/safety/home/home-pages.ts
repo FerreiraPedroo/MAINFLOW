@@ -1,15 +1,15 @@
 import { DashboardPage } from "./pages/DashboardPage";
-import { HomePage } from "./pages/HomePage";
+import { SafetyHomePage } from "./pages/SafetyHomePage";
 
 export const safetyHomePages = [
   {
     path: "/",
-    element: HomePage,
-    permission: "safety:epi",
+    element: SafetyHomePage,
+    permission: "safety:manager",
   },
   {
     path: "/dashboard",
     element: DashboardPage,
-    permission: "safety:epi",
+    permission: "safety:manager",
   },
 ];

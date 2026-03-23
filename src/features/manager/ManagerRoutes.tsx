@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { personHomePages } from "./home/home-pages";
-import { personPersonPages } from "./person/person-pages";
+import { managerPages } from "./manager-pages";
 
-export function PersonRouter() {
+export function ManagerRouter() {
   const createRoute = useCallback((pageList: any) => {
     return pageList.map(
       ({
@@ -19,10 +18,5 @@ export function PersonRouter() {
     );
   }, []);
 
-  return (
-    <Routes>
-      {createRoute(personHomePages)}
-      {createRoute(personPersonPages)}
-    </Routes>
-  );
+  return <Routes>{createRoute(managerPages)}</Routes>;
 }

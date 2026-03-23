@@ -32,7 +32,7 @@ const localizationList: Localization[] = [
   },
 ];
 
-export function ListLocalizationView() {
+export function LocalizationList() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);

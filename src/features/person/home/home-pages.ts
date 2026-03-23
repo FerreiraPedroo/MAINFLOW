@@ -1,10 +1,10 @@
 import { DashboardPage } from "./pages/DashboardPage";
-import { HomePage } from "./pages/HomePage";
+import { PersonHome } from "./pages/PersonHome";
 
 export const personHomePages = [
   {
     path: "/",
-    element: HomePage,
+    element: PersonHome,
     permission: "person:person",
   },
   {
