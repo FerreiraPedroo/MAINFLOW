@@ -8,7 +8,7 @@ import { LinkButton } from "@shared/components/button/LinkButton";
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
 
-import type { Localization } from "../interfaces/localization";
+import type { Localization } from "../../interfaces/localization";
 import { TextInput } from "@/shared/components/input/TextInput";
 
 const localizationList: Localization[] = [

@@ -17,8 +17,13 @@ export const sideBarConfig: LayoutConfigType = {
   departaments: [
     { id: 1, name: "Painel", url: "/painel", icon: "painel" },
     { id: 4, name: "Gerenciamento", url: "/manager", icon: "menuManager" },
-    { id: 3, name: "Pessoas", url: "/persons", icon: "menuPersons" },
-    { id: 2, name: "QSMS", url: "/qsms", icon: "menuQsms" },
+    { id: 3, name: "Pessoas", url: "/persons", icon: "menuPerson" },
+    {
+      id: 2,
+      name: "Segurança do Trabalho",
+      url: "/safety",
+      icon: "menuSafety",
+    },
   ],
   menuItems: [
     ...painelMenuItems,

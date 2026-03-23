@@ -9,7 +9,7 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { BuildingDivision } from "../interfaces/buildingDivision";
+import type { BuildingDivision } from "../../interfaces/buildingDivision";
 import { SelectInput } from "@/shared/components/input/SelectInput";
 
 const buildingDivisionList: BuildingDivision[] = [
