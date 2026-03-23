@@ -1,8 +1,8 @@
 import type { DepartmentType, MenuItemsType } from "@/shared/ui/SideBarTypes";
-import { managerMenuItems } from "./sidebar/manager";
-import { safetyMenuItems } from "./sidebar/safety";
-import { personMenuItems } from "./sidebar/person";
-import { painelMenuItems } from "./sidebar/painel";
+import { managerMenuItems } from "@/features/manager/manager-sidebar.config";
+import { safetyMenuItems } from "@/features/safety/safety-sidebar.config";
+import { personsMenuItems } from "@/features/person/persons-sidebar.config";
+import { painelMenuItems } from "@/features/home/painel-sidebar.config";
 
 /**
  * Configura o sidebar, esses dados serão obtidos apartir
@@ -15,7 +15,7 @@ type LayoutConfigType = {
 
 export const sideBarConfig: LayoutConfigType = {
   departaments: [
-    { id: 1, name: "Painel", url: "/painel", icon: "painel" },
+    { id: 1, name: "Painel", url: "/", icon: "painel" },
     { id: 4, name: "Gerenciamento", url: "/manager", icon: "menuManager" },
     { id: 3, name: "Pessoas", url: "/persons", icon: "menuPerson" },
     {
@@ -28,7 +28,7 @@ export const sideBarConfig: LayoutConfigType = {
   menuItems: [
     ...painelMenuItems,
     ...safetyMenuItems,
-    ...personMenuItems,
+    ...personsMenuItems,
     ...managerMenuItems,
   ],
 };

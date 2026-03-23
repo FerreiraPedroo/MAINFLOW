@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
@@ -9,38 +9,50 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { BuildingDivision } from "../../interfaces/buildingDivision";
-import { SelectInput } from "@/shared/components/input/SelectInput";
+import type { PaymentGroup } from "../../interfaces/paymentGroup";
+import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
+import { CheckInput } from "@/shared/components/input/CheckInput";
+import { PillBadge } from "@/shared/components/badges/PillBadge";
 
-const itemList: BuildingDivision[] = [
+const itemList: PaymentGroup[] = [
   {
     id: 1,
-    name: "Corredor",
-    type: "string",
+    name: "1321305 - Adiantamento para imobilização",
+    active: true,
   },
   {
     id: 2,
-    name: "Escada",
-    type: "string",
+    name: "45050330 - Material HID/SER/ELE/MAR/CIV",
+    active: true,
   },
   {
     id: 3,
-    name: "Sala",
-    type: "string",
+    name: "45090109	- ENERGIA ELETRICA",
+    active: true,
   },
   {
     id: 4,
-    name: "Rampa",
-    type: "string",
+    name: "45090101	- AGUA E ESGOTO",
+    active: true,
   },
   {
     id: 5,
-    name: "Pátio",
-    type: "string",
+    name: "45010101	- Alugueis - Imoveis",
+    active: true,
+  },
+  {
+    id: 6,
+    name: "45050317	- MATERIAL P/COPA, COZINHA E REFEITORIO",
+    active: true,
+  },
+  {
+    id: 7,
+    name: "45030191	- OUTROS SERVICOS PRESTADOS POR P.JURIDICA",
+    active: true,
   },
 ];
 
-export function ListCostCenterView() {
+export function PaymentGroupList() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -48,38 +60,44 @@ export function ListCostCenterView() {
   const [showModal, setShowModal] = useState("");
   const [searchTerm, setSearchTerm] = useState({
     search_name: "",
-    search_type: "",
   });
 
-  const [items, setItems] = useState<BuildingDivision[]>(itemList);
+  const [items, setItems] = useState<PaymentGroup[]>(itemList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingDivision>>({
+  const [formDataNew, setFormDataNew] = useState<Partial<PaymentGroup>>({
     name: "",
-    type: "",
+    active: true,
   });
-  function handleNewModal(modal: string) {
-    setFormDataNew({
-      name: "",
-      type: "",
-    });
+  const handleModalNew = useCallback((modal: string) => {
+    setFormDataNew({ name: "", active: true });
     setShowModal(modal);
-  }
+  }, []);
 
   const [formDataEdit, setFormDataEdit] =
-    useState<Partial<BuildingDivision> | null>(null);
-  function handleEditModal(item: BuildingDivision | null, modal: string) {
-    setFormDataEdit(item);
-    setShowModal(modal);
-  }
+    useState<Partial<PaymentGroup> | null>(null);
+  const handleModalEdit = useCallback(
+    (item: PaymentGroup | null, modal: string) => {
+      setFormDataEdit(item);
+      setShowModal(modal);
+    },
+    [],
+  );
+
+  const handleSearch = async () => {
+    setIsLoading(true);
+    const data = await apiClient("payment-groups");
+    setItems(data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const loadItems = async () => {
+    const loadList = async () => {
       setIsLoading(true);
-      const data = await apiClient("center-cost-list");
+      const data = await apiClient("payment-groups");
       setItems(data);
       setIsLoading(false);
     };
-    // loadItens();
+    // loadList();
   }, []);
 
   return (
@@ -87,26 +105,27 @@ export function ListCostCenterView() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
-          title="Centro de custo"
-          subTitle="Cadastre um novo centro de custo para registrar e acompanhar despesas associadas a uma área ou recurso."
+          title="Grupo de pagamento"
+          subTitle="Cadastre um novo grupo de pagamento para organizar as configurações de pagamento."
         />
         <div className="flex gap-4">
           <TextButton
-            text="Cadastrar centro de custo"
+            text="Cadastrar grupo de pagamento"
             type="stone"
-            onClick={() => handleNewModal("new")}
+            onClick={() => handleModalNew("new")}
           />
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
-            <TextInput
+            <SearchButtonTextInput
               name={"search_name"}
-              value={searchTerm?.["search_name"]}
-              required={false}
-              setFormValue={setSearchTerm}
               text={"Nome"}
+              value={searchTerm.search_name}
+              required={false}
+              setSearchValue={setSearchTerm}
+              handleSearch={handleSearch}
               cols={2}
             />
           </div>
@@ -118,8 +137,30 @@ export function ListCostCenterView() {
         ) : items.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <h3 className="text-lg font-semibold text-slate-800 mb-2">
-              Nenhum centro de custo encontrado
+              Nenhum grupo de pagamento encontrada
             </h3>
+            <p className="text-slate-500 mb-6">
+              Cadastre uma novo grupo de pagamento para começar
+            </p>
+            <Link
+              to={"#"}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white font-medium rounded-xl hover:bg-emerald-600 transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+              Cadastrar grupo de pagamento
+            </Link>
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
@@ -128,14 +169,20 @@ export function ListCostCenterView() {
                 <thead>
                   <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
                     <th className="w-1/10 px-6 py-4 font-medium">Id</th>
-                    <th className="w-6/10 px-4 py-4 font-medium">Nome</th>
-                    <th className="w-2/10 px-4 py-4 font-medium">Ação</th>
+                    <th className="w-8/10 px-4 py-4 font-medium">Nome</th>
+                    <th className="w-2/10 px-4 py-4 font-medium">Ativo</th>
+                    <th className="w-1/10 px-4 py-4 font-medium text-center">
+                      Ação
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {items.map((item) => (
-                    <tr key={item.id} onClick={() => null} className="text-sm">
-                      {/* hover:bg-slate-50 transition-colors hover:cursor-pointer" */}
+                    <tr
+                      key={item.id}
+                      onClick={() => null}
+                      className="text-sm transition-colors " //hover:bg-slate-50 hover:cursor-pointer"
+                    >
                       <td className="px-6 py-3">
                         <span className="font-medium text-slate-800">
                           {item.id}
@@ -144,12 +191,17 @@ export function ListCostCenterView() {
                       <td className="px-4 py-3">
                         <span className="text-slate-700">{item.name}</span>
                       </td>
+                      <td className="px-4 py-3">
+                        <span className="text-slate-700">
+                          <PillBadge name={item.active ? "Ativo" : "Inativo"} />
+                        </span>
+                      </td>
                       <td className="px-4 py-2">
                         <span className="text-slate-700">
                           <TextButton
                             type="white"
                             text="Editar"
-                            onClick={() => handleEditModal(item, "edit")}
+                            onClick={() => handleModalEdit(item, "edit")}
                           />
                         </span>
                       </td>
@@ -168,10 +220,10 @@ export function ListCostCenterView() {
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
-                Novo centro de custo
+                Novo grupo de pagamento
               </h2>
               <button
-                onClick={() => handleNewModal("")}
+                onClick={() => handleModalNew("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -204,15 +256,12 @@ export function ListCostCenterView() {
                 required={true}
                 disable={isSaving}
               />
-
-              <SelectInput
-                text={"type"}
-                name={"Tipo"}
-                value={formDataNew.type}
-                options={["Bloco", "Ala", "Divisão"]}
-                setFormValue={function (value: any): void {
-                  throw new Error("Function not implemented.");
-                }}
+              <CheckInput
+                text={"Ativo"}
+                name={"active"}
+                value={formDataNew.active}
+                setFormValue={setFormDataNew}
+                disable={isSaving}
               />
             </form>
 
@@ -246,10 +295,10 @@ export function ListCostCenterView() {
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
-                Editar centro de custo
+                Editar grupo de pagamento
               </h2>
               <button
-                onClick={() => handleEditModal(null, "")}
+                onClick={() => handleModalEdit(null, "")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -282,13 +331,11 @@ export function ListCostCenterView() {
                 required={true}
                 disable={isSaving}
               />
-              <TextInput
-                name="name"
-                text="Nome"
-                value={formDataEdit.type}
+              <CheckInput
+                name={"active"}
+                text={"Ativo"}
+                value={formDataEdit.active}
                 setFormValue={setFormDataEdit}
-                cols={2}
-                required={true}
                 disable={isSaving}
               />
             </form>
@@ -299,12 +346,12 @@ export function ListCostCenterView() {
                 type="white"
                 text="Cancelar"
                 disable={isSaving}
-                onClick={() => handleEditModal(null, "")}
+                onClick={() => handleModalEdit(null, "")}
               />
 
               <TextButton
                 type={"green"}
-                text={"Salvar"}
+                text={"Cadastrar"}
                 disable={isSaving}
                 onClick={() => null}
               />

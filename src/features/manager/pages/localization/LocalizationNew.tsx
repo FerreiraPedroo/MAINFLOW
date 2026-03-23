@@ -18,7 +18,7 @@ import { Modal } from "@/shared/components/modal/Modal";
 
 const categoriesList = [];
 
-export function NewLocalizationView() {
+export function LocalizationNew() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);

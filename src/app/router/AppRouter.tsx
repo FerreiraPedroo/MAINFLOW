@@ -1,15 +1,19 @@
-import { HomePage } from "@/features/safety/home/pages/HomePage";
-import { Layout } from "@/shared/layouts/Layout";
 import React, { lazy } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate,
   Route,
 } from "react-router-dom";
 
-// import { Layout } from "@/shared/layouts/Layout";
+import { Layout } from "@/shared/layouts/Layout";
+import { HomePage } from "@/features/home/Home";
 // import { NotFoundPage } from "@/pages/errors/NotFoundPage";
+
+const ManagerModule = lazy(() =>
+  import("@/features/manager/ManagerRoutes.tsx").then((m) => ({
+    default: m.ManagerRouter,
+  })),
+);
 
 const SafetyModule = lazy(() =>
   import("@/features/safety/SafetyRoutes").then((m) => ({
@@ -26,11 +30,11 @@ const PersonModule = lazy(() =>
 export const Approuter = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Navigate to={"/painel"} />} />
       <Route element={<Layout />}>
-        <Route path="painel" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="safety/*" element={<SafetyModule />} />
         <Route path="persons/*" element={<PersonModule />} />
+        <Route path="manager/*" element={<ManagerModule />} />
       </Route>
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Route>,

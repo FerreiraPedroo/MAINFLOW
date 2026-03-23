@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { safetyEpiPages } from "./epi/epi-routes";
-import { riskManagementPages } from "./risk-management/risk-management-routes";
-import { safetyHomePages } from "./home/home-router";
+import { safetyEpiPages } from "./epi/epi-pages";
+import { riskManagementPages } from "./risk-management/risk-management-pages";
+import { safetyHomePages } from "./home/home-pages";
 
 export function SafetyRouter() {
   const createRoute = useCallback((pageList: any) => {
