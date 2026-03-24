@@ -48,10 +48,3 @@ export interface PersonJob {
   start_time_in_position: string;
   end_time_in_position: string | null;
 }
-
-export interface Job {
-  id: number;
-  job_id: number;
-  name: string;
-  description: string | null;
-}

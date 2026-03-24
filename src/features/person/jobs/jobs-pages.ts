@@ -12,17 +12,17 @@ export const personJobsPages = [
   //   permission: "person:job",
   // },
   {
-    path: "/persons/:id",
+    path: "/jobs/:id",
     element: job.JobDetailsPage,
     permission: "person:job",
   },
   {
-    path: "/persons",
+    path: "/jobs",
     element: job.JobListPage,
     permission: "person:person",
   },
   {
-    path: "/persons/new",
+    path: "/jobs/new",
     element: job.JobNewPage,
     permission: "person:person",
   },

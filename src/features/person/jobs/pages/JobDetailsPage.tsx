@@ -6,8 +6,8 @@ import { BackButton } from "@/shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
 
 // import { Modal } from "@/shared/components/modal/Modal";
-import type { Job } from "../../interfaces/job";
-import { Breadcrumb } from "@shared/ui/pageHome/";
+import type { Job } from "@features/person/jobs/types/jobs.types";
+import { Breadcrumb } from "@shared/ui/Breadcrumb";
 
 export function JobDetailsPage() {
   const navigate = useNavigate();

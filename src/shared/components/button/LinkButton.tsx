@@ -5,21 +5,8 @@ export function LinkButton({ to, text }: { to: string; text: string }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center px-5 py-2.5 gap-2 rounded-xl hover:text-slate-900 bg-slate-200 hover:bg-slate-300 hover:shadow-slate-500/25 hover:shadow-lg transition-all duration-300 font-medium"
+      className="inline-flex items-center justify-center border align-middle select-none font-medium text-center duration-200 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none py-2 px-4 shadow-sm hover:shadow-md bg-stone-100 hover:bg-stone-200 border-stone-300 text-stone-700 rounded-lg  hover:border-stone-400"
     >
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 4v16m8-8H4"
-        />
-      </svg>
       {text}
     </Link>
   );

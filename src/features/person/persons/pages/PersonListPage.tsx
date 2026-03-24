@@ -63,7 +63,7 @@ export function PersonListPage() {
   useEffect(() => {
     const loadPersons = async () => {
       setIsLoading(true);
-      const data = await apiClient("person-list");
+      const data = await apiClient("persons-persons-list");
       setPersons(data);
       setIsLoading(false);
     };
@@ -75,7 +75,7 @@ export function PersonListPage() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header title="Pessoas" />
-        <LinkButton to="/persons/new" text="Cadastrar pessoa" />
+        <LinkButton to="/persons/persons/new" text="Cadastrar pessoa" />
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
@@ -146,7 +146,7 @@ export function PersonListPage() {
                   {persons.map((person) => (
                     <tr
                       key={person.id}
-                      onClick={() => navigate(`/persons/${person.id}`)}
+                      onClick={() => navigate(`/persons/persons/${person.id}`)}
                       className="text-sm hover:bg-slate-50 transition-colors hover:cursor-pointer"
                     >
                       <td className="px-6 py-4">

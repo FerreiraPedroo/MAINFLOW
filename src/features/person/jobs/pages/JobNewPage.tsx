@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
@@ -7,11 +7,11 @@ import { PageMainContainer } from "@shared/components/PageMainContainer";
 import { SubmitButtom } from "@shared/components/button/SubmitButtom";
 import { BackButton } from "@shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
+import { OccupationPerson } from "../../persons/components/OccupationPerson";
+import { AllocationPerson } from "../../persons/components/AllocationPerson";
+import { BasicPersonInfo } from "../../persons/components/BasicPersonInfo";
 
-// import { BasicPersonInfo } from "../components/BasicPersonInfo";
-// import { AllocationPerson } from "../components/AllocationPerson";
-// import { OccupationPerson } from "../components/OccupationPerson";
-
+const sectors = [];
 const department = [
   {
     id: 1,
@@ -152,7 +152,7 @@ export function JobNewPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* <BasicPersonInfo
+            <BasicPersonInfo
               formData={formData}
               setFormData={setFormData}
               loading={isLoading}
@@ -169,7 +169,7 @@ export function JobNewPage() {
               setFormData={setFormData}
               jobs={jobs}
               loading={isLoading}
-            /> */}
+            />
             <SubmitButtom text="Cadastrar" />
           </form>
         )}

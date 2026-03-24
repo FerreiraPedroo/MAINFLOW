@@ -28,6 +28,7 @@ export function TextButton({
       className={types[type] ?? base}
       disabled={disable}
     >
+
       {text}
     </button>
   );
