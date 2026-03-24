@@ -5,8 +5,8 @@ import { PageMainContainer } from "@/shared/components/PageMainContainer";
 import { BackButton } from "@/shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
 import type { Person } from "../types/person.interface";
-import { DetailsPersonMainCardSkeleton } from "@/features/person/person/components/skeleton/DetailsPersonMainCardSkeleton";
-import { StatusPerson } from "@/features/person/person/components/StatusPerson";
+import { DetailsPersonMainCardSkeleton } from "@/features/person/persons/components/skeleton/DetailsPersonMainCardSkeleton";
+import { StatusPerson } from "@/features/person/persons/components/StatusPerson";
 import { iconList } from "@/shared/utils/icons";
 
 import { Modal } from "@/shared/components/modal/Modal";
