@@ -21,9 +21,9 @@ const SafetyModule = lazy(() =>
   })),
 );
 
-const PersonModule = lazy(() =>
-  import("@/features/person/PersonRoutes").then((m) => ({
-    default: m.PersonRouter,
+const PersonsModule = lazy(() =>
+  import("@/features/person/PersonsRoutes").then((m) => ({
+    default: m.PersonsRouter,
   })),
 );
 
@@ -33,7 +33,7 @@ export const Approuter = createBrowserRouter(
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="safety/*" element={<SafetyModule />} />
-        <Route path="persons/*" element={<PersonModule />} />
+        <Route path="persons/*" element={<PersonsModule />} />
         <Route path="manager/*" element={<ManagerModule />} />
       </Route>
       {/* <Route path="*" element={<NotFoundPage />} /> */}
