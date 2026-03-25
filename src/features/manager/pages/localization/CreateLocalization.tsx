@@ -18,7 +18,7 @@ import { Modal } from "@/shared/components/modal/Modal";
 
 const categoriesList = [];
 
-export function LocalizationNew() {
+export function LocalizationCreate() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -61,10 +61,10 @@ export function LocalizationNew() {
     <PageMainContainer>
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
-          <BackButton />
           <Header
             title="Cadastrar localização"
             subTitle="Identifique uma localização específica."
+            backButton={true}
           />
         </div>
 
@@ -156,6 +156,7 @@ export function LocalizationNew() {
                   setFormValue={setFormData}
                   required={false}
                   cols={"full"}
+                  disable={false}
                 />
               </div>
             </div>

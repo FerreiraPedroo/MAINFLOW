@@ -53,12 +53,12 @@ export function CostCenterList() {
 
   const [items, setItems] = useState<BuildingDivision[]>(itemList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingDivision>>({
+  const [formData, setFormData] = useState<Partial<BuildingDivision>>({
     name: "",
     type: "",
   });
-  function handleNewModal(modal: string) {
-    setFormDataNew({
+  function handleCreateModal(modal: string) {
+    setFormData({
       name: "",
       type: "",
     });
@@ -94,7 +94,7 @@ export function CostCenterList() {
           <TextButton
             text="Cadastrar centro de custo"
             type="stone"
-            onClick={() => handleNewModal("new")}
+            onClick={() => handleCreateModal("new")}
           />
         </div>
 
@@ -171,7 +171,7 @@ export function CostCenterList() {
                 Novo centro de custo
               </h2>
               <button
-                onClick={() => handleNewModal("")}
+                onClick={() => handleCreateModal("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -198,8 +198,8 @@ export function CostCenterList() {
               <TextInput
                 name="name"
                 text="Nome"
-                value={formDataNew.name}
-                setFormValue={setFormDataNew}
+                value={formData.name}
+                setFormValue={setFormData}
                 cols={2}
                 required={true}
                 disable={isSaving}
@@ -208,7 +208,7 @@ export function CostCenterList() {
               <SelectInput
                 text={"type"}
                 name={"Tipo"}
-                value={formDataNew.type}
+                value={formData.type}
                 options={["Bloco", "Ala", "Divisão"]}
                 setFormValue={function (value: any): void {
                   throw new Error("Function not implemented.");

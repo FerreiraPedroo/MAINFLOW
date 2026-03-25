@@ -46,11 +46,11 @@ export function BuildingFloorList() {
 
   const [buildingFloor, setBuildingFloor] = useState<BuildingFloor[]>(typeList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingFloor>>({
+  const [formData, setFormData] = useState<Partial<BuildingFloor>>({
     name: "",
   });
-  function handleModalNew(modal: string) {
-    setFormDataNew({ name: "" });
+  function handleCreateModal(modal: string) {
+    setFormData({ name: "" });
     setShowModal(modal);
   }
 
@@ -83,7 +83,7 @@ export function BuildingFloorList() {
           <TextButton
             text="Cadastrar andar"
             type="stone"
-            onClick={() => handleModalNew("new")}
+            onClick={() => handleCreateModal("new")}
           />
         </div>
 
@@ -112,25 +112,6 @@ export function BuildingFloorList() {
             <p className="text-slate-500 mb-6">
               Cadastre uma novo andar para começar
             </p>
-            <Link
-              to={"#"}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white font-medium rounded-xl hover:bg-emerald-600 transition-colors"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              Cadastrar andar
-            </Link>
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
@@ -182,7 +163,7 @@ export function BuildingFloorList() {
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">Novo andar</h2>
               <button
-                onClick={() => handleModalNew("")}
+                onClick={() => handleCreateModal("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -209,8 +190,8 @@ export function BuildingFloorList() {
               <TextInput
                 name="name"
                 text="Nome"
-                value={formDataNew.name}
-                setFormValue={setFormDataNew}
+                value={formData.name}
+                setFormValue={setFormData}
                 cols={2}
                 required={true}
                 disable={isSaving}

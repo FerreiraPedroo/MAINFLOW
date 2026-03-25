@@ -69,12 +69,12 @@ export function BuildingDivisionList() {
   const [buildingDivision, setBuildingDivision] =
     useState<BuildingDivision[]>(buildingDivisionList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingDivision>>({
+  const [formData, setFormData] = useState<Partial<BuildingDivision>>({
     name: "",
     type: "",
   });
-  function handleNewModal(modal: string) {
-    setFormDataNew({
+  function handleCreateModal(modal: string) {
+    setFormData({
       name: "",
       type: "",
     });
@@ -108,12 +108,13 @@ export function BuildingDivisionList() {
         <Header
           title="Divisão"
           subTitle="Cadastre uma nova divisão para ser utilizada na estrutura de localização do edifício."
+
         />
         <div className="flex gap-4">
           <TextButton
             text="Cadastrar divisão"
             type="stone"
-            onClick={() => handleNewModal("new")}
+            onClick={() => handleCreateModal("new")}
           />
         </div>
 
@@ -217,14 +218,14 @@ export function BuildingDivisionList() {
         )}
       </div>
 
-      {/* Modal New */}
+
       {showModal == "new" && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">Nova divisão</h2>
               <button
-                onClick={() => handleNewModal("")}
+                onClick={() => handleCreateModal("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -251,8 +252,8 @@ export function BuildingDivisionList() {
               <TextInput
                 name="name"
                 text="Nome"
-                value={formDataNew.name}
-                setFormValue={setFormDataNew}
+                value={formData.name}
+                setFormValue={setFormData}
                 cols={2}
                 required={true}
                 disable={isSaving}
@@ -261,7 +262,7 @@ export function BuildingDivisionList() {
               <SelectInput
                 text={"type"}
                 name={"Tipo"}
-                value={formDataNew.type}
+                value={formData.type}
                 options={["Bloco", "Ala", "Divisão"]}
                 setFormValue={function (value: any): void {
                   throw new Error("Function not implemented.");

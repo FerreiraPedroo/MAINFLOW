@@ -4,7 +4,7 @@ import { BackButton } from "../button/BackButton";
 export function Header({
   title,
   subTitle,
-  backButton = false,
+  backButton = true,
 }: {
   title: string;
   subTitle?: string;

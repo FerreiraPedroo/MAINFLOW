@@ -11,16 +11,18 @@ export function TextInput({
   value = "",
   disable = false,
   setFormValue,
+  register
 }: {
-  text: string;
-  name: string;
+  text?: string;
+  name?: string;
   required?: boolean;
   readOnly?: boolean;
   placeholder?: string;
   cols?: number | string;
   disable?: boolean;
-  value: any;
-  setFormValue: React.Dispatch<React.SetStateAction<any>>;
+  value?: any;
+  setFormValue?: React.Dispatch<React.SetStateAction<any>>;
+  register: any
 }) {
   return (
     <div className={gridCols[cols]}>
@@ -31,16 +33,17 @@ export function TextInput({
 
       <input
         type="text"
-        name={name}
-        required={required}
-        readOnly={readOnly}
-        value={value}
-        onChange={(e) =>
-          setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
-        }
+        // name={name}
+        // required={required}
+        // readOnly={readOnly}
+        // value={value}
+        // onChange={(e) =>
+        //   setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
+        // }
         className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
         placeholder={`${placeholder && "Ex: " + placeholder}`}
         disabled={disable}
+        {...register}
       />
     </div>
   );

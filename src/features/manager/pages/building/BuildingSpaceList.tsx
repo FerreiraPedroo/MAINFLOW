@@ -10,7 +10,7 @@ import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { buildingSpace } from "../../interfaces/buildingSpace";
+import type { BuildingSpace, buildingSpace } from "../../interfaces/buildingSpace";
 
 const typeList: buildingSpace[] = [
   {
@@ -53,12 +53,12 @@ export function BuildingSpaceList() {
 
   const [buildingSpace, setBuildingSpace] = useState<BuildingSpace[]>(typeList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<BuildingSpace>>({
+  const [formData, setFormData] = useState<Partial<BuildingSpace>>({
     name: "",
     imagem: "",
   });
-  function handleFormDataNew(modal: string) {
-    setFormDataNew({
+  function handleFormData(modal: string) {
+    setFormData({
       name: "",
       imagem: "",
     });
@@ -94,7 +94,7 @@ export function BuildingSpaceList() {
           <TextButton
             text="Cadastrar espaço"
             type="stone"
-            onClick={() => handleFormDataNew("new")}
+            onClick={() => handleFormData("new")}
           />
         </div>
 
@@ -203,14 +203,14 @@ export function BuildingSpaceList() {
         )}
       </div>
 
-      {/* Modal New */}
+
       {showModal == "new" && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">Novo espaço</h2>
               <button
-                onClick={() => handleFormDataNew("")}
+                onClick={() => handleFormData("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -237,8 +237,8 @@ export function BuildingSpaceList() {
               <TextInput
                 name="name"
                 text="Nome"
-                value={formDataNew.name}
-                setFormValue={setFormDataNew}
+                value={formData.name}
+                setFormValue={setFormData}
                 cols={2}
                 required={true}
                 disable={isSaving}
@@ -247,8 +247,8 @@ export function BuildingSpaceList() {
               <ImagemUpload
                 name="imagem"
                 text="Imagem"
-                value={formDataNew.imagem}
-                setFormValue={setFormDataNew}
+                value={formData.imagem}
+                setFormValue={setFormData}
                 cols={2}
                 required={false}
                 disable={isSaving}

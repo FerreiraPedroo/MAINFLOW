@@ -134,10 +134,10 @@ export function JobNewPage() {
     <PageMainContainer>
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
-          <BackButton />
           <Header
             title="Cadastrar função"
             subTitle="Cadastre uma nova função."
+            backButton={true}
           />
         </div>
 

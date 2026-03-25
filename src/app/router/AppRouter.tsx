@@ -27,6 +27,12 @@ const PersonsModule = lazy(() =>
   })),
 );
 
+const OperationsModule = lazy(() =>
+  import("@/features/operations/OperationsRoutes").then((m) => ({
+    default: m.OperationsRouter,
+  })),
+);
+
 export const Approuter = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -35,6 +41,7 @@ export const Approuter = createBrowserRouter(
         <Route path="safety/*" element={<SafetyModule />} />
         <Route path="persons/*" element={<PersonsModule />} />
         <Route path="manager/*" element={<ManagerModule />} />
+        <Route path="operations/*" element={<OperationsModule />} />
       </Route>
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Route>,

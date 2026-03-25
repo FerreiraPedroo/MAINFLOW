@@ -60,6 +60,7 @@ export function JobListPage() {
         <Header
           title="Função"
           subTitle="Cadastre uma nova função para identificar o papel ou responsabilidade de uma pessoa."
+          backButton={true}
         />
         <LinkButton to="/persons/jobs/new" text="Cadastrar função" />
 

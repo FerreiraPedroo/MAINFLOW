@@ -63,7 +63,7 @@ export function LocalizationList() {
         />
         <div className="flex gap-4">
           <LinkButton
-            to="/manager/localizations/new"
+            to="/manager/localizations/create"
             text="Cadastrar localização"
           />
         </div>

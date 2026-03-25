@@ -12,8 +12,8 @@ export const managerPages = [
     permission: "manager:manager",
   },
   {
-    path: "/localizations/new",
-    element: manager.LocalizationNew,
+    path: "/localizations/create",
+    element: manager.LocalizationCreate,
     permission: "manager:manager",
   },
   {

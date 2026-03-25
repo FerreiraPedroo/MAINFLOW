@@ -93,7 +93,10 @@ export function PersonDetailsPage() {
         <h3 className="text-lg font-semibold text-slate-800 mb-2">
           EPI não encontrado
         </h3>
-        <Link to={"EPIs"} className="text-emerald-600 hover:text-emerald-700">
+        <Link
+          to={"/persons/persons"}
+          className="text-emerald-600 hover:text-blue-700"
+        >
           Voltar para lista
         </Link>
       </div>
@@ -139,7 +142,7 @@ export function PersonDetailsPage() {
 
                   <div className="flex items-center justify-center md:justify-end w-full xl:w-auto gap-2">
                     <Link
-                      to={`/person/${id}/edit`}
+                      to={`/persons/persons/${id}`}
                       className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors"
                     >
                       <svg
@@ -183,21 +186,21 @@ export function PersonDetailsPage() {
                   <hr className="border-stone-200 my-2" />
 
                   <p className="flex text-lg font-light text-slate-800 gap-1">
-                    Status:{" "}
+                    Status:
                     <span className="mr-2 font-normal ">
                       <StatusPerson status={person.status ?? ""} />
                     </span>
                   </p>
 
                   <p className="flex text-lg font-light text-slate-800 gap-1">
-                    Registro:{" "}
+                    Registro:
                     <span className="mr-2 font-normal ">
                       {person.registration}
                     </span>
                   </p>
 
                   <p className="text-lg font-light text-slate-800">
-                    Data de admissão:{" "}
+                    Data de admissão:
                     <span className="font-normal">
                       {new Date(person.admission_date).toLocaleDateString(
                         "pt-BR",

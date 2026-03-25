@@ -81,8 +81,7 @@ export function JobDetailsPage() {
       <div className="space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <BackButton />
-          <Header title="Detalhes da função" />
+          <Header title="Detalhes da função" backButton={true} />
         </div>
 
         {/* Main Card */}

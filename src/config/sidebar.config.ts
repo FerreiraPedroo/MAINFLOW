@@ -1,4 +1,6 @@
 import type { DepartmentType, MenuItemsType } from "@/shared/ui/SideBarTypes";
+
+import { operationsMenuItems } from "@/features/operations/operations-sidebar.config";
 import { managerMenuItems } from "@/features/manager/manager-sidebar.config";
 import { safetyMenuItems } from "@/features/safety/safety-sidebar.config";
 import { personsMenuItems } from "@/features/person/persons-sidebar.config";
@@ -18,6 +20,7 @@ export const sideBarConfig: LayoutConfigType = {
     { id: 1, name: "Painel", url: "/", icon: "painel" },
     { id: 4, name: "Gerenciamento", url: "/manager", icon: "menuManager" },
     { id: 3, name: "Pessoas", url: "/persons", icon: "menuPerson" },
+    { id: 5, name: "Operações", url: "/operations", icon: "menuOperations" },
     {
       id: 2,
       name: "Segurança do Trabalho",
@@ -30,5 +33,6 @@ export const sideBarConfig: LayoutConfigType = {
     ...safetyMenuItems,
     ...personsMenuItems,
     ...managerMenuItems,
+    ...operationsMenuItems,
   ],
 };
