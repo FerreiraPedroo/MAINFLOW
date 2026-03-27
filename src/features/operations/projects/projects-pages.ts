@@ -1,6 +1,6 @@
 import * as projects from "./index";
 
-export const operationProjectPages = [
+export const operationsProjectPages = [
   // {
   //   path: "/projects/:id",
   //   element: projects.ProjectDetailsPage,

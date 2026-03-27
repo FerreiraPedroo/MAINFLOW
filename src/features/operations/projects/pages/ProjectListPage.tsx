@@ -66,7 +66,7 @@ export function ProjectListPage() {
         />
         <div className="flex gap-4">
           <LinkButton
-            to="/operations/projects/new"
+            to="/operations/projects/create"
             text="Cadastrar localização"
           />
         </div>

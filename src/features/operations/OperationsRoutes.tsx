@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { operationProjectPages } from "./projects/projects-pages";
+import { operationsProjectPages } from "./projects/projects-pages";
+import { operationsMaintenancePages } from "./maintenance/maintenance-pages";
 
 export function OperationsRouter() {
   const createRoute = useCallback((pageList: any) => {
@@ -18,5 +19,10 @@ export function OperationsRouter() {
     );
   }, []);
 
-  return <Routes>{createRoute(operationProjectPages)}</Routes>;
+  return (
+    <Routes>
+      {createRoute(operationsProjectPages)}
+      {createRoute(operationsMaintenancePages)}
+    </Routes>
+  );
 }

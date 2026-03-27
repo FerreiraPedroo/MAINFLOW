@@ -54,7 +54,7 @@ export function SideBar() {
   return (
     <div className={``}>
       <aside
-        className={`z-50 h-full w-50 lg:w-72 bg-white border-r border-slate-200`}
+        className={`z-50 h-full w-50 lg:w-60 bg-white border-r border-slate-200`}
       >
         <div className="flex flex-col h-full">
           {/* Logo / Departament */}

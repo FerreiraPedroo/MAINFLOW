@@ -40,8 +40,7 @@ export function ProjectCreatePage() {
           </div>
         ) : ( */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <TextInput register={register} />
-
+          <TextInput name="firstName" register={register} />
 
           <SubmitButtom text="Cadastrar" />
         </form>
