@@ -9,7 +9,7 @@ export function TextInput({
   readOnly,
   cols = 2,
   disable = false,
-  register,
+  register = () => null,
 }: {
   text?: string;
   name: string;
@@ -18,7 +18,7 @@ export function TextInput({
   placeholder?: string;
   cols?: number | string;
   disable?: boolean;
-  register: any;
+  register?: any;
 }) {
   return (
     <div className={gridCols[cols]}>

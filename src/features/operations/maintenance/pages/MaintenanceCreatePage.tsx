@@ -6,7 +6,6 @@ import { SubmitButtom } from "@shared/components/button/SubmitButtom";
 import { Header } from "@shared/components/header/Header";
 
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { TextInput } from "@/shared/components/input/TextInput";
 import { SearchInputWithModal } from "@/shared/components/input/SearchInputWithModal";
 
 type FormData = {
@@ -34,11 +33,15 @@ export function MaintenanceCreatePage() {
           />
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <TextInput text="" name="firstName" register={register} />
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-4">
+          {/* <TextInput text="" name="firstName" register={register} /> */}
           <SearchInputWithModal
             name={""}
             value={""}
+            text={"Equipamento"}
+            hiddenText={false}
+            required={false}
+            cols="2"
             setSearchTerm={function (value: any): void {
               throw new Error("Function not implemented.");
             }}

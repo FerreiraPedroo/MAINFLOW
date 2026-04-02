@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
 import { PageMainContainer } from "@shared/components/PageMainContainer";
-import { SearchInput } from "@/shared/components/input/SearchInput";
 import { LinkButton } from "@/shared/components/button/LinkButton";
+import { Calendar } from "@/shared/components/calendar/Calendar";
+import { MainTenancePill } from "../utils/MainTenancePill";
 
 const maintenanceList = [
   {
@@ -14,8 +15,9 @@ const maintenanceList = [
     code: "12345678",
     equipment: "Bebedouro",
     localization: "2º - BLOCO B - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Preventiva",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -25,8 +27,9 @@ const maintenanceList = [
     code: "901234",
     equipment: "Bebedouro",
     localization: "CG IV - BLOCO B - 2º - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Preventiva",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -36,8 +39,9 @@ const maintenanceList = [
     code: "12345678",
     equipment: "Bebedouro",
     localization: "BS SEDE - BLOCO B - 2º - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Corretiva",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -47,8 +51,9 @@ const maintenanceList = [
     code: "901234",
     equipment: "Bebedouro",
     localization: "BS SEDE - BLOCO B - 2º - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Preventiva",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -58,8 +63,9 @@ const maintenanceList = [
     code: "12345678",
     equipment: "Bebedouro",
     localization: "BS POLEM - 2º - BLOCO B - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Emergencial",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -69,8 +75,9 @@ const maintenanceList = [
     code: "901234",
     equipment: "Bebedouro",
     localization: "BGS - 2º - BLOCO B - Corredor frente a rampa",
-    activity: "Troca de filtro",
-    preventive_date: "26/03/2026",
+    //activity: "Troca de filtro",
+    type: "Preditiva",
+    scheduled_date: "26/03/2026",
     building: "BS - SEDE",
     cost_center: "0100401301	Obras",
     status: "Pendente",
@@ -89,33 +96,44 @@ export function MaintenanceListPage() {
   });
 
   useEffect(() => {
-    const loadList = async () => {
-      setState({ ...state, loading: true, error: null });
-      const data = await apiClient("operations-projects-list");
-      setState({ ...state, data, loading: false });
-    };
+    // const loadList = async () => {
+    //   setState({ ...state, loading: true, error: null });
+    //   const data = await apiClient("operations-projects-list");
+    //   setState({ ...state, data, loading: false });
+    // };
     // loadList();
   }, []);
 
   return (
     <PageMainContainer>
       <div className="w-full space-y-6">
-        {/* Header */}
-        <Header
-          title="Manutenção"
-          backButton={false}
-          // subTitle="Cadastre os predios para identificar o endereço de uma localização."
-        />
-
-        <div className="flex gap-4">
-          <LinkButton
-            to="/operations/maintenance/create"
-            text="Cadastrar localização"
+        <div className="flex">
+          <div className="w-full  space-y-4">
+            {/* Header */}
+            <Header
+              title="Manutenção"
+              backButton={false}
+              // subTitle="Cadastre os predios para identificar o endereço de uma localização."
+            />
+            <div className="flex gap-4">
+              <LinkButton
+                to="/operations/maintenance/create"
+                text="Nova manutenção"
+              />
+            </div>
+            Colocar os dias da semana abaixo pelo dia do calendário, em fila e
+            para que possa ser selecionada a semana com seta ou lista suspença
+            (dropdown).
+          </div>
+          <Calendar
+            name={"data"}
+            cols={2}
+            text="Selecione o mês"
+            hiddenDays={true}
           />
         </div>
-
         {/* Filters */}
-        <div className="bg-white rounded-xl border border-slate-200 p-4">
+        {/* <div className="bg-white rounded-xl border border-slate-200 p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <SearchInput
               name="search"
@@ -125,8 +143,7 @@ export function MaintenanceListPage() {
               cols={2}
             />
           </div>
-        </div>
-
+        </div> */}
         {/* Grid */}
         {state.loading ? (
           <></>
@@ -150,9 +167,10 @@ export function MaintenanceListPage() {
                   <th className="w-1/12 max-w-1/12 px-2 py-1 font-medium text-center">
                     Data
                   </th>
+                  <th className="w-1/10 px-1 font-medium">Tipo</th>
                   <th className="w-2/10 px-1 font-medium">Ativo</th>
-                  <th className="w-2/10 px-1 font-medium">Atividade</th>
-                  <th className="w-3/10 px-1 font-medium">Localização</th>
+                  {/* <th className="w-2/10 px-1 font-medium">Atividade</th> */}
+                  <th className="w-4/10 px-1 font-medium">Localização</th>
                   <th className="w-1/12 px-2 font-medium">Status</th>
                 </tr>
               </thead>
@@ -172,16 +190,21 @@ export function MaintenanceListPage() {
                     </td>
                     <td className="px-1 text-center">
                       <span className="font-medium text-slate-800 ">
-                        {data.preventive_date}
+                        {data.scheduled_date}
                       </span>
                     </td>
 
                     <td className="p-1">
-                      <span className="text-slate-700">{data.equipment}</span>
+                      <span className="text-slate-700">
+                        <MainTenancePill text={data.type} />
+                      </span>
                     </td>
                     <td className="p-1">
-                      <span className="text-slate-700">{data.activity}</span>
+                      <span className="text-slate-700">{data.equipment}</span>
                     </td>
+                    {/* <td className="p-1">
+                      <span className="text-slate-700">{data.activity}</span>
+                    </td> */}
                     <td className="p-1">
                       <span className="text-slate-700">
                         {data.localization}

@@ -18,21 +18,22 @@ export function DateInput({
 }) {
   return (
     <div className={gridCols[cols]}>
-      <label className="block text-sm font-medium text-slate-700 mb-1">
-        {text}
-        {required && <span className="text-red-500">*</span>}
-      </label>
-
-      <input
-        type="date"
-        value={value}
-        name={name}
-        required={required}
-        onChange={(e) =>
-          setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
-        }
-        className="w-full bg-white px-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-      />
+      <div className="flex justify-between items-center pr-0.5 mb-1">
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          {text}
+          {required && <span className="text-red-500">*</span>}
+        </label>
+        <input
+          type="date"
+          value={value}
+          name={name}
+          required={required}
+          onChange={(e) =>
+            setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
+          }
+          className="w-full bg-white px-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+        />
+      </div>
     </div>
   );
 }

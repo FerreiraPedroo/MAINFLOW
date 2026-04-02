@@ -1,14 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { gridCols } from "../input/utils/gridCols";
 
-export function Calendar() {
-  const currentMonthElement = useRef<any>(null);
+const todayData = new Date().toISOString().split("T")[0].split("-");
+
+type Calendar = {
+  name: string;
+  cols?: number;
+  year?: string;
+  month?: string;
+  text: string;
+  hiddenDays: boolean;
+  setFormValue?: (p: any) => void | null;
+  required?: boolean;
+};
+
+export function Calendar({
+  name,
+  cols = 2,
+  year = todayData[0],
+  month = todayData[1],
+  text = "",
+  hiddenDays = true,
+  setFormValue = () => null,
+  required,
+}: Calendar) {
   const calendarElement = useRef<any>(null);
+  const [values, setValues] = useState({ year, month });
 
   // Function to generate the calendar for a specific month and year
   function generateCalendar(year: number, month: number) {
-    console.log(calendarElement);
-    console.log(currentMonthElement);
-
     // Create a date object for the first day of the specified month
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -16,31 +36,14 @@ export function Calendar() {
     // Clear the calendar
     calendarElement!.current!.innerHTML = "";
 
-    // Set the current month text
-    const monthNames: string[] = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    currentMonthElement.current.innerText = `${monthNames[month]} ${year}`;
-
     // Calculate the day of the week for the first day of the month (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
     const firstDayOfWeek = firstDayOfMonth.getDay();
 
     // Create headers for the days of the week
-    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const daysOfWeek = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
     daysOfWeek.forEach((day) => {
       const dayElement = document.createElement("div");
-      dayElement.className = "text-center font-semibold";
+      dayElement.className = "text-xs text-center font-semibold";
       dayElement.innerText = day;
       calendarElement.current.appendChild(dayElement);
     });
@@ -54,7 +57,8 @@ export function Calendar() {
     // Create boxes for each day of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const dayElement = document.createElement("div");
-      dayElement.className = "w-10 h-10 text-center py-2 border cursor-pointer";
+      dayElement.className =
+        "text-center py-1 cursor-pointer hover:bg-stone-200";
       dayElement.innerText = `${day}`;
 
       // Check if this date is the current date
@@ -68,10 +72,10 @@ export function Calendar() {
       }
 
       dayElement.addEventListener("click", () => {
-        const selectedDate = new Date(2026, 2, day);
+        const selectedDate = new Date(2026, 5, day);
         const options = {
-          weekday: "long",
-          year: "numeric",
+          weekday: "short",
+          year: "2-digit",
           month: "long",
           day: "numeric",
         };
@@ -86,72 +90,59 @@ export function Calendar() {
     }
   }
 
-  //   Function to show the modal with the selected date
-  function showModal(selectedDate) {
-    const modal = document.getElementById("myModal");
-    const modalDateElement = document.getElementById("modalDate");
-    modalDateElement.innerText = selectedDate;
-    modal.classList.remove("hidden");
-  }
-
-  //   Function to hide the modal
-  function hideModal() {
-    const modal = document.getElementById("myModal");
-    modal.classList.add("hidden");
-  }
-
-  //   Event listener for closing the modal
-  //   document.getElementById("closeModal").addEventListener("click", () => {
-  //     hideModal();
-  //   });
-
   useEffect(() => {
-    generateCalendar(2026, 5);
+    generateCalendar(
+      new Date(Date.now()).getFullYear(),
+      new Date(Date.now()).getMonth(),
+    );
   }, []);
+  useEffect(() => {
+    if (setFormValue) {
+      setFormValue((prev: any) => {
+        return { ...prev, ...values };
+      });
+    }
+    generateCalendar(values.year, values.month);
+  }, [values]);
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center h-screen">
-      <div className="">
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-3 bg-gray-700">
-            <h2
-              ref={currentMonthElement}
-              id="currentMonth"
-              className="text-white"
-            ></h2>
-          </div>
-
-          <div
-            ref={calendarElement}
-            className="grid grid-cols-7 gap-1 p-4"
-            id="calendar"
-          >
-            {/* <!-- Calendar Days Go Here --> */}
-          </div>
-
-          <div
-            id="myModal"
-            className="modal hidden fixed inset-0 flex items-center justify-center z-50"
-          >
-            <div className="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-
-            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-              <div className="modal-content py-4 text-left px-6">
-                <div className="flex justify-between items-center pb-3">
-                  <p className="text-2xl font-bold">Selected Date</p>
-                  <button
-                    id="closeModal"
-                    className="modal-close px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div id="modalDate" className="text-xl font-semibold"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="h-min w-80 flex flex-col items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl shadow-sm p-3 dark:bg-neutral-900 dark:border-neutral-800">
+      <div
+        className={`flex flex-col w-full justify-center pr-0.5 ${gridCols[cols]}`}
+      >
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          {text}
+        </label>
+        <input
+          type="month"
+          value={`${values.year}-${values.month}`}
+          name={name}
+          required={required}
+          onChange={(e) => {
+            console.log({
+              year: e.target.value.split("-")[0],
+              month: e.target.value.split("-")[1],
+            });
+            if (!e.target.value) {
+              setValues({
+                year: todayData[0],
+                month: todayData[1],
+              });
+            } else {
+              setValues({
+                year: e.target.value.split("-")[0],
+                month: e.target.value.split("-")[1],
+              });
+            }
+          }}
+          className="bg-white py-1 px-2 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+        />
       </div>
+
+      <div
+        ref={calendarElement}
+        className={`grid grid-cols-7 gap-0 text-sm text-center ${hiddenDays && "hidden"}`}
+      ></div>
     </div>
   );
 }

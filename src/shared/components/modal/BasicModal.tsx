@@ -1,6 +1,7 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
-export function BasicModal() {
+export function BasicModal({ children }: any) {
   return (
     <div
       className="fixed inset-0 bg-stone-800/60 bg-opacity-75 flex justify-center items-center pointer-events-none transition-opacity duration-300 ease-out z-10"
@@ -14,7 +15,8 @@ export function BasicModal() {
             &times;
           </button>
         </div>
-        <div className="p-4 text-stone-500"> Content for the first modal. </div>
+
+        <div className="w-full p-4">{children}</div>
         <div className="border-t border-stone-200 p-4 flex justify-end gap-2">
           <button
             type="button"
