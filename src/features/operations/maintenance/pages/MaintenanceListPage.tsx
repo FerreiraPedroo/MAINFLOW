@@ -157,7 +157,7 @@ export function MaintenanceListPage() {
             </p>
           </div>
         ) : (
-          <div className="bg-white overflow-x-auto border border-slate-400 overflow-hidden rounded-none">
+          <div className="flex-1  bg-white overflow-x-auto border border-slate-400 overflow-hidden rounded-none">
             <table className="w-full">
               <thead className="rounded-xs">
                 <tr className="text-left text-xs text-slate-500 uppercase bg-slate-100 border-b border-slate-200">
@@ -174,7 +174,7 @@ export function MaintenanceListPage() {
                   <th className="w-1/12 px-2 font-medium">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-200">
                 {state.dataList.map((data) => (
                   <tr
                     key={data.id}

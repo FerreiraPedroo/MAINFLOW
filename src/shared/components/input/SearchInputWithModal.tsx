@@ -1,113 +1,140 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { gridCols } from "./utils/gridCols";
-import { TextInput } from "./TextInput";
 import { TextButton } from "../button/TextButton";
 
 export function SearchInputWithModal({
   name,
   text,
-  hiddenText,
-  required = true,
+  options,
   cols = 2,
-  value = "",
+  row,
+  hiddenText,
+  setValue,
 }: {
   name: string;
   text: string;
-  hiddenText: boolean;
-  required: boolean;
+  options: {
+    compareField: string; // qual campo do item deve ser comparado ao do campo search
+    itemField: string; // nome do item da lista
+    itemSubField?: string; // segundo texto aparecendo no item da lista
+    itemJoinName: boolean; // junta as strings de itemField e itemSubField
+  };
   cols?: number | string;
-  value: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<any>>;
+  rows?: number | string;
+  hiddenText?: boolean;
+  setValue: any;
 }) {
-  const [showModal, setShowModal] = useState(false);
+  const [state, setState] = useState<any>({
+    showModal: false,
+    isLoading: false,
+    itemSelected: {},
+  });
+
   const [search, setSearch] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
   const [itens, setItens] = useState<any[]>([]);
 
-  function handleSearch(itemsList: any) {
-    const list = [...itemsList];
-    const filtered = list
-      .filter((item: any) => {
-        return item.name.includes(search);
-      })
-      .map((i: any) => {
-        const item = { ...i };
-        const totalSize = item.name.length;
-        const idx = item.name.indexOf(search);
+  const handleSearch = useCallback(
+    (search: string) => {
+      const filtered = itemsList
+        .filter((item: any) => {
+          return item[options.compareField]
+            .toUpperCase()
+            .includes(search.toUpperCase());
+        })
+        .map((i: any) => {
+          const item = { ...i };
+          // console.log(item[options.compareField])
+          const totalSize = item[options.compareField].length;
+          const idx = item[options.compareField]
+            .toUpperCase()
+            .indexOf(search.toUpperCase());
 
-        const prefix = item.name.substring(idx, search.length - totalSize);
-        const found = item.name.substring(idx, idx + search.length);
-        const sufix = item.name.substring(idx + search.length, totalSize);
-        item.name = (
-          <div key={item.name}>
-            {prefix}
-            <b>{found}</b>
-            {sufix}
-          </div>
-        );
-        return item;
-      });
+          const prefix = item[options.compareField].substring(
+            idx,
+            search.length - totalSize,
+          );
+          const found = item[options.compareField].substring(
+            idx,
+            idx + search.length,
+          );
+          const sufix = item[options.compareField].substring(
+            idx + search.length,
+            totalSize,
+          );
+          item.find = (
+            <p key={item[options.compareField]}>
+              {prefix}
+              <span className="text-red-600">{found}</span>
+              {sufix}
+            </p>
+          );
+          return item;
+        });
 
-    return filtered;
+      setItens(filtered);
+    },
+    [itens],
+  );
+
+  function handleSelect(item: any) {
+    setValue(name, item.id);
+    setState({ ...state, itemSelected: item, showModal: false });
   }
-
-  useEffect(() => {
-    setItens(itemsList);
-  }, []);
-
+  console.log(
+    options.itemJoinName,
+    state.itemSelected?.[options.compareField],
+    options.itemSubField,
+  );
   return (
     <div className={`w-full flex items-end gap-2 ${gridCols[cols]}`}>
       <div className="w-full">
         <label
-          className={`block text-sm font-medium text-slate-700 mb-1 ${hiddenText && "hidden"}`}
+          className={`block text-sm font-medium text-slate-700 mb-1 pl-1 ${hiddenText && "hidden"}`}
         >
           {text}
-          {required && <span className="text-red-500">*</span>}
         </label>
+
         <input
           type="text"
-          name={name}
-          placeholder={"..."}
-          value={value}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-white p-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all readonly"
+          value={
+            state.itemSelected?.[options.compareField] &&
+            options.itemJoinName &&
+            options.itemSubField
+              ? `${state?.itemSelected?.[options.compareField]} / ${state?.itemSelected?.[options.itemSubField!]}`
+              : state?.itemSelected?.[options.compareField]
+          }
+          className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
         />
       </div>
-      <button
-        className="h-9 border border-red-400 align-middle select-none font-medium text-center duration-100 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none px-2 shadow-sm hover:shadow-md bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg"
-        onClick={() => setShowModal(true)}
-      >
-        🧾
-      </button>
+      <input
+        type="button"
+        className="h-9 cursor-pointer align-middle select-none font-medium text-center duration-100 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none px-2 shadow-sm hover:shadow-md bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg"
+        onClick={() => {
+          setSearch("");
+          setState({ ...state, showModal: true, itemSelected: {} });
+        }}
+        value="🧾"
+      />
 
-      {showModal && (
+      {state.showModal && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+          <div className="flex flex-col relative bg-white rounded-2xl max-w-2xl w-full h-[90vh] max-h-[90vh] overflow-hidden">
+            <div className=" bg-white border-b border-slate-200 px-6 py-2 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
                 Selecione um ativo
               </h2>
-              <button
-                onClick={() => setShowModal(false)}
+              <input
+                type="button"
+                onClick={() => {
+                  setState({ ...state, showModal: false, itemSelected: {} });
+                  setItens([]);
+                }}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-              >
-                <svg
-                  className="w-5 h-5 text-slate-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                value={"X"}
+              />
             </div>
 
-            <div className="p-4">
+            <div className="pt-2 pb-4 px-6 border-b border-b-slate-400">
               <div className={gridCols[cols]}>
                 <label className="block text-sm font-medium text-slate-700 mb-1 pl-1">
                   {text}
@@ -123,7 +150,7 @@ export function SearchInputWithModal({
                   />
                   <button
                     className="border border-amber-400 px-2 rounded-md bg-slate-200 hover:text-slate-900 hover:bg-slate-300 hover:shadow-slate-500/25 hover:shadow-lg transition-all duration-300 font-medium"
-                    onClick={handleSearch}
+                    onClick={() => handleSearch(search)}
                   >
                     <svg
                       className="w-4 h-4 text-slate-600"
@@ -143,29 +170,40 @@ export function SearchInputWithModal({
               </div>
             </div>
 
-            <div className="flex flex-col gap-1 p-4">
-              {handleSearch(itemsList).map((item) => {
+            <div className="flex-1 space-y-1 py-2 px-6 overflow-auto bg-slate-100">
+              {itens.map((item) => {
                 return (
-                  <div key={item.id} className="border p-1">
-                    <p>{item.name}</p>
-                    <p>{item.localization}</p>
+                  <div
+                    key={item.id}
+                    className="border border-slate-400 px-2 py-1 bg-white cursor-pointer hover:border-blue-500"
+                    onClick={() => handleSelect(item)}
+                  >
+                    <p className="text-slate-700">{item.find}</p>
+                    {options.itemSubField && (
+                      <p className="text-stone-600">
+                        {item[options.itemSubField]}
+                      </p>
+                    )}
                   </div>
                 );
               })}
             </div>
 
-            <div className="flex items-center justify-end gap-4 px-4 py-6 border-t border-slate-200">
+            <div className="flex items-center justify-end gap-4 px-6 py-4 bg-white border-t border-slate-400">
               <TextButton
                 type="white"
                 text="Cancelar"
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setState({ ...state, showModal: false, itemSelected: {} });
+                  setItens([]);
+                }}
               />
 
-              <TextButton
+              {/* <TextButton
                 type={"green"}
                 text={"Selecionar"}
                 onClick={() => null}
-              />
+              /> */}
             </div>
           </div>
         </div>

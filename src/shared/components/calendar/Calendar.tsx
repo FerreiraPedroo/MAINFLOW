@@ -90,6 +90,25 @@ export function Calendar({
     }
   }
 
+  function handleCalendar(e: any) {
+    let month;
+    let year;
+
+    if (!e.target.value) {
+      year = todayData[0];
+      month = todayData[1];
+    } else {
+      year = e.target.value.split("-")[0];
+      month = e.target.value.split("-")[1];
+    }
+
+    setFormValue({ year, month });
+    setValues({
+      year,
+      month,
+    });
+  }
+
   useEffect(() => {
     generateCalendar(
       new Date(Date.now()).getFullYear(),
@@ -118,23 +137,7 @@ export function Calendar({
           value={`${values.year}-${values.month}`}
           name={name}
           required={required}
-          onChange={(e) => {
-            console.log({
-              year: e.target.value.split("-")[0],
-              month: e.target.value.split("-")[1],
-            });
-            if (!e.target.value) {
-              setValues({
-                year: todayData[0],
-                month: todayData[1],
-              });
-            } else {
-              setValues({
-                year: e.target.value.split("-")[0],
-                month: e.target.value.split("-")[1],
-              });
-            }
-          }}
+          onChange={(e) => handleCalendar(e)}
           className="bg-white py-1 px-2 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
         />
       </div>
