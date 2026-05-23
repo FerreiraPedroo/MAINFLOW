@@ -9,17 +9,16 @@
     "strictFunctionTypes": true,
     "strict": true,
 
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@app/*": ["src/app/*"],
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"],
-      "@shared/*": ["src/shared/*"],
-      "@features/*": ["src/features/*"],
-      "@config/*": ["src/config/*"],
-      "@assets/*": ["src/assets/*"]
-    }
+    // "paths": {
+    //   "@/*": ["./src/*"],
+    //   "@app/*": ["./src/app/*"],
+    //   "@pages/*": ["./src/pages/*"],
+    //   "@utils/*": ["./src/utils/*"],
+    //   "@shared/*": ["./src/shared/*"],
+    //   "@features/*": ["./src/features/*"],
+    //   "@config/*": ["./src/config/*"],
+    //   "@assets/*": ["./src/assets/*"]
+    // }
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/node_modules/*"]

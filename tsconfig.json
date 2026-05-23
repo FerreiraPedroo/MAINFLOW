@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@app/*": ["src/app/*"],
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/shared/utils/*"],
-      "@shared/*": ["src/shared/*"],
-      "@features/*": ["src/features/*"],
-      "@config/*": ["src/config/*"],
-      "@assets/*": ["src/assets/*"]
+      "@/*": ["./src/*"],
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/shared/utils/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@features/*": ["./src/features/*"],
+      "@config/*": ["./src/config/*"],
+      "@assets/*": ["./src/assets/*"]
     },
 
     "target": "ES2022",
