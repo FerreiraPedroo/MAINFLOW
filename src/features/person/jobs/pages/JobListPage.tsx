@@ -6,7 +6,7 @@ import { Header } from "@/shared/components/header/Header";
 import { LinkButton } from "@shared/components/button/LinkButton";
 import { SearchInput } from "@shared/components/input/SearchInput";
 import { SelectInput } from "@shared/components/input/SelectInput";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import { PillBadge } from "@/shared/components/badges/PillBadge";
 import { TextButton } from "@/shared/components/button/TextButton";
@@ -54,7 +54,7 @@ export function JobListPage() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -174,6 +174,6 @@ export function JobListPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

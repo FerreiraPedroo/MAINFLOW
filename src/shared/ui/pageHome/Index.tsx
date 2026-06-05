@@ -1,5 +1,5 @@
 import React from "react";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { HomeHeader } from "./Header";
 import { HomeCards } from "./Cards";
 
@@ -23,11 +23,11 @@ interface Header {
  */
 export function PageHome({ header, cards }: Header) {
   return (
-    <PageMainContainer>
+    <Container>
       <div className="max-w-4xl w-full">
         <HomeHeader icon={header.icon} headerTitle={header.headerTitle} />
         <HomeCards icon="default" menuItens={cards.menuItens} />
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

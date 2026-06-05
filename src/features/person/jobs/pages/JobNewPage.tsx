@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
 
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { SubmitButtom } from "@shared/components/button/SubmitButtom";
 import { BackButton } from "@shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
@@ -131,7 +131,7 @@ export function JobNewPage() {
   };
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
           <Header
@@ -174,6 +174,6 @@ export function JobNewPage() {
           </form>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

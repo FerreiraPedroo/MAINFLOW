@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { PageMainContainer } from "@/shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { BackButton } from "@/shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
 import type { Person } from "../types/person.interface";
@@ -104,7 +104,7 @@ export function PersonDetailsPage() {
   }
 
   return (
-    <PageMainContainer className="bg-slate-50">
+    <Container className="bg-slate-50">
       <div className="space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -471,6 +471,6 @@ export function PersonDetailsPage() {
           <Notification type="alert" title="Erro ao carregr" text="Erro ao carregar" />
         </div> */}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

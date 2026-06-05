@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { Header } from "@/shared/components/header/Header";
 
 const menuItens = [
@@ -21,7 +21,7 @@ const menuItens = [
 
 export function RiskHomePage() {
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -50,6 +50,6 @@ export function RiskHomePage() {
           })}
         </div>
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

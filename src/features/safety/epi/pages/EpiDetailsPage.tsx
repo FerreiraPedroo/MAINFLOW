@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import type { Epi } from "../types/epi.types";
-import { PageMainContainer } from "@/shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { BackButton } from "@/shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
 
@@ -50,7 +50,7 @@ export function EpiDetailsPage() {
   };
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
           <BackButton />
@@ -474,6 +474,6 @@ export function EpiDetailsPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

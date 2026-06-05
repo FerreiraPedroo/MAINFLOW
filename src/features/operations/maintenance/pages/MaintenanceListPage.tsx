@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { LinkButton } from "@/shared/components/button/LinkButton";
 import { Calendar } from "@/shared/components/calendar/Calendar";
 import { MainTenancePill } from "../utils/MainTenancePill";
@@ -105,7 +105,7 @@ export function MaintenanceListPage() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         <div className="flex">
           <div className="w-full  space-y-4">
@@ -220,6 +220,6 @@ export function MaintenanceListPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

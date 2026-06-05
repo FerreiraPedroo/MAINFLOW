@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 export function DashboardPage() {
   const [funcionarios, setFuncionarios] = useState([]);
@@ -67,7 +67,7 @@ export function DashboardPage() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="space-y-8">
         {/* Header */}
         <div>
@@ -317,6 +317,6 @@ export function DashboardPage() {
           </div>
         </div>
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

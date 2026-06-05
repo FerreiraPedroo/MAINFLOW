@@ -1,7 +1,7 @@
 export const personsMenuItems = [
   {
     id: 7,
-    name: "Inicio",
+    title: "Inicio",
     department_id: 3,
     order: 1,
     url: "/persons",
@@ -9,7 +9,7 @@ export const personsMenuItems = [
   },
   {
     id: 8,
-    name: "Dashboard",
+    title: "Dashboard",
     department_id: 3,
     order: 2,
     url: "/persons/dashboard",
@@ -17,7 +17,7 @@ export const personsMenuItems = [
   },
   {
     id: 9,
-    name: "Pessoas",
+    title: "Pessoas",
     department_id: 3,
     order: 3,
     url: "/persons/persons",
@@ -25,7 +25,7 @@ export const personsMenuItems = [
   },
   {
     id: 9,
-    name: "Função",
+    title: "Função",
     department_id: 3,
     order: 4,
     url: "/persons/jobs",

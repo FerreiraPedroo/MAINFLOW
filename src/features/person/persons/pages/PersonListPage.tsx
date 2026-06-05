@@ -7,7 +7,7 @@ import { Header } from "@shared/components/header/Header";
 import { LinkButton } from "@shared/components/button/LinkButton";
 import { SearchInput } from "@shared/components/input/SearchInput";
 import { SelectInput } from "@shared/components/input/SelectInput";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import { ListPersonSkeleton } from "../components/skeleton/ListPersonSkeleton";
 import { statusList } from "../utils/statusList";
@@ -71,7 +71,7 @@ export function PersonListPage() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header title="Pessoas" />
@@ -188,6 +188,6 @@ export function PersonListPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

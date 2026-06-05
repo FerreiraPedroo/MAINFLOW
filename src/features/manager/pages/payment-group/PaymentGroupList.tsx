@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
@@ -101,7 +101,7 @@ export function PaymentGroupList() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -363,6 +363,6 @@ export function PaymentGroupList() {
           </div>
         </div>
       )}
-    </PageMainContainer>
+    </Container>
   );
 }

@@ -1,6 +1,6 @@
 import { CONFIG } from "@/config/config";
 
-interface ConfigImp {
+interface ApiConfig {
   method: string;
   headers?: { [key: string]: string };
   body?: any;
@@ -8,7 +8,7 @@ interface ConfigImp {
 
 export async function apiClient(
   url: string,
-  config: ConfigImp = { method: "GET", headers: {} },
+  config: ApiConfig = { method: "GET", headers: {} },
 ) {
   const configDefault = {
     headers: {
@@ -55,3 +55,4 @@ export async function apiClient(
     }
   }
 }
+

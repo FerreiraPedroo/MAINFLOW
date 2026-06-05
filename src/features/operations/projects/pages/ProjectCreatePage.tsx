@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { SubmitButtom } from "@shared/components/button/SubmitButtom";
 import { Header } from "@shared/components/header/Header";
 
@@ -20,7 +20,7 @@ export function ProjectCreatePage() {
   const onSubmit: SubmitHandler = (data) => console.log(data);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
           <Header
@@ -46,6 +46,6 @@ export function ProjectCreatePage() {
         </form>
         {/* )} */}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

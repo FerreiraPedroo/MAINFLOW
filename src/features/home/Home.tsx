@@ -1,12 +1,12 @@
 import React from "react";
 
-import { PageMainContainer } from "@shared/components/PageMainContainer";
-import { HomeHeader } from "@/shared/ui/pageHome/Header";
+import { Container } from "@shared/components/Container";
+import { HomeHeader } from "@/shared/ui/PageHome/Header";
 
 export function HomePage() {
   return (
-    <PageMainContainer>
+    <Container>
       <HomeHeader icon={"home"} headerTitle={"Inicio"} />
-    </PageMainContainer>
+    </Container>
   );
 }

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import type { Epi } from "../types/epi.types";
 import { apiClient } from "@/shared/lib/apiClient";
 
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { Header } from "@shared/components/header/Header";
 import { LinkButton } from "@shared/components/button/LinkButton";
 import { SearchInput } from "@shared/components/input/SearchInput";
@@ -187,7 +187,7 @@ export function EpiListPage() {
   });
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -349,6 +349,6 @@ export function EpiListPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

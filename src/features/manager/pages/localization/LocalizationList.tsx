@@ -6,7 +6,7 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { LinkButton } from "@shared/components/button/LinkButton";
 import { SelectInput } from "@shared/components/input/SelectInput";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import type { Localization } from "../../interfaces/localization";
 import { TextInput } from "@/shared/components/input/TextInput";
@@ -53,7 +53,7 @@ export function LocalizationList() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -215,6 +215,6 @@ export function LocalizationList() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

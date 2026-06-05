@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
@@ -102,13 +102,12 @@ export function BuildingDivisionList() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
           title="Divisão"
           subTitle="Cadastre uma nova divisão para ser utilizada na estrutura de localização do edifício."
-
         />
         <div className="flex gap-4">
           <TextButton
@@ -217,7 +216,6 @@ export function BuildingDivisionList() {
           </div>
         )}
       </div>
-
 
       {showModal == "new" && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
@@ -370,6 +368,6 @@ export function BuildingDivisionList() {
           </div>
         </div>
       )}
-    </PageMainContainer>
+    </Container>
   );
 }

@@ -6,7 +6,7 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { TextButton } from "@/shared/components/button/TextButton";
 import { SearchInput } from "@shared/components/input/SearchInput";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import type { ProjectList } from "../types/projects-list.types";
 import { LinkButton } from "@/shared/components/button/LinkButton";
@@ -57,7 +57,7 @@ export function ProjectListPage() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -145,6 +145,6 @@ export function ProjectListPage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }

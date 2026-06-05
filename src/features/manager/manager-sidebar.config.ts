@@ -1,7 +1,7 @@
 export const managerMenuItems = [
   {
     id: 1,
-    name: "Inicio",
+    title: "Inicio",
     department_id: 4,
     order: 1,
     url: "/manager",
@@ -10,7 +10,7 @@ export const managerMenuItems = [
   },
   {
     id: 4,
-    name: "Localização",
+    title: "Localização",
     department_id: 4,
     order: 4,
     url: "/manager/localizations",
@@ -20,7 +20,7 @@ export const managerMenuItems = [
       {
         id: 1,
         menu_id: 4,
-        name: "Prédio",
+        title: "Prédio",
         order: 3,
         url: "/manager/localizations/buildings",
         icon: "menuItemDefault",
@@ -28,7 +28,7 @@ export const managerMenuItems = [
       {
         id: 3,
         menu_id: 4,
-        name: "Divisão",
+        title: "Divisão",
         order: 2,
         url: "/manager/localizations/building-divisions",
         icon: "menuItemDefault",
@@ -36,7 +36,7 @@ export const managerMenuItems = [
       {
         id: 2,
         menu_id: 4,
-        name: "Andar",
+        title: "Andar",
         order: 1,
         url: "/manager/localizations/building-floors",
         icon: "menuItemDefault",
@@ -44,7 +44,7 @@ export const managerMenuItems = [
       {
         id: 4,
         menu_id: 4,
-        name: "Tipo de espaço",
+        title: "Tipo de espaço",
         order: 4,
         url: "/manager/localizations/building-spaces",
         icon: "menuItemDefault",
@@ -53,7 +53,7 @@ export const managerMenuItems = [
   },
   {
     id: 2,
-    name: "Centro de custo",
+    title: "Centro de custo",
     department_id: 4,
     order: 2,
     url: "/manager/cost-center",
@@ -62,7 +62,7 @@ export const managerMenuItems = [
   },
   {
     id: 3,
-    name: "Grupo de pagamento",
+    title: "Grupo de pagamento",
     department_id: 4,
     order: 3,
     url: "/manager/payment-groups",
@@ -71,7 +71,7 @@ export const managerMenuItems = [
   },
   {
     id: 5,
-    name: "Projetos",
+    title: "Projetos",
     department_id: 4,
     order: 5,
     url: "/manager/projects",

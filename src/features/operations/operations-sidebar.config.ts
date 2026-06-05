@@ -1,7 +1,7 @@
 export const operationsMenuItems = [
   {
     id: 7,
-    name: "Inicio",
+    title: "Inicio",
     department_id: 5,
     order: 1,
     url: "/operations",
@@ -9,7 +9,7 @@ export const operationsMenuItems = [
   },
   {
     id: 8,
-    name: "Dashboard",
+    title: "Dashboard",
     department_id: 5,
     order: 2,
     url: "/operations/dashboard",
@@ -17,7 +17,7 @@ export const operationsMenuItems = [
   },
   {
     id: 9,
-    name: "Projetos",
+    title: "Projetos",
     department_id: 5,
     order: 3,
     url: "/operations/projects",
@@ -25,7 +25,7 @@ export const operationsMenuItems = [
   },
   {
     id: 9,
-    name: "Manutenção",
+    title: "Manutenção",
     department_id: 5,
     order: 3,
     url: "/operations/maintenance",

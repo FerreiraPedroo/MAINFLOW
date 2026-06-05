@@ -4,13 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "@/shared/lib/apiClient";
 
 import { Header } from "@shared/components/header/Header";
-import { PageMainContainer } from "@shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 
 import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextInput } from "@/shared/components/input/TextInput";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import type { BuildingSpace, buildingSpace } from "../../interfaces/buildingSpace";
+import type {
+  BuildingSpace,
+  buildingSpace,
+} from "../../interfaces/buildingSpace";
 
 const typeList: buildingSpace[] = [
   {
@@ -83,7 +86,7 @@ export function BuildingSpaceList() {
   }, []);
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
@@ -202,7 +205,6 @@ export function BuildingSpaceList() {
           </div>
         )}
       </div>
-
 
       {showModal == "new" && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
@@ -356,6 +358,6 @@ export function BuildingSpaceList() {
           </div>
         </div>
       )}
-    </PageMainContainer>
+    </Container>
   );
 }

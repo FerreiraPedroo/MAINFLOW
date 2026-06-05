@@ -5,7 +5,7 @@ import { getCategory } from "@features/safety/epi/utils/categoriesList";
 
 import type { Epi } from "@features/safety/epi/types/epi.types";
 
-import { PageMainContainer } from "@/shared/components/PageMainContainer";
+import { Container } from "@/shared/components/Container";
 import { BackButton } from "@/shared/components/button/BackButton";
 import { Header } from "@/shared/components/header/Header";
 
@@ -79,7 +79,7 @@ export function EpiReleasePage() {
   }
 
   return (
-    <PageMainContainer>
+    <Container>
       <div className="space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
@@ -507,6 +507,6 @@ export function EpiReleasePage() {
           </div>
         )}
       </div>
-    </PageMainContainer>
+    </Container>
   );
 }
