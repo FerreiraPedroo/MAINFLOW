@@ -14,7 +14,7 @@
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@utils/*": ["./src/shared/utils/*"],
       "@shared/*": ["./src/shared/*"],
       "@features/*": ["./src/features/*"],
       "@config/*": ["./src/config/*"],

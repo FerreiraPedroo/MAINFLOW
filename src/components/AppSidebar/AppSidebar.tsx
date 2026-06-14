@@ -1,143 +1,125 @@
-"use client";
+import React, { useCallback, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import * as React from "react";
-import {
-  BookOpen,
-  Bot,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
-
-import { MenuDepartmentItems } from "@/components/AppSidebar/NavMain";
-import { NavProjects } from "@/components/AppSidebar/NavProjects";
-import { MenuDepartmentSelector } from "@/components/AppSidebar/MenuDepartmentSelector";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar";
-
-import { sideBarConfig } from "@/components/AppSidebar/config/sidebar.config";
-import type { MenuItemsType } from "@/components/AppSidebar/types/sidebar.types";
 import { getImagem } from "@/shared/utils/getImagem";
+import { useMenuStore } from "@/app/store/store";
+import { ChevronDown, ChevronsDownUp } from "lucide-react";
+import { Separator } from "@base-ui/react";
 
-// This is sample data.
-const data = {
-  departments: sideBarConfig.departaments,
-  menuDepartmentItems: sideBarConfig.menuItems,
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  departamentos: [
-    {
-      titulo: "Acme Inc",
-      icon: GalleryVerticalEnd,
-      url: "Enterprise",
-    },
-    {
-      titulo: "Acme Inc",
-      icon: GalleryVerticalEnd,
-      url: "Enterprise",
-    },
-  ],
-  menuItems: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: null,
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: null,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-};
+export function AppSideBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const departmentSelected = useMenuStore((state) => state.departmentSelected);
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [selectedDepartment, setSelectedDepartment] = React.useState(
-    data.departments[0],
+  const isActive = useCallback(
+    (pageUrl: string) => {
+      if (!pageUrl) return false;
+      const pathName = location.pathname;
+      const wordRegex = new RegExp("^" + pathName + "$", "i").test(pageUrl);
+      return wordRegex;
+    },
+    [location],
   );
-  const [menuItems, setMenuItens] = React.useState<MenuItemsType[]>([]);
-
-  React.useEffect(() => {
-    setMenuItens(
-      data.menuDepartmentItems.filter(
-        (item) => item.department_id == selectedDepartment.id,
-      ),
-    );
-  }, [selectedDepartment]);
 
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <header className="flex h-12 items-center gap-3 border-b bg-stone-100 pl-5">
-        <img src={getImagem("default")} className=" size-8" />
-      </header>
-      <SidebarHeader>
-        <MenuDepartmentSelector
-          departments={data.departments}
-          selectedDepartment={selectedDepartment}
-          setSelectedDepartment={setSelectedDepartment}
-        />
-      </SidebarHeader>
-      <SidebarContent>
-        <MenuDepartmentItems items={menuItems} />
-        <NavProjects projects={data.projects} />
-      </SidebarContent>
-      <SidebarFooter></SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
+    <aside className={`min-w-50 bg-stone-100 border-r border-slate-200`}>
+      <div className="flex flex-col h-full">
+        <header>
+          <p className="bg-gray-200 p-3">{departmentSelected?.title}</p>
+        </header>
+        {/* Navigation */}
+        <nav className="flex-1 space-y-1 ">
+          {departmentSelected?.itemsList.map((item) =>
+            "sectorItems" in item ? (
+              <details
+                key={item.title}
+                className="group/menu [&_summary::-webkit-details-marker]:hidden"
+              >
+                <summary
+                  className={`p-0 m-0 flex transition-all duration-200 group-hover/menu:cursor-pointer`}
+                >
+                  <div
+                    className={`flex w-full items-center pl-3 pr-1 py-2 group-hover/menu:bg-stone-200 hover:bg-stone-200`}
+                  >
+                    <div className="w-full flex gap-2 items-center">
+                      <img src={getImagem(item.icon)} className="w-6" />
+                      <span className="text-sm font-medium ">{item.title}</span>
+                    </div>
+                    <ChevronDown className="w-4 group-open/menu:rotate-180 transition-transform duration-300" />
+                  </div>
+                </summary>
+
+                {item.sectorItems.map((sectorItem) => (
+                  <div
+                    key={sectorItem.title}
+                    className={`group/sector relative flex items-center gap-1 pl-6 py-1 transition-all duration-200 hover:text-slate-600 hover:cursor-pointer hover:bg-stone-200 z-0`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org"
+                      viewBox="0 0 16 24"
+                      width="16"
+                      height="24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="0.8"
+                      className="stroke-current "
+                    >
+                      <path d="M 1 5 L 1 14 L 8 14" />
+                    </svg>
+                    <span className="text-sm">{sectorItem.title}</span>
+
+                    <div className="hidden group-hover/sector:flex min-w-50 flex-col z-50 space-x-1 absolute bg-stone-100 top-0 left-49.5 border border-slate-200">
+                      {sectorItem.options.map((option) => (
+                        <Link
+                          key={option.id}
+                          to={option.url}
+                          className="w-full px-2 py-1 hover:bg-stone-200 border border-stone-300 text-sm"
+                        >
+                          {option.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </details>
+            ) : (
+              <div
+                key={item.title}
+                className={`group/items relative flex transition-all duration-200 hover:cursor-pointer`}
+              >
+                <div
+                  className={`flex w-full items-center pl-3 pr-1 py-2 group-hover/items:bg-stone-200`}
+                >
+                  <div className="w-full flex gap-2 items-center">
+                    <img src={getImagem(item.icon)} className="w-6" />
+                    <span className="text-sm">{item.title}</span>
+                  </div>
+                </div>
+
+                <div className="hidden group-hover/items:flex min-w-50 flex-col z-50 space-x-1 absolute bg-stone-100 top-0 left-49.5 border border-slate-200">
+                  {item.options.map((option) => (
+                    <Link
+                      key={option.id}
+                      to={option.url}
+                      className="w-full px-2 py-1 hover:bg-stone-200 border border-stone-300 text-sm"
+                    >
+                      {option.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ),
+          )}
+        </nav>
+
+        {/* Footer */}
+        <div className="p-2 border-t border-slate-300 bg-slate-200">
+          <p className="text-lg font-medium text-slate-700">Diferencial Flow</p>
+          {/* <p className="text-md text-slate-500 hidden flex">
+              Gestão operacional
+            </p> */}
+        </div>
+      </div>
+    </aside>
   );
 }

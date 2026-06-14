@@ -3,23 +3,28 @@ export type DepartmentType = {
   title: string;
   url: string;
   icon: string;
+  itemsList: SectorType[] | ItemsType[];
 };
 
-export interface MenuItemsType {
+export interface SectorType {
   id: number;
   title: string;
   department_id: number;
   order: number;
-  url: string;
   icon: string;
-  subMenu?: SubMenuItemsType[];
+  sectorItems: ItemsType[];
 }
 
-export type SubMenuItemsType = {
+export type ItemsType = {
   id: number;
-  menu_id: number;
+  item_id: number;
   title: string;
   order: number;
-  url: string;
   icon: string;
+  options: {
+    id: number;
+    title: string;
+    icon: string;
+    url: string;
+  }[];
 };

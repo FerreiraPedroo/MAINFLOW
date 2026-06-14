@@ -30,7 +30,7 @@ export function Modal({
   info: string;
   description: string;
   type: keyof typeof types;
-  buttons: { text: string; type: any; onClick: () => null }[];
+  buttons: { text: string; type: any; onClick: () => void }[];
 }) {
   return (
     <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
@@ -57,7 +57,7 @@ export function Modal({
           {info}
         </h4>
         <p className="text-slate-500 text-center mb-6">{description}</p>
-        <div className="flex gap-3">
+        <div className="flex justify-center gap-3">
           {buttons.map((button, index) => (
             <TextButton
               key={index}

@@ -1,6 +1,6 @@
-import * as projects from "./index";
+import * as project from "./index";
 
-export const operationsProjectPages = [
+export const projectPages = [
   // {
   //   path: "/projects/:id",
   //   element: projects.ProjectDetailsPage,
@@ -8,12 +8,12 @@ export const operationsProjectPages = [
   // },
   {
     path: "/projects",
-    element: projects.ProjectListPage,
+    element: project.ProjectListPage,
     permission: "operations:projects",
   },
   {
     path: "/projects/create",
-    element: projects.ProjectCreatePage,
+    element: project.ProjectCreatePage,
     permission: "operations:projects",
   },
 ];

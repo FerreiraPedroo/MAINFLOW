@@ -1,3 +1,4 @@
+import { useAppStore } from "@/app/store/store";
 import { CONFIG } from "@/config/config";
 
 interface ApiConfig {
@@ -13,8 +14,8 @@ export async function apiClient(
   const configDefault = {
     headers: {
       "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("X-DiferencialFlow-Token")}`,
-      "X-DiferencialFlow-Version": `${localStorage.getItem("diferencialFlow-dataVersion")}`,
+      Authorization: `Bearer ${useAppStore.getState().token}`,
+      "X-DiferencialFlow-Version": `${JSON.stringify(useAppStore.getState().appVersion)}`,
     },
   };
 
@@ -27,11 +28,10 @@ export async function apiClient(
     const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
     const responseJson = await response.json();
 
-    if (
-      responseJson.codStatus &&
-      +(responseJson.codStatus == 201 || responseJson.codStatus == 200)
-    ) {
+    if (responseJson.codStatus == 200 || responseJson.codStatus == 200) {
       return responseJson;
+    } else if (responseJson.codStatus == 401) {
+      useAppStore.getState().setLogout();
     } else {
       throw responseJson;
     }
@@ -46,6 +46,7 @@ export async function apiClient(
         data: null,
       };
     } else {
+      console.log("apiClient: codStatus não identificado !!");
       throw {
         codStatus: error.codStatus,
         message: `${error.message}`,
@@ -55,4 +56,3 @@ export async function apiClient(
     }
   }
 }
-

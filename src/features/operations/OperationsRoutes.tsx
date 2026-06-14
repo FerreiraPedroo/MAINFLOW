@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { operationsProjectPages } from "./projects/projects-pages";
+import { projectPages } from "./projects/projects-pages";
 import { operationsMaintenancePages } from "./maintenance/maintenance-pages";
 
 export function OperationsRouter() {
@@ -21,7 +21,7 @@ export function OperationsRouter() {
 
   return (
     <Routes>
-      {createRoute(operationsProjectPages)}
+      {createRoute(projectPages)}
       {createRoute(operationsMaintenancePages)}
     </Routes>
   );
