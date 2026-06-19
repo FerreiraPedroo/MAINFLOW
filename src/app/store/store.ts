@@ -156,43 +156,50 @@ const dataSample = {
 };
 
 const useAppStore = create<AppStore>()(
-  // persist(
-  (set) => ({
-    token: null,
-    user: null,
-    appVersion: {
-      userVersion: null,
-      departmentVersion: null,
-      uiVersion: null,
-    },
-    setLogin: (token: string | null) => set(() => ({ token })),
-    setLogout: () => ({
+  persist(
+    (set) => ({
       token: null,
+      user: null,
       appVersion: {
         userVersion: null,
         departmentVersion: null,
         uiVersion: null,
       },
-      departments: [],
-      departmentSelected: null,
+      setLogin: (token: string | null) => set(() => ({ token })),
+      setLogout: () => ({
+        token: null,
+        appVersion: {
+          userVersion: null,
+          departmentVersion: null,
+          uiVersion: null,
+        },
+        departments: [],
+        departmentSelected: null,
+      }),
+      setUser: (user) => set(() => ({ user })),
+      setAppVersion: (appVersion) => set(() => ({ appVersion })),
     }),
-    setUser: (user) => set(() => ({ user })),
-    setAppVersion: (appVersion) => set(() => ({ appVersion })),
-  }),
-  // ,
-  //   {
-  //     name: "app-storage",
-  //     storage: createJSONStorage(() => localStorage),
-  //   },
-  // ),
+    {
+      name: "app-storage",
+      storage: createJSONStorage(() => localStorage),
+    },
+  ),
 );
 
-const useMenuStore = create<MenuStore>()((set) => ({
-  departments: dataSample.departments,
-  departmentSelected: null,
-  setDepartments: (departments) => set(() => ({ departments })),
-  setDepartmentSelected: (department) =>
-    set(() => ({ departmentSelected: department })),
-}));
+const useMenuStore = create<MenuStore>()(
+  persist(
+    (set) => ({
+      departments: dataSample.departments,
+      departmentSelected: null,
+      setDepartments: (departments) => set(() => ({ departments })),
+      setDepartmentSelected: (department) =>
+        set(() => ({ departmentSelected: department })),
+    }),
+    {
+      name: "menu-storage",
+      storage: createJSONStorage(() => localStorage),
+    },
+  ),
+);
 
 export { useAppStore, useMenuStore };

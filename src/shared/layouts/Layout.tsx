@@ -33,7 +33,7 @@ export function Layout() {
   }, [token, location.pathname]);
 
   return (
-    <div className="flex flex-col h-screen border-2 border-yellow-400">
+    <div className="flex flex-col h-screen">
       {/* {ModalDisconnect} */}
 
       <TooltipProvider>

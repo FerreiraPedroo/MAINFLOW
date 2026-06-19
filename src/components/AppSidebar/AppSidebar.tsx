@@ -25,7 +25,9 @@ export function AppSideBar() {
     <aside className={`min-w-50 bg-stone-100 border-r border-slate-200`}>
       <div className="flex flex-col h-full">
         <header>
-          <p className="bg-gray-200 p-3">{departmentSelected?.title}</p>
+          <p className="font-medium text-center p-3 select-none ">
+            {departmentSelected?.title}
+          </p>
         </header>
         {/* Navigation */}
         <nav className="flex-1 space-y-1 ">

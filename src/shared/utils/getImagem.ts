@@ -17,6 +17,6 @@ const imagens = {
   ...icons,
 };
 
-export function getImagem(name: string) {
+export function getImagem(name: keyof typeof imagens | string | null) {
   return imagens[name] ?? imagens.default;
 }
