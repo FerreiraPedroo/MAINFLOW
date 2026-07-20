@@ -3,7 +3,7 @@ import React from "react";
 import { Container } from "@shared/components/Container";
 import { HomeHeader } from "@/shared/ui/PageHome/Header";
 
-export function HomePage() {
+export function PublicHomePage() {
   return (
     <Container>
       <HomeHeader icon={"home"} headerTitle={"Inicio"} />

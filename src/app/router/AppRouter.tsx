@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Layout } from "@/shared/layouts/Layout";
-import { HomePage } from "@/features/home/Home";
+import { HomePage } from "@/features/public/pages/Home";
 // import { NotFoundPage } from "@/pages/errors/NotFoundPage";
 
 const ManagerModule = lazy(() =>
@@ -27,9 +27,9 @@ const PersonsModule = lazy(() =>
   })),
 );
 
-const OperationsModule = lazy(() =>
-  import("@/features/operations/OperationsRoutes").then((m) => ({
-    default: m.OperationsRouter,
+const FacilitiesFeatures = lazy(() =>
+  import("@/features/facilities/index").then((m) => ({
+    default: m.FacilitiesRouter,
   })),
 );
 
@@ -41,7 +41,7 @@ export const Approuter = createBrowserRouter(
         <Route path="safety/*" element={<SafetyModule />} />
         <Route path="persons/*" element={<PersonsModule />} />
         <Route path="manager/*" element={<ManagerModule />} />
-        <Route path="operations/*" element={<OperationsModule />} />
+        <Route path="facilities/*" element={<FacilitiesFeatures />} />
       </Route>
       {/* <Route path="*" element={<NotFoundPage />} /> */}
     </Route>,

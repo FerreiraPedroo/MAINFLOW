@@ -3,7 +3,7 @@ import type {
   MenuItemsType,
 } from "@/components/AppSidebar/types/sidebar.types";
 
-import { operationsMenuItems } from "@/features/operations/operations-sidebar.config";
+import { operationsMenuItems } from "@/features/facilities/config/facilities-pages.config";
 import { managerMenuItems } from "@/features/manager/manager-sidebar.config";
 import { safetyMenuItems } from "@/features/safety/safety-sidebar.config";
 import { personsMenuItems } from "@/features/person/persons-sidebar.config";
@@ -18,24 +18,24 @@ type LayoutConfigType = {
   menuItems: MenuItemsType[];
 };
 
-export const sideBarConfig: LayoutConfigType = {
-  departaments: [
-    { id: 1, title: "Painel Inicial", url: "/", icon: "painel" },
-    { id: 4, title: "Gerenciamento", url: "/manager", icon: "menuManager" },
-    { id: 3, title: "Pessoas", url: "/persons", icon: "menuPerson" },
-    { id: 5, title: "Operações", url: "/operations", icon: "menuOperations" },
-    {
-      id: 2,
-      title: "Segurança do Trabalho",
-      url: "/safety",
-      icon: "menuSafety",
-    },
-  ],
-  menuItems: [
-    ...painelMenuItems,
-    ...safetyMenuItems,
-    ...personsMenuItems,
-    ...managerMenuItems,
-    ...operationsMenuItems,
-  ],
-};
+// export const sideBarConfig: LayoutConfigType = {
+// departaments: [
+//   { id: 1, title: "Painel Inicial", url: "/", icon: "painel" },
+//   { id: 4, title: "Gerenciamento", url: "/manager", icon: "menuManager" },
+//   { id: 3, title: "Pessoas", url: "/persons", icon: "menuPerson" },
+//   { id: 5, title: "Operações", url: "/operations", icon: "menuOperations" },
+//   {
+//     id: 2,
+//     title: "Segurança do Trabalho",
+//     url: "/safety",
+//     icon: "menuSafety",
+//   },
+// ],
+// menuItems: [
+//   ...painelMenuItems,
+//   ...safetyMenuItems,
+//   ...personsMenuItems,
+//   ...managerMenuItems,
+//   ...operationsMenuItems,
+// ],
+// };

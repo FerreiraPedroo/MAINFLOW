@@ -11,6 +11,7 @@ import { TextButton } from "@/shared/components/button/TextButton";
 
 import type { BuildingDivision } from "../../interfaces/buildingDivision";
 import { SelectInput } from "@/shared/components/input/SelectInput";
+import { LinkButton } from "@/shared/components/button/LinkButton";
 
 const itemList: BuildingDivision[] = [
   {
@@ -39,6 +40,32 @@ const itemList: BuildingDivision[] = [
     type: "string",
   },
 ];
+
+const costCenterList = {
+  header: {
+    title: "",
+    subTitle: "",
+  },
+  buttons: [
+    {
+      to: "/manager/localizations/create",
+      text: "Cadastrar localização",
+    },
+  ],
+  fields: {
+    grid: 2,
+    inputs: [
+      {
+        name: "search_name",
+        value: "search_name",
+        required: false,
+        setFormValue: "",
+        text: "Nome",
+        cols: 2,
+      },
+    ],
+  },
+};
 
 export function CostCenterList() {
   const navigate = useNavigate();
@@ -90,11 +117,12 @@ export function CostCenterList() {
           title="Centro de custo"
           subTitle="Cadastre um novo centro de custo para registrar e acompanhar despesas associadas a uma área ou recurso."
         />
+
+        {/* Buttons */}
         <div className="flex gap-4">
-          <TextButton
-            text="Cadastrar centro de custo"
-            type="stone"
-            onClick={() => handleCreateModal("new")}
+          <LinkButton
+            to="/manager/localizations/create"
+            text="Cadastrar localização"
           />
         </div>
 

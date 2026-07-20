@@ -3,7 +3,7 @@ export type DepartmentType = {
   title: string;
   url: string;
   icon: string;
-  itemsList: SectorType[] | ItemsType[];
+  activities: SectorType[] | ActivityType[];
 };
 
 export interface SectorType {
@@ -12,19 +12,14 @@ export interface SectorType {
   department_id: number;
   order: number;
   icon: string;
-  sectorItems: ItemsType[];
+  activities: ActivityType[];
 }
 
-export type ItemsType = {
+export type ActivityType = {
   id: number;
   item_id: number;
   title: string;
   order: number;
+  url: string;
   icon: string;
-  options: {
-    id: number;
-    title: string;
-    icon: string;
-    url: string;
-  }[];
 };

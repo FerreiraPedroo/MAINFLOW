@@ -1,0 +1,1 @@
+export { FacilitiesRouter } from "./FacilitiesRoutes";

@@ -10,7 +10,7 @@ interface Header {
   };
   cards: {
     icon: "default";
-    menuItens: { name: string; url: string; subMenu?: { name: string }[] }[];
+    menuItens: { title: string; url: string; subMenu?: { title: string }[] }[];
   };
 }
 
@@ -23,11 +23,9 @@ interface Header {
  */
 export function PageHome({ header, cards }: Header) {
   return (
-    <Container>
-      <div className="max-w-4xl w-full">
-        <HomeHeader icon={header.icon} headerTitle={header.headerTitle} />
-        <HomeCards icon="default" menuItens={cards.menuItens} />
-      </div>
-    </Container>
+    <div className="max-w-4xl w-full">
+      <HomeHeader icon={header.icon} headerTitle={header.headerTitle} />
+      <HomeCards icon="default" menuItens={cards.menuItens} />
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Separator } from "@base-ui/react";
 import { getImagem } from "@/shared/utils/getImagem";
 import { useMenuStore } from "@/app/store/store";
 import { useNavigate } from "react-router-dom";

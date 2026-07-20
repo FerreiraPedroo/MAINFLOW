@@ -28,132 +28,88 @@ interface MenuStore {
   setDepartmentSelected: (department: DepartmentType) => void;
 }
 
-const dataSample = {
-  departments: [
-    {
-      id: 1,
-      title: "Operações",
-      url: "/operations",
-      icon: "default",
-      itemsList: [
-        {
-          id: 1,
-          title: "Obras",
-          department_id: 1,
-          order: 1,
-          icon: "default",
-          options: [
-            {
-              id: 1,
-              title: "Painel de obras",
-              icon: "painel",
-              url: "/construction/painel",
-            },
-            {
-              id: 2,
-              title: "Lista de obras",
-              icon: "list",
-              url: "/constructions",
-            },
-            {
-              id: 3,
-              title: "Informações detalhadas de obras",
-              icon: "info",
-              url: "/construction/info-details",
-            },
-          ],
-        },
-        {
-          id: 1,
-          title: "Movimentação",
-          department_id: 1,
-          order: 1,
-          icon: "default",
-          options: [
-            {
-              id: 1,
-              title: "Painel de movimentações",
-              icon: "painel",
-              url: "/movimentations/painel",
-            },
-            {
-              id: 2,
-              title: "Lista de movimentações",
-              icon: "list",
-              url: "/movimentations",
-            },
-            {
-              id: 3,
-              title: "Informações detalhadas de movimentação",
-              icon: "info",
-              url: "/movimentations/info-details",
-            },
-          ],
-        },
-        {
-          id: 1,
-          title: "Facilities",
-          department_id: 1,
-          order: 1,
-          icon: "default",
-          sectorItems: [
-            {
-              id: 1,
-              item_id: 1,
-              title: "Projeto",
-              order: 1,
-              icon: "project",
-              options: [
-                {
-                  id: 1,
-                  title: "Painel de projeto",
-                  icon: "painel",
-                  url: "/project/painel",
-                },
-                {
-                  id: 2,
-                  title: "Lista de projeto",
-                  icon: "list",
-                  url: "/projects",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 1,
-          title: "Facilities",
-          department_id: 1,
-          order: 1,
-          icon: "default",
-          sectorItems: [
-            {
-              id: 1,
-              item_id: 1,
-              title: "Projeto",
-              order: 1,
-              icon: "project",
-              options: [
-                {
-                  id: 1,
-                  title: "Painel de projeto",
-                  icon: "painel",
-                  url: "/project/painel",
-                },
-                {
-                  id: 2,
-                  title: "Lista de projeto",
-                  icon: "list",
-                  url: "/projects",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+const dataSample = [
+  {
+    id: 2,
+    title: "Gerenciamento",
+    url: "/manager",
+    icon: "default",
+    activities: [
+      {
+        id: 1,
+        item_id: 1,
+        title: "Centros de custo",
+        order: 1,
+        url: "/manager/cost-center",
+        icon: "default",
+      },
+      {
+        id: 1,
+        item_id: 1,
+        title: "Grupos de pagamento",
+        order: 1,
+        url: "/manager/payment-groups",
+        icon: "default",
+      },
+      {
+        id: 1,
+        title: "Localização",
+        department_id: 1,
+        order: 1,
+        icon: "default",
+        activities: [
+          {
+            id: 1,
+            item_id: 1,
+            title: "Localizações",
+            order: 1,
+            url: "/manager/localizations",
+            icon: "default",
+          },
+          {
+            id: 2,
+            item_id: 1,
+            title: "Unidades",
+            order: 1,
+            url: "/manager/localizations/buildings",
+            icon: "default",
+          },
+          {
+            id: 3,
+            item_id: 1,
+            title: "Andares",
+            order: 1,
+            url: "/manager/localizations/building-floors",
+            icon: "default",
+          },
+          {
+            id: 4,
+            item_id: 1,
+            title: "Divisões",
+            order: 1,
+            url: "/manager/localizations/building-divisions",
+            icon: "default",
+          },
+          {
+            id: 5,
+            item_id: 1,
+            title: "Tipos de espaços",
+            order: 1,
+            url: "/manager/localizations/building-spaces",
+            icon: "default",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Operações",
+    url: "/operations",
+    icon: "default",
+    activities: [],
+  },
+];
 
 const useAppStore = create<AppStore>()(
   persist(
@@ -189,7 +145,7 @@ const useAppStore = create<AppStore>()(
 const useMenuStore = create<MenuStore>()(
   persist(
     (set) => ({
-      departments: dataSample.departments,
+      departments: dataSample,
       departmentSelected: null,
       setDepartments: (departments) => set(() => ({ departments })),
       setDepartmentSelected: (department) =>

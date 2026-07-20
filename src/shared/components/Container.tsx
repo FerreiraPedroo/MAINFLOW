@@ -10,7 +10,7 @@ export function Container({
 }) {
   return (
     <div
-      className={`container flex items-start justify-center p-2 lg:p-4 ${className}`}
+      className={`container flex items-start justify-center p-6 ${className}`}
     >
       {children}
     </div>

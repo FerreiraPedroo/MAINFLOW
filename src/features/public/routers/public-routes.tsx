@@ -1,21 +1,22 @@
 import React, { useCallback } from "react";
-
 import { Routes, Route } from "react-router-dom";
-import { managerPages } from "./manager-pages";
 
-export function ManagerRouter() {
+import { publicPagesConfig } from "../config";
+
+export function PublicRouter() {
   const createRoute = useCallback((pageList: any) => {
     return pageList.map(
       ({
         path,
         element: Component,
+        permission,
       }: {
         path: string;
         element: React.ComponentType;
-        // permission: string;
+        permission: string;
       }) => <Route key={path} path={path} element={<Component />} />,
     );
   }, []);
 
-  return <Routes>{createRoute(managerPages)}</Routes>;
+  return <Routes>{createRoute(publicPagesConfig)}</Routes>;
 }

@@ -1,6 +1,6 @@
-import * as maintenance from "./index";
+import * as maintenance from "../index";
 
-export const operationsMaintenancePages = [
+export const maintenancePagesConfig = [
   {
     path: "/maintenance",
     element: maintenance.MaintenanceListPage,

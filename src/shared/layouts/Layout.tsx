@@ -4,7 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppSuperiorbar } from "@/components/AppSuperiorbar/AppSuperiorbar";
 import { Modal } from "../components/modal/Modal";
 import { useAppStore } from "@/app/store/store";
-import { AppSideBar } from "@/components/AppSideBar/AppSideBar";
+import { AppSideBar } from "@/components/AppSidebar/AppSidebar";
+
 
 export function Layout() {
   const navigate = useNavigate();
