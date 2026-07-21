@@ -1,1 +1,1 @@
-export { facilitiesSideBarConfig } from "./facilities-pages.config";
+export { facilitiesPagesConfig } from "./facilities-pages.config";

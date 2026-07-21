@@ -3,7 +3,12 @@ import * as publicPages from "../pages";
 export const publicPagesConfig = [
   {
     path: "/",
-    element: publicPages.PublicHomePage,
-    permission: "facilities",
+    element: publicPages.HomePage,
+    permission: "public",
+  },
+  {
+    path: "/login",
+    element: publicPages.LoginPage,
+    permission: "public:login",
   },
 ];

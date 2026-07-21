@@ -6,8 +6,14 @@ import {
 } from "react-router-dom";
 
 import { Layout } from "@/shared/layouts/Layout";
-import { HomePage } from "@/features/public/pages/Home";
+import { LayoutPublic } from "@/shared/layouts/LayoutPublic";
 // import { NotFoundPage } from "@/pages/errors/NotFoundPage";
+
+const PublicModule = lazy(() =>
+  import("@/features/public").then((m) => ({
+    default: m.PublicRouter,
+  })),
+);
 
 const ManagerModule = lazy(() =>
   import("@/features/manager/ManagerRoutes.tsx").then((m) => ({
@@ -36,8 +42,10 @@ const FacilitiesFeatures = lazy(() =>
 export const Approuter = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route element={<LayoutPublic />}>
+        <Route path="/*" element={<PublicModule />} />
+      </Route>
       <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
         <Route path="safety/*" element={<SafetyModule />} />
         <Route path="persons/*" element={<PersonsModule />} />
         <Route path="manager/*" element={<ManagerModule />} />

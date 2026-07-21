@@ -1,17 +1,12 @@
 import React from "react";
 
-import { facilitiesSideBarConfig } from "@features/facilities/config";
-
 import { Container } from "@/shared/components/Container";
-import { PageHome } from "@/shared/ui/PageHome/Index";
+import { Header } from "@/shared/components/header/Header";
 
 export function FacilitiesHome() {
   return (
     <Container>
-      <PageHome
-        header={{ icon: "menuFacilities", headerTitle: "Operações" }}
-        cards={{ icon: "default", menuItens: facilitiesSideBarConfig }}
-      />
+      <Header title="Facilities" center={true}/>
     </Container>
   );
 }

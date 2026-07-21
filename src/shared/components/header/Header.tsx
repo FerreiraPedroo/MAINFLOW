@@ -4,20 +4,22 @@ import { BackButton } from "../button/BackButton";
 export function Header({
   title,
   subTitle,
-  backButton = true,
+  center = false,
+  backButton = false,
 }: {
   title: string;
   subTitle?: string;
+  center: boolean;
   backButton?: boolean;
 }) {
   return (
-    <header className="flex gap-4">
-      {backButton && <BackButton />}
-      <div>
-        <h1 className="p-0 text-2xl lg:text-3xl font-bold text-slate-800">
+    <header className="flex gap-4 w-full p-4 place-items-center">
+      {!backButton && <BackButton />}
+      <div className="w-full">
+        <h1 className={`w-full text-4xl font-bold ${!center && "text-center"}`}>
           {title}
         </h1>
-        <p className="text-slate-500 mt-1">{subTitle}</p>
+        <p className="text-slate-500">{subTitle}</p>
       </div>
     </header>
   );
