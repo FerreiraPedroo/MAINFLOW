@@ -7,6 +7,11 @@ interface ApiConfig {
   body?: any;
 }
 
+/**
+ *
+ * @param url string
+ * @param config Object { method: string, headers: { string: string } }
+ */
 export async function apiClient(
   url: string,
   config: ApiConfig = { method: "GET", headers: {} },

@@ -6,7 +6,7 @@ import { Header } from "@/shared/components/header/Header";
 export function FacilitiesHome() {
   return (
     <Container>
-      <Header title="Facilities" center={true}/>
+      <Header title="Facilities" center={true} backButton={false} />
     </Container>
   );
 }

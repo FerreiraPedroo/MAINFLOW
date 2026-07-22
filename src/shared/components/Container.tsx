@@ -9,7 +9,7 @@ export function Container({
   children?: ReactNode;
 }) {
   return (
-    <div className={`container flex items-start justify-center ${className}`}>
+    <div className={`w-full flex items-start justify-center ${className}`}>
       {children}
     </div>
   );

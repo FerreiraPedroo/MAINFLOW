@@ -1,4 +1,4 @@
-export type ProjectCreateDTO {
+export interface ProjectCreateDTO {
   name: string;
   code: string;
   cost_center_id: number | null;

@@ -9,14 +9,14 @@ export function Header({
 }: {
   title: string;
   subTitle?: string;
-  center: boolean;
+  center?: boolean;
   backButton?: boolean;
 }) {
   return (
     <header className="flex gap-4 w-full p-4 place-items-center">
-      {!backButton && <BackButton />}
+      {backButton && <BackButton />}
       <div className="w-full">
-        <h1 className={`w-full text-4xl font-bold ${!center && "text-center"}`}>
+        <h1 className={`w-full text-4xl font-bold ${center && "text-center"}`}>
           {title}
         </h1>
         <p className="text-slate-500">{subTitle}</p>
