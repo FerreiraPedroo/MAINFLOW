@@ -10,7 +10,7 @@ export function TextInput({
   readOnly,
   cols = 2,
   disable = false,
-  setFormValue
+  setFormValue,
 }: {
   text?: string;
   name: string;
@@ -27,21 +27,21 @@ export function TextInput({
       <label className="block text-sm font-medium text-slate-700 mb-1 pl-1">
         {text}
         {required && <span className="text-red-500">*</span>}
-      </label>
 
-      <input
-        type="text"
-        name={name}
-        value={value}
-        required={required}
-        readOnly={readOnly}
-        className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-        placeholder={`${placeholder && "Ex: " + placeholder}`}
-        disabled={disable}
-        onChange={(e) =>
-          setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
-        }
-      />
+        <input
+          type="text"
+          name={name}
+          value={value}
+          required={required}
+          readOnly={readOnly}
+          className="w-full bg-white px-2 py-1.5 text-sm rounded border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-xs"
+          placeholder={`${placeholder && "Ex: " + placeholder}`}
+          disabled={disable}
+          onChange={(e) =>
+            setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
+          }
+        />
+      </label>
     </div>
   );
 }

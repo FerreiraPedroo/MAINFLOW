@@ -9,7 +9,9 @@ export function Container({
   children?: ReactNode;
 }) {
   return (
-    <div className={`w-full flex items-start justify-center ${className}`}>
+    <div
+      className={`h-auto w-full flex items-start justify-center pt-4 pb-10 px-6 overflow-y-auto min-w-full ${className} `}
+    >
       {children}
     </div>
   );

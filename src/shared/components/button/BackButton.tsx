@@ -6,7 +6,24 @@ export function BackButton() {
   return (
     <button
       onClick={() => navigate(-1)}
-      className="inline-flex items-center h-9 p-2 gap-2 rounded-xl hover:cursor-pointer hover:text-slate-900 hover:bg-slate-100 hover:shadow-slate-500/25 hover:shadow-lg transition-all duration-300 font-medium"
+      className="
+      h-10
+      px-1
+      rounded-md
+      font-medium
+      hover:text-slate-900
+      bg-blue-100
+      hover:bg-blue-200
+      hover:cursor-pointer
+      shadow-xs
+      shadow-slate-700
+      hover:shadow-slate-500/25
+      hover:shadow-sm
+      border
+      border-slate-400
+      transition-all
+      duration-300
+    "
     >
       <svg
         className="w-5 h-5"

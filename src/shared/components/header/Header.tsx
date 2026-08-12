@@ -13,9 +13,9 @@ export function Header({
   backButton?: boolean;
 }) {
   return (
-    <header className="flex gap-4 w-full p-4 place-items-center">
+    <header className="flex gap-4 w-full place-items-center">
       {backButton && <BackButton />}
-      <div className="w-full">
+      <div className="w-full pb-1">
         <h1 className={`w-full text-4xl font-bold ${center && "text-center"}`}>
           {title}
         </h1>

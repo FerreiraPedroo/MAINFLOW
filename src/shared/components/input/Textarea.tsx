@@ -32,9 +32,10 @@ export function Textarea({
           setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
         }
         rows={3}
-        className="w-full bg-white px-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+        className="w-full bg-white px-4 py-1.5 text-sm rounded border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-xs"
         placeholder={placeholder}
       />
     </div>
   );
 }
+

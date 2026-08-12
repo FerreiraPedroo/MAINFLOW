@@ -37,7 +37,7 @@ export function SelectInput({
         onChange={(e) =>
           setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
         }
-        className="w-full bg-white p-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+        className="w-full bg-white p-1.5 text-sm rounded border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-xs"
       >
         <option value="">Selecione...</option>
         {options.map((opt) => {

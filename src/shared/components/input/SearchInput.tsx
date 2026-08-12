@@ -36,9 +36,10 @@ export function SearchInput({
           placeholder={`${placeholder}...`}
           value={value}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-white pl-7 pr-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+          className="w-full bg-white pl-7 pr-4 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-xs"
         />
       </div>
     </div>
   );
 }
+

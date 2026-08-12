@@ -5,7 +5,38 @@ export function LinkButton({ to, text }: { to: string; text: string }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center justify-center border align-middle select-none font-medium text-center duration-200 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none py-2 px-4 shadow-sm hover:shadow-md bg-stone-100 hover:bg-stone-200 border-stone-300 text-stone-700 rounded-lg  hover:border-stone-400"
+      className="
+      min-h-10
+      px-3
+
+      inline-flex items-center justify-center align-middle
+      select-none
+      rounded-sm
+      text-sm
+      font-medium
+      text-nowrap
+      text-center
+
+    text-slate-900
+      disabled:opacity-50
+      disabled:shadow-none
+      disabled:cursor-not-allowed
+      focus:shadow-none
+
+      hover:cursor-pointer
+      hover:shadow-slate-500/25
+      hover:shadow-sm
+    bg-blue-100
+    hover:bg-blue-200
+      border
+    border-slate-400
+      shadow-xs
+    shadow-slate-500
+
+      ease-in
+      transition-all
+      duration-100
+      "
     >
       {text}
     </Link>
