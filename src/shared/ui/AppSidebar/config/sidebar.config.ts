@@ -3,10 +3,10 @@ import type {
   MenuItemsType,
 } from "@/components/AppSidebar/types/sidebar.types";
 
-import { operationsMenuItems } from "@/features/facilities/config/facilities-pages.config";
-import { managerMenuItems } from "@/features/manager/manager-sidebar.config";
+import { operationsMenuItems } from "@/features/asset-management/facilities/config/facilities-pages.config";
+import { managerMenuItems } from "@/features/backoffice/manager/config/manager-sidebar.config";
 import { safetyMenuItems } from "@/features/safety/safety-sidebar.config";
-import { personsMenuItems } from "@/features/person/persons-sidebar.config";
+import { personsMenuItems } from "@/features/persons/persons-sidebar.config";
 import { painelMenuItems } from "@/features/home/painel-sidebar.config";
 
 /**

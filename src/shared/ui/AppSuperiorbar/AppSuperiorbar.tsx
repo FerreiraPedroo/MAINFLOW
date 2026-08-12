@@ -17,13 +17,13 @@ export function AppSuperiorbar() {
 
   return (
     <div className="z-99 sticky top-0 flex justify-between items-center gap-2 border-b bg-stone-100 max-h-10 min-h-10">
-      <div className="border-b border-slate-100 w-50 bg-slate-200 px-1">
+      <div className="w-50 bg-slate-400 px-1">
         <div className="relative" onMouseLeave={() => setShowDeptMenu(false)}>
           <button
             onClick={() => setShowDeptMenu(!showDeptMenu)}
             className="flex items-center hover:cursor-pointer"
           >
-            <div className="flex items-center justify-center w-9 rounded-sm">
+            <div className="flex items-center justify-center w-9">
               <img src={getImagem("default")} />
             </div>
           </button>
@@ -57,12 +57,12 @@ export function AppSuperiorbar() {
           )}
         </div>
       </div>
-      {/* <SidebarTrigger /> */}
-      {/* <Separator
+      {/* <SidebarTrigger />
+      <Separator
         orientation="vertical"
         className="self-center data-[orientation=vertical]:h-60 mt-2"
-      /> */}
-      {/* <NavUser user={data.user} /> */}
+      />
+      <NavUser user={data.user} /> */}
     </div>
   );
 }

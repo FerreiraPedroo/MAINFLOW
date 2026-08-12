@@ -12,13 +12,13 @@
     "paths": {
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
-      "@utils/*": ["./src/shared/utils/*"],
+      "@assets/*": ["./src/assets/*"],
       "@shared/*": ["./src/shared/*"],
+      "@config/*": ["./src/app/config/*"],
       "@features/*": ["./src/features/*"],
-      "@config/*": ["./src/config/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@utils/*": ["./src/shared/utils/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": ["src"],

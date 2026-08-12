@@ -1,5 +1,5 @@
 import { useAppStore } from "@/app/store/store";
-import { CONFIG } from "@/config/config";
+import { CONFIG } from "@/app/config/config";
 
 interface ApiConfig {
   method: string;
@@ -31,33 +31,15 @@ export async function apiClient(
 
   try {
     const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
-    const responseJson = await response.json();
 
-    if (responseJson.codStatus == 200 || responseJson.codStatus == 200) {
-      return responseJson;
-    } else if (responseJson.codStatus == 401) {
-      useAppStore.getState().setLogout();
-    } else {
-      throw responseJson;
+    if (!response.ok) {
+      throw response;
     }
+
+    const responseJson = await response.json();
+    return responseJson;
   } catch (error: any) {
-    if (
-      error.message?.includes("Failed to fetch") ||
-      error.message?.includes("ERR_CONNECTION_REFUSED")
-    ) {
-      throw {
-        codStatus: 404,
-        message: "Servidor indisponível ou conexão recusada.",
-        data: null,
-      };
-    } else {
-      console.log("apiClient: codStatus não identificado !!");
-      throw {
-        codStatus: error.codStatus,
-        message: `${error.message}`,
-        error: error,
-        data: null,
-      };
-    }
+    const errorJson = await error.json();
+    throw errorJson;
   }
 }

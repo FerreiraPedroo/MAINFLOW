@@ -28,88 +28,88 @@ interface MenuStore {
   setDepartmentSelected: (department: DepartmentType) => void;
 }
 
-const dataSample = [
-  {
-    id: 2,
-    title: "Gerenciamento",
-    url: "/manager",
-    icon: "default",
-    activities: [
-      {
-        id: 1,
-        item_id: 1,
-        title: "Centros de custo",
-        order: 1,
-        url: "/manager/cost-center",
-        icon: "default",
-      },
-      {
-        id: 1,
-        item_id: 1,
-        title: "Grupos de pagamento",
-        order: 1,
-        url: "/manager/payment-groups",
-        icon: "default",
-      },
-      {
-        id: 1,
-        title: "Localização",
-        department_id: 1,
-        order: 1,
-        icon: "default",
-        activities: [
-          {
-            id: 1,
-            item_id: 1,
-            title: "Localizações",
-            order: 1,
-            url: "/manager/localizations",
-            icon: "default",
-          },
-          {
-            id: 2,
-            item_id: 1,
-            title: "Unidades",
-            order: 1,
-            url: "/manager/localizations/buildings",
-            icon: "default",
-          },
-          {
-            id: 3,
-            item_id: 1,
-            title: "Andares",
-            order: 1,
-            url: "/manager/localizations/building-floors",
-            icon: "default",
-          },
-          {
-            id: 4,
-            item_id: 1,
-            title: "Divisões",
-            order: 1,
-            url: "/manager/localizations/building-divisions",
-            icon: "default",
-          },
-          {
-            id: 5,
-            item_id: 1,
-            title: "Tipos de espaços",
-            order: 1,
-            url: "/manager/localizations/building-spaces",
-            icon: "default",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Operações",
-    url: "/operations",
-    icon: "default",
-    activities: [],
-  },
-];
+// const dataSample = [
+//   {
+//     id: 2,
+//     title: "Gerenciamento",
+//     url: "/manager",
+//     icon: "default",
+//     activities: [
+//       {
+//         id: 1,
+//         item_id: 1,
+//         title: "Centros de custo",
+//         order: 1,
+//         url: "/manager/cost-center",
+//         icon: "default",
+//       },
+//       {
+//         id: 1,
+//         item_id: 1,
+//         title: "Grupos de pagamento",
+//         order: 1,
+//         url: "/manager/payment-groups",
+//         icon: "default",
+//       },
+//       {
+//         id: 1,
+//         title: "Localização",
+//         department_id: 1,
+//         order: 1,
+//         icon: "default",
+//         activities: [
+//           {
+//             id: 1,
+//             item_id: 1,
+//             title: "Localizações",
+//             order: 1,
+//             url: "/manager/localizations",
+//             icon: "default",
+//           },
+//           {
+//             id: 2,
+//             item_id: 1,
+//             title: "Unidades",
+//             order: 1,
+//             url: "/manager/localizations/buildings",
+//             icon: "default",
+//           },
+//           {
+//             id: 3,
+//             item_id: 1,
+//             title: "Andares",
+//             order: 1,
+//             url: "/manager/localizations/building-floors",
+//             icon: "default",
+//           },
+//           {
+//             id: 4,
+//             item_id: 1,
+//             title: "Divisões",
+//             order: 1,
+//             url: "/manager/localizations/building-divisions",
+//             icon: "default",
+//           },
+//           {
+//             id: 5,
+//             item_id: 1,
+//             title: "Tipos de espaços",
+//             order: 1,
+//             url: "/manager/localizations/building-spaces",
+//             icon: "default",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     title: "Operações",
+//     url: "/operations",
+//     icon: "default",
+//     activities: [],
+//   },
+// ];
 
 const useAppStore = create<AppStore>()(
   persist(
@@ -121,19 +121,21 @@ const useAppStore = create<AppStore>()(
         departmentVersion: null,
         uiVersion: null,
       },
-      setLogin: (token: string | null) => set(() => ({ token })),
+      setLogin: (token: string | null) =>
+        set((state) => {
+          return { ...state, token };
+        }),
       setLogout: () => ({
         token: null,
+        user: null,
         appVersion: {
           userVersion: null,
           departmentVersion: null,
           uiVersion: null,
         },
-        departments: [],
-        departmentSelected: null,
       }),
-      setUser: (user) => set(() => ({ user })),
-      setAppVersion: (appVersion) => set(() => ({ appVersion })),
+      setUser: (user) => set((state) => ({ ...state, user })),
+      setAppVersion: (appVersion) => set((state) => ({ ...state, appVersion })),
     }),
     {
       name: "app-storage",
@@ -145,11 +147,12 @@ const useAppStore = create<AppStore>()(
 const useMenuStore = create<MenuStore>()(
   persist(
     (set) => ({
-      departments: dataSample,
+      departments: [],
       departmentSelected: null,
-      setDepartments: (departments) => set(() => ({ departments })),
+      setDepartments: (departments) =>
+        set((state) => ({ ...state, departments })),
       setDepartmentSelected: (department) =>
-        set(() => ({ departmentSelected: department })),
+        set((state) => ({ ...state, departmentSelected: department })),
     }),
     {
       name: "menu-storage",
