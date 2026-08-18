@@ -5,7 +5,7 @@ import type { Epi } from "../types/epi.types";
 import { ImagemUpload } from "@shared/components/input/Imagem";
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { Textarea } from "@shared/components/input/Textarea";
-import { TextInput } from "@shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 
 const inputCompose = [
   {

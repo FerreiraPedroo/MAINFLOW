@@ -8,6 +8,12 @@ import { Container } from "@/shared/components/Container";
 import { LinkButton } from "@/shared/components/button/LinkButton";
 import { Calendar } from "@/shared/components/calendar/Calendar";
 import { MainTenancePill } from "../utils/MainTenancePill";
+import {
+  BlockSection,
+  BlockSectionTitle,
+} from "@/shared/components/block-section/BlockSection";
+import { SelectInput } from "@/shared/components";
+import { SearchInput } from "@/shared/components/input/SearchInput";
 
 const maintenanceList = [
   {
@@ -106,31 +112,29 @@ export function MaintenanceListPage() {
 
   return (
     <Container>
-      <div className="w-full space-y-6">
-        <div className="flex">
-          <div className="w-full  space-y-4">
-            {/* Header */}
+      <div className="w-full space-y-4">
+        <div className="flex flex-col md:flex-row justify-between gap-1">
+          <div className="w-full md:w-2/5 space-y-4 ">
             <Header
               title="Manutenção"
               backButton={false}
-              // subTitle="Cadastre os predios para identificar o endereço de uma localização."
+              subTitle="Cadastre e gerencie manutenção."
             />
-            <div className="flex gap-4">
-              <LinkButton
-                to="/operations/maintenance/create"
-                text="Nova manutenção"
-              />
-            </div>
-            Colocar os dias da semana abaixo pelo dia do calendário, em fila e
-            para que possa ser selecionada a semana com seta ou lista suspença
-            (dropdown).
           </div>
-          <Calendar
-            name={"data"}
-            cols={2}
-            text="Selecione o mês"
-            hiddenDays={true}
-          />
+          <div className="flex gap-4">
+            <BlockSection>
+              <SelectInput
+                name="exibition"
+                text="Modo de exibição"
+                required={false}
+                value={"Mensal"}
+                defaultOption={false}
+                cols={4}
+                options={["Mensal", "Semanal", "Diário"]}
+              />
+            </BlockSection>
+            <Calendar name={"data"} text="Selecione o mês" hiddenDays={true} />
+          </div>
         </div>
         {/* Filters */}
         {/* <div className="bg-white rounded-xl border border-slate-200 p-4">
@@ -144,6 +148,7 @@ export function MaintenanceListPage() {
             />
           </div>
         </div> */}
+
         {/* Grid */}
         {state.loading ? (
           <></>

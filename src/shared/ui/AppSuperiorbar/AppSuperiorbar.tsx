@@ -16,7 +16,7 @@ export function AppSuperiorbar() {
   const [showDeptMenu, setShowDeptMenu] = useState(false);
 
   return (
-    <div className="z-99 sticky top-0 flex justify-between items-center gap-2 border-b bg-stone-100 max-h-10 min-h-10">
+    <div className="z-50 sticky top-0 flex justify-between items-center gap-2 border-b bg-stone-100 max-h-10 min-h-10">
       <div className="w-50 bg-slate-400 px-1">
         <div className="relative" onMouseLeave={() => setShowDeptMenu(false)}>
           <button

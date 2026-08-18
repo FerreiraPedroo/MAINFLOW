@@ -73,16 +73,14 @@ export function Calendar({
 
       dayElement.addEventListener("click", () => {
         const selectedDate = new Date(2026, 5, day);
-        const options = {
+        const formattedDate = selectedDate.toLocaleDateString(undefined, {
           weekday: "short",
           year: "2-digit",
           month: "long",
           day: "numeric",
-        };
-        const formattedDate = selectedDate.toLocaleDateString(
-          undefined,
-          options,
-        );
+        });
+
+        console.log(formattedDate);
         showModal(formattedDate);
       });
 
@@ -125,7 +123,7 @@ export function Calendar({
   }, [values]);
 
   return (
-    <div className="h-min w-80 flex flex-col items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl shadow-sm p-3 dark:bg-neutral-900 dark:border-neutral-800">
+    <div className="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-md shadow-sm p-3">
       <div
         className={`flex flex-col w-full justify-center pr-0.5 ${gridCols[cols]}`}
       >

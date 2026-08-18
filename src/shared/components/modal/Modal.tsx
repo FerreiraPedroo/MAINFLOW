@@ -1,56 +1,42 @@
 import React from "react";
 import { TextButton } from "../button/TextButton";
+import { Check, X } from "lucide-react";
 
-const typesBase =
-  "w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 p-3";
-
-const types = {
-  red: `${typesBase} bg-rose-100`,
-  green: `${typesBase} bg-green-100`,
+const icons = {
+  sucess: <Check className="stroke-green-500 stroke-3" size="128" />,
+  fail: <X className="stroke-rose-500 stroke-3" size="128" />,
 };
 
-const textTypes = {
-  red: "text-rose-600",
-  green: "text-green-600",
+const textColor = {
+  sucess: "text-green-900",
+  fail: "text-rose-900",
 };
 
-const iconTypes = {
-  red: "",
-  green: "",
-};
-
-export function Modal({
-  title,
-  info,
-  description,
-  type,
-  buttons,
-}: {
+export type ModalType = {
   title: string;
   info: string;
   description: string;
-  type: keyof typeof types;
-  buttons: { text: string; type: any; onClick: () => void }[];
-}) {
+  type: keyof typeof icons;
+  buttons: { text: string; color: any; onClick: () => void }[];
+};
+
+/**
+ *
+ * @param param0
+ * @type ModalType ```{  title: string;  info: string;  description: string;  type: keyof typeof types;  buttons: { ext: string; type: any; onClick: () => void }[];
+}```
+ * @returns
+ */
+export function Modal({ title, info, description, type, buttons }: ModalType) {
   return (
     <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl max-w-md w-full p-6">
-        <div className={types[type] ?? typesBase}>
-          <svg
-            className={textTypes[type]}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
+        <div
+          className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2`}
+        >
+          {icons[type]}
         </div>
-        <h3 className="text-xl font-bold text-slate-800 text-center mb-2">
+        <h3 className={`text-xl font-bold text-center mb-2 ${textColor[type]}`}>
           {title}
         </h3>
         <h4 className="text-lg font-medium text-slate-800 text-center mb-2">
@@ -62,7 +48,7 @@ export function Modal({
             <TextButton
               key={index}
               text={button.text}
-              type={button.type}
+              color={button.color}
               onClick={button.onClick}
             />
           ))}

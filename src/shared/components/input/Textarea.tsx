@@ -4,19 +4,25 @@ import { gridCols } from "./utils/gridCols";
 export function Textarea({
   text,
   name,
+  value,
+  readOnly,
   required = true,
-  placeholder,
-  cols = 2,
-  formValue = "",
-  setFormValue,
+  placeholder = "",
+  disabled = false,
+  onChange,
+  onBlur,
+  cols = "full",
 }: {
-  text: string;
+  text?: string;
   name: string;
+  value?: string;
+  readOnly?: boolean;
   required?: boolean;
   placeholder?: string;
+  disabled?: boolean;
+  onChange?: React.Dispatch<React.SetStateAction<any>>;
+  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   cols?: number | string;
-  formValue: any;
-  setFormValue: React.Dispatch<React.SetStateAction<any>>;
 }) {
   return (
     <div className={gridCols[cols]}>
@@ -26,16 +32,17 @@ export function Textarea({
       </label>
 
       <textarea
-        value={formValue[name]}
-        name={name}
-        onChange={(e) =>
-          setFormValue((prev: any) => ({ ...prev, [name]: e.target.value }))
-        }
         rows={3}
-        className="w-full bg-white px-4 py-1.5 text-sm rounded border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-xs"
-        placeholder={placeholder}
+        name={name}
+        value={value}
+        required={required}
+        readOnly={readOnly}
+        className={`w-full bg-white px-2 py-1.5 text-sm rounded border border-slate-300 focus:ring-1 focus:ring-blue-400 outline-none transition-all shadow-sm`}
+        placeholder={`${placeholder && "Ex: " + placeholder}`}
+        disabled={disabled}
+        onChange={onChange}
+        onBlur={onBlur}
       />
     </div>
   );
 }
-

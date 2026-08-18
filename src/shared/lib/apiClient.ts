@@ -36,9 +36,9 @@ export async function apiClient(
       throw response;
     }
 
-    const responseJson = await response.json();
-    return responseJson;
+    return await response.json();
   } catch (error: any) {
+    console.log(error)
     const errorJson = await error.json();
     throw errorJson;
   }

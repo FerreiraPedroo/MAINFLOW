@@ -6,7 +6,7 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { Container } from "@/shared/components/Container";
 
-import { TextInput } from "@/shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 import { TextButton } from "@/shared/components/button/TextButton";
 
 import type { BuildingDivision } from "../../interfaces/building-division";

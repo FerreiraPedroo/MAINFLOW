@@ -9,27 +9,27 @@ export interface SnackBarType {
 const color = {
   get(type: string) {
     switch (type) {
-      case "SUCESS":
-        return this.SUCESS;
+      case "sucess":
+        return this.sucess;
         break;
-      case "FAIL":
-        return this.FAIL;
+      case "fail":
+        return this.fail;
         break;
       case "WARNING":
         return this.WARNING;
         break;
       default:
-        return this.DEFAULT;
+        return this.default;
         break;
     }
   },
-  SUCESS: {
+  sucess: {
     box: "border-green-500 bg-green-50",
     typeText: "text-green-800",
     message: "text-green-700",
     icon: "text-green-700",
   },
-  FAIL: {
+  fail: {
     box: "border-red-500 bg-red-50",
     typeText: "text-red-800",
     message: "text-red-700",
@@ -41,7 +41,7 @@ const color = {
     message: "text-yellow-700",
     icon: "text-yellow-700",
   },
-  DEFAULT: {
+  default: {
     box: "border-gray-500 bg-gray-50",
     typeText: "text-gray-800",
     message: "text-gray-700",
@@ -55,7 +55,7 @@ export function SnackBar({
 }: SnackBarType) {
   return (
     <div
-      className={`absolute right-2 top-2 w-1/2 rounded-md border p-4 shadow-sm ${color.get(snackType)?.box}`}
+      className={`absolute right-2 top-2 w-1/2 rounded-md border p-4 shadow-sm z-100 ${color.get(snackType)?.box}`}
     >
       <div className={`flex items-start gap-4`}>
         <svg

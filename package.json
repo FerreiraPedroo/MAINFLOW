@@ -17,6 +17,7 @@
     "@fontsource-variable/geist": "^5.2.9",
     "@tabler/icons-react": "^3.44.0",
     "@tailwindcss/vite": "^4.3.3",
+    "lucide-react": "^1.31.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.72.0",

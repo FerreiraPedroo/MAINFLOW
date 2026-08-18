@@ -1,50 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { Container } from "@/shared/components/Container";
-import { SubmitButtom } from "@shared/components/button/SubmitButtom";
-import { Header } from "@shared/components/header/Header";
+import { apiClient } from "@/shared/lib/apiClient";
 
-import { useForm, Controller, type SubmitHandler } from "react-hook-form";
-import { TextInput } from "@/shared/components/input/TextInput";
+import { Header } from "@shared/components/header/Header";
+import { Container } from "@/shared/components/Container";
+import { useSnackBar } from "@/app/provider/SnackBarProvider";
+
+import { Modal, type ModalType } from "@/shared/components/modal/Modal";
+import { ProjectCreate } from "../components";
 
 export function ProjectCreatePage() {
   const navigate = useNavigate();
-
-  const { register, handleSubmit } = useForm({
+  const snackBar = useSnackBar();
+  const { handleSubmit, control } = useForm({
     defaultValues: {
-      firstName: "",
+      title: "",
+      code: "",
+      period: "",
+      budget: "",
+      cost_center_id: "",
+      status: "ATIVO",
+      description: "",
     },
   });
 
-  const onSubmit: SubmitHandler = (data) => console.log(data);
+  const [costCenter, setCostCenter] = useState([]);
+  const [modalInfo, setModalInfo] = useState<ModalType>();
+
+  const onSubmit: SubmitHandler<any> = async (data: FormData) => {
+    await apiClient("/facilities/projects", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        setModalInfo({
+          title: "Sucesso",
+          info: "Projeto cadastrado com sucesso.",
+          description: "",
+          type: "sucess",
+          buttons: [
+            {
+              text: "Fechar",
+              color: "green",
+              onClick: () => {
+                navigate(-1);
+              },
+            },
+          ],
+        });
+      })
+      .catch((value) => {
+        snackBar.showSnackBar(
+          "Erro ao cadastrar o projeto.",
+          value.message,
+          "FAIL",
+        );
+      });
+  };
+
+  useEffect(() => {
+    apiClient("/manager/cost-centers", { method: "GET" })
+      .then((value) => {
+        setCostCenter(
+          value.map((cc: any) => ({ value: cc.id, name: cc.title })),
+        );
+      })
+      .catch((value) => {
+        snackBar.showSnackBar(
+          "Erro recarrege a página.",
+          value.message,
+          "fail",
+        );
+      });
+  }, []);
 
   return (
-    <Container>
+    <Container className="2xl:w-4/5">
       <div className="w-full space-y-6 pb-20">
         <div className="flex gap-4">
           <Header
             title="Cadastrar projeto"
-            subTitle="Cadastre uma novo projeto."
+            subTitle="Cadastre um novo projeto."
+            backButton={true}
           />
         </div>
 
-        {/* {isSaving && (
-          <div className="absolute top-0 left-0 w-full h-full bg-slate-700/75 z-10">
-            <div className="absolute top-1/2 left-1/2 w-15 -15 border-2  border-white border-t-transparent rounded-full animate-spin" />
-          </div>
-        )}
-        {isLoading ? (
-          <div className="flex items-center justify-center min-h-100">
-            <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : ( */}
-        {/* <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <TextInput name="firstName" register={register} />
+        <ProjectCreate
+          onSubmit={handleSubmit(onSubmit)}
+          control={control}
+          costCenter={costCenter}
+        />
 
-          <SubmitButtom text="Cadastrar" />
-        </form> */}
-        {/* )} */}
+        {modalInfo && <Modal {...modalInfo} />}
       </div>
     </Container>
   );

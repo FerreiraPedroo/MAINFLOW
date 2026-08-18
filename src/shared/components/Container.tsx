@@ -10,7 +10,7 @@ export function Container({
 }) {
   return (
     <div
-      className={`h-auto w-full flex items-start justify-center pt-4 pb-10 px-6 overflow-y-auto min-w-full ${className} `}
+      className={`h-auto w-full flex items-start justify-center pt-4 pb-10 px-6 overflow-y-auto ${className} `}
     >
       {children}
     </div>

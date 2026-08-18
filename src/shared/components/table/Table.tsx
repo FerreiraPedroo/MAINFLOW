@@ -54,16 +54,18 @@ export function Table({ headers, data }: TableInput) {
                 }
                 className="text-sm hover:bg-blue-100 transition-colors hover:cursor-pointer"
               >
-                {Object.entries(row).map(([key, value], index, array) => (
+                {headers.map((data, index, array) => (
                   <td
-                    key={key}
+                    key={data.text}
                     className={`px-2 py-1 text-
                         ${tableConfig.position[headers[index].position ?? ""]}
                         ${!index && "rounded-bl-md pl-4"}
                         ${index == array.length - 1 && "rounded-br-md pr-4"}
                         `}
                   >
-                    <span className="font-medium text-slate-800">{value}</span>
+                    <span className="font-medium text-slate-800">
+                      {row[data.text]}
+                    </span>
                   </td>
                 ))}
               </tr>

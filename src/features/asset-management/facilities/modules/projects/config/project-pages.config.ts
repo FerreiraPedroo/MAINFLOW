@@ -6,11 +6,11 @@ export const projectPagesConfig = [
     element: project.ProjectListPage,
     permission: "operations:projects",
   },
-  // {
-  //   path: "/projects/:id",
-  //   element: project.ProjectDetailsPage,
-  //   permission: "operations:projects",
-  // },
+  {
+    path: "/projects/:projectId",
+    element: project.ProjectDetailsPage,
+    permission: "operations:projects",
+  },
   {
     path: "/projects/create",
     element: project.ProjectCreatePage,

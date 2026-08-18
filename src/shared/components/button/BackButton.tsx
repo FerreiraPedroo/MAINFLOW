@@ -9,20 +9,30 @@ export function BackButton() {
       className="
       h-10
       px-1
-      rounded-md
-      font-medium
-      hover:text-slate-900
-      bg-blue-100
-      hover:bg-blue-200
-      hover:cursor-pointer
-      shadow-xs
-      shadow-slate-700
-      hover:shadow-slate-500/25
-      hover:shadow-sm
-      border
-      border-slate-400
-      transition-all
-      duration-300
+      font-semibold
+        bg-blue-100
+        focus:ring-offset-blue-400
+        focus:ring-offset-1
+        focus:ring-1
+        focus:ring-blue-300
+        outline-blue-600
+        focus:outline-blue-600
+        hover:bg-blue-200
+        hover:ring-blue-300
+        hover:cursor-pointer
+        hover:ring-1
+        border
+        border-blue-200
+        transition
+        ease-in
+        duration-200
+        shadow-md
+        rounded-md
+
+        disabled:ring-0
+        disabled:bg-stone-300
+        disabled:border-stone-400
+        disabled:text-stone-500
     "
     >
       <svg

@@ -1,7 +1,7 @@
 import React from "react";
 import { DateInput } from "@/shared/components/input/DateInput";
 import { SelectInput } from "@/shared/components/input/SelectInput";
-import { TextInput } from "@/shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 
 export function OccupationPerson({
   jobs,

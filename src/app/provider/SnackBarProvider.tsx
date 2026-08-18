@@ -14,13 +14,13 @@ export function SnackBarProvider({ children }: React.PropsWithChildren) {
     isOpen: false,
     messageTitle: "",
     message: "",
-    type: "DEFAULT",
+    type: "default",
   });
 
   function showSnackBar(
     messageTitle: string,
     message: string,
-    type = "DEFAULT",
+    type = "default",
   ) {
     setSnackBar({ isOpen: true, messageTitle, message, type });
 
@@ -29,9 +29,9 @@ export function SnackBarProvider({ children }: React.PropsWithChildren) {
         isOpen: false,
         messageTitle: "",
         message: "",
-        type: "DEFAULT",
+        type: "default",
       }));
-    }, 3000);
+    }, 4000);
   }
 
   return (

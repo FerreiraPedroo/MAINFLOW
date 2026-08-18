@@ -1,18 +1,29 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { gridCols } from "./utils/gridCols";
 import { TextButton } from "../button/TextButton";
+
+const handleKeyDown = (e: any) => {
+  if (e.key === "Enter") {
+    e.preventDefault(); // Evita submeter o formulário
+    e.stopPropagation(); // Impede o Enter de subir para o Modal e fechá-lo
+
+    // Sua lógica do Enter aqui (se houver)
+  }
+};
 
 export function SearchInputWithModal({
   name,
   text,
+  required,
+  getItemList,
   options,
   cols = 2,
-  row,
-  hiddenText,
   setValue,
 }: {
   name: string;
   text: string;
+  required: boolean;
+  getItemList: any;
   options: {
     compareField: string; // qual campo do item deve ser comparado ao do campo search
     itemField: string; // nome do item da lista
@@ -20,8 +31,6 @@ export function SearchInputWithModal({
     itemJoinName: boolean; // junta as strings de itemField e itemSubField
   };
   cols?: number | string;
-  rows?: number | string;
-  hiddenText?: boolean;
   setValue: any;
 }) {
   const [state, setState] = useState<any>({
@@ -31,11 +40,19 @@ export function SearchInputWithModal({
   });
 
   const [search, setSearch] = useState<string>("");
-  const [itens, setItens] = useState<any[]>([]);
+  const [items, setItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function get() {
+      const list = await getItemList();
+      setItems(list);
+    }
+    get();
+  }, []);
 
   const handleSearch = useCallback(
     (search: string) => {
-      const filtered = itemsList
+      const filtered = items
         .filter((item: any) => {
           return item[options.compareField]
             .toUpperCase()
@@ -71,44 +88,40 @@ export function SearchInputWithModal({
           return item;
         });
 
-      setItens(filtered);
+      setItems(filtered);
     },
-    [itens],
+    [items],
   );
 
   function handleSelect(item: any) {
     setValue(name, item.id);
     setState({ ...state, itemSelected: item, showModal: false });
   }
-  console.log(
-    options.itemJoinName,
-    state.itemSelected?.[options.compareField],
-    options.itemSubField,
-  );
+
   return (
     <div className={`w-full flex items-end gap-2 ${gridCols[cols]}`}>
       <div className="w-full">
-        <label
-          className={`block text-sm font-medium text-slate-700 mb-1 pl-1 ${hiddenText && "hidden"}`}
-        >
+        <label className="block text-sm font-medium text-slate-700">
           {text}
-        </label>
+          {required && <span className="text-red-500">*</span>}
 
-        <input
-          type="text"
-          value={
-            state.itemSelected?.[options.compareField] &&
-            options.itemJoinName &&
-            options.itemSubField
-              ? `${state?.itemSelected?.[options.compareField]} / ${state?.itemSelected?.[options.itemSubField!]}`
-              : state?.itemSelected?.[options.compareField]
-          }
-          className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-        />
+          <input
+            type="text"
+            className="w-full bg-white px-2 py-1.5 text-sm rounded border border-slate-300 outline-none transition-all shadow-sm select-none cursor-auto"
+            readOnly={true}
+            value={
+              state.itemSelected?.[options.compareField] &&
+              options.itemJoinName &&
+              options.itemSubField
+                ? `${state?.itemSelected?.[options.compareField]} / ${state?.itemSelected?.[options.itemSubField!]}`
+                : state?.itemSelected?.[options.compareField]
+            }
+          />
+        </label>
       </div>
       <input
         type="button"
-        className="h-9 cursor-pointer align-middle select-none font-medium text-center duration-100 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none px-2 shadow-sm hover:shadow-md bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg"
+        className="h-8.5 px-1 font-semibold bg-blue-100 focus:ring-offset-blue-400 focus:ring-offset-1 focus:ring-1 focus:ring-blue-300 outline-blue-600 focus:outline-blue-600 hover:bg-blue-200 hover:ring-blue-300 hover:cursor-pointer over:ring-1 border border-blue-200 transition ease-in duration-200 hadow-sm rounded"
         onClick={() => {
           setSearch("");
           setState({ ...state, showModal: true, itemSelected: {} });
@@ -120,18 +133,17 @@ export function SearchInputWithModal({
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="flex flex-col relative bg-white rounded-2xl max-w-2xl w-full h-[90vh] max-h-[90vh] overflow-hidden">
             <div className=" bg-white border-b border-slate-200 px-6 py-2 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-800">
-                Selecione um ativo
-              </h2>
-              <input
+              <h2 className="text-xl font-bold text-slate-800">Selecione</h2>
+              <button
                 type="button"
                 onClick={() => {
                   setState({ ...state, showModal: false, itemSelected: {} });
-                  setItens([]);
+                  setItems([]);
                 }}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                value={"X"}
-              />
+                className="px-3 py-2 hover:bg-slate-100 cursor-pointer rounded-lg transition-colors"
+              >
+                X
+              </button>
             </div>
 
             <div className="pt-2 pb-4 px-6 border-b border-b-slate-400">
@@ -144,12 +156,15 @@ export function SearchInputWithModal({
                   <input
                     type="text"
                     // name={name}
-                    className="w-full bg-white px-2 py-1.5 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                    className={`w-full bg-white px-2 py-1.5 text-sm rounded border border-slate-300 focus:ring-1 focus:ring-blue-400 outline-none transition-all shadow-sm`}
                     value={search}
+                    onKeyDown={handleKeyDown}
                     onChange={(e) => setSearch(e.target.value)}
                   />
+
                   <button
-                    className="border border-amber-400 px-2 rounded-md bg-slate-200 hover:text-slate-900 hover:bg-slate-300 hover:shadow-slate-500/25 hover:shadow-lg transition-all duration-300 font-medium"
+                    type="button"
+                    className="h-8.5 px-2 font-semibold bg-blue-100 focus:ring-offset-blue-400 focus:ring-offset-1 focus:ring-1 focus:ring-blue-300 outline-blue-600 focus:outline-blue-600 hover:bg-blue-200 hover:ring-blue-300 hover:cursor-pointer hover:ring-1 border border-blue-200 transition ease-in duration-200 shadow-sm rounded"
                     onClick={() => handleSearch(search)}
                   >
                     <svg
@@ -171,19 +186,14 @@ export function SearchInputWithModal({
             </div>
 
             <div className="flex-1 space-y-1 py-2 px-6 overflow-auto bg-slate-100">
-              {itens.map((item) => {
+              {items.map((item) => {
                 return (
                   <div
                     key={item.id}
                     className="border border-slate-400 px-2 py-1 bg-white cursor-pointer hover:border-blue-500"
                     onClick={() => handleSelect(item)}
                   >
-                    <p className="text-slate-700">{item.find}</p>
-                    {options.itemSubField && (
-                      <p className="text-stone-600">
-                        {item[options.itemSubField]}
-                      </p>
-                    )}
+                    {item.find}
                   </div>
                 );
               })}
@@ -194,16 +204,11 @@ export function SearchInputWithModal({
                 type="white"
                 text="Cancelar"
                 onClick={() => {
+                  console.log(state);
                   setState({ ...state, showModal: false, itemSelected: {} });
-                  setItens([]);
+                  setItems([]);
                 }}
               />
-
-              {/* <TextButton
-                type={"green"}
-                text={"Selecionar"}
-                onClick={() => null}
-              /> */}
             </div>
           </div>
         </div>

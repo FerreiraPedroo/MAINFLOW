@@ -4,7 +4,7 @@ import type { Epi } from "../../epi/types/epi.types";
 
 import { CheckInput } from "@shared/components/input/CheckInput";
 import { DateInput } from "@/shared/components/input/DateInput";
-import { TextInput } from "@shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 
 export function EpiCertificateApproval({
   formData,

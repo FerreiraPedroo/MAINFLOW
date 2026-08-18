@@ -8,7 +8,7 @@ import { Container } from "@/shared/components/Container";
 import { SubmitButtom } from "@shared/components/button/SubmitButtom";
 import { BackButton } from "@shared/components/button/BackButton";
 import { Header } from "@shared/components/header/Header";
-import { TextInput } from "@/shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
 import { SelectInput } from "@/shared/components/input/SelectInput";

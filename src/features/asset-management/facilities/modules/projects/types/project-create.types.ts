@@ -6,5 +6,5 @@ export interface ProjectCreateDTO {
   start_date: string;
   end_date: string;
   period: string;
-  budgets: { id: number; sequence: number; month: string }[];
+  budgets: number;
 }

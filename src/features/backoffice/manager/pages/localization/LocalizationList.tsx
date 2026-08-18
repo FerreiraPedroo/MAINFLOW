@@ -9,7 +9,7 @@ import { SelectInput } from "@shared/components/input/SelectInput";
 import { Container } from "@/shared/components/Container";
 
 import type { Localization } from "../../interfaces/localization";
-import { TextInput } from "@/shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 
 const localizationList: Localization[] = [
   {

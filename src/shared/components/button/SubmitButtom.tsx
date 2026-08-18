@@ -1,15 +1,47 @@
 import React from "react";
 
-export function SubmitButtom({ text }: { text: string }) {
+const colorType = {
+  blue: "bg-blue-100 focus:outline-blue-300 hover:bg-blue-200 hover:not-disabled:ring-blue-300 border-blue-200",
+  green:
+    "bg-green-100 focus:outline-green-300 hover:bg-green-200 hover:not-disabled:ring-green-300 border-green-200",
+};
+export function SubmitButtom({
+  text,
+  disabled,
+  color = "blue",
+}: {
+  text: string;
+  disabled?: boolean;
+  color?: keyof typeof colorType;
+}) {
   return (
-    <div className="flex items-center justify-center gap-4">
-      <button
-        type="submit"
-        // disabled={isSaving}
-        className="px-6 py-2.5 rounded-xl bg-linear-to-r from-emerald-500 to-teal-600 text-white font-medium hover:shadow-lg hover:shadow-emerald-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-      >
-        {text}
-      </button>
-    </div>
+    <button
+      type="submit"
+      disabled={disabled}
+      className={`
+        font-semibold
+        flex
+        px-4
+        py-2
+
+        ${colorType[color]}
+
+        border
+        hover:ring-1
+        hover:cursor-pointer
+        transition
+        ease-in
+        duration-200
+        shadow-md
+        rounded-md
+
+        disabled:ring-0
+        disabled:bg-stone-300
+        disabled:border-stone-400
+        disabled:text-stone-500
+        `}
+    >
+      {text}
+    </button>
   );
 }

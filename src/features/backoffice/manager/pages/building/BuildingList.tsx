@@ -10,7 +10,7 @@ import { SelectInput } from "@shared/components/input/SelectInput";
 import { Container } from "@/shared/components/Container";
 
 import type { Building } from "../../interfaces/building";
-import { TextInput } from "@/shared/components/input/TextInput";
+import { TextInput } from "@/shared/components/input/Input";
 import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { TextButton } from "@/shared/components/button/TextButton";
 
