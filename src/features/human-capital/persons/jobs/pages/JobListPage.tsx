@@ -8,7 +8,7 @@ import { SearchInput } from "@shared/components/input/SearchInput";
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { Container } from "@/shared/components/Container";
 
-import { PillBadge } from "@/shared/components/badges/PillBadge";
+import { PillBadge } from "@/shared/components/badge/PillBadge";
 import { TextButton } from "@/shared/components/button/TextButton";
 
 import type { Job } from "../../interfaces/job";

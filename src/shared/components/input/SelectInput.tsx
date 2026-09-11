@@ -41,7 +41,7 @@ export function SelectInput({
   cols?: number | string;
 }) {
   return (
-    <div className={`${gridCols[cols]} relative`}>
+    <div className={`${gridCols[cols]} relative self-end`}>
       <label
         className={`block text-sm font-medium text-slate-700 ${hiddenText && "hidden"}`}
       >

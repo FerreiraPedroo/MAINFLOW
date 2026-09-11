@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "@/shared/components/Container";
-import { Table } from "@/shared/components/table/Table";
+import { Table } from "@/shared/components/table/Table2";
 
 export function Home() {
   return (

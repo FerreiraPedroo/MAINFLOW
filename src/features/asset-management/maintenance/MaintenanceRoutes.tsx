@@ -1,11 +1,9 @@
 import React, { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { facilitiesPagesConfig } from "./config/facilities-pages.config";
-import { projectPagesConfig } from "./modules/projects";
-import { maintenancePagesConfig } from "../maintenance";
+import { maintenancePagesConfig } from ".";
 
-export function FacilitiesRouter() {
+export function MaintenanceRouter() {
   const createRoute = useCallback((pageList: any) => {
     return pageList.map(
       ({
@@ -20,11 +18,5 @@ export function FacilitiesRouter() {
     );
   }, []);
 
-  return (
-    <Routes>
-      {createRoute(facilitiesPagesConfig)}
-      {createRoute(projectPagesConfig)}
-      {createRoute(maintenancePagesConfig)}
-    </Routes>
-  );
+  return <Routes>{createRoute(maintenancePagesConfig)}</Routes>;
 }

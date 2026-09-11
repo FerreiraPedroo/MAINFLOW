@@ -12,7 +12,7 @@ import { TextButton } from "@/shared/components/button/TextButton";
 import type { PaymentGroup } from "../../interfaces/payment-group";
 import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
 import { CheckInput } from "@/shared/components/input/CheckInput";
-import { PillBadge } from "@/shared/components/badges/PillBadge";
+import { PillBadge } from "@/shared/components/badge/PillBadge";
 
 const itemList: PaymentGroup[] = [
   {

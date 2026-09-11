@@ -3,7 +3,7 @@ import * as maintenance from "../index";
 export const maintenancePagesConfig = [
   {
     path: "/maintenance",
-    element: maintenance.MaintenanceListPage,
+    element: maintenance.MaintenanceList,
     permission: "operations:maintenance",
   },
   // {
@@ -13,7 +13,7 @@ export const maintenancePagesConfig = [
   // },
   {
     path: "/maintenance/create",
-    element: maintenance.MaintenanceCreatePage,
+    element: maintenance.MaintenanceNew,
     permission: "operations:maintenance",
   },
 ];

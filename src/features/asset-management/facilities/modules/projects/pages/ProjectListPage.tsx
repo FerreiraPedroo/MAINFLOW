@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { apiClient } from "@/shared/lib/apiClient";
 
-import { Table } from "@/shared/components/table/Table";
+import { Table } from "@/shared/components/table/Table2";
 import { Header } from "@shared/components/header/Header";
 import { Container } from "@/shared/components/Container";
 import { LinkButton } from "@/shared/components/button/LinkButton";

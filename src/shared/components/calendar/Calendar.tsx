@@ -10,7 +10,7 @@ type Calendar = {
   month?: string;
   text: string;
   hiddenDays: boolean;
-  setFormValue?: (p: any) => void | null;
+  onChange?: (p: any) => void | null;
   required?: boolean;
 };
 
@@ -21,7 +21,7 @@ export function Calendar({
   month = todayData[1],
   text = "",
   hiddenDays = true,
-  setFormValue = () => null,
+  onChange = () => null,
   required,
 }: Calendar) {
   const calendarElement = useRef<any>(null);
@@ -31,7 +31,7 @@ export function Calendar({
   function generateCalendar(year: number, month: number) {
     // Create a date object for the first day of the specified month
     const firstDayOfMonth = new Date(year, month, 1);
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInMonth = new Date(year, month + 1, -0).getDate();
 
     // Clear the calendar
     calendarElement!.current!.innerHTML = "";
@@ -72,7 +72,7 @@ export function Calendar({
       }
 
       dayElement.addEventListener("click", () => {
-        const selectedDate = new Date(2026, 5, day);
+        const selectedDate = new Date(year, month, day);
         const formattedDate = selectedDate.toLocaleDateString(undefined, {
           weekday: "short",
           year: "2-digit",
@@ -100,7 +100,10 @@ export function Calendar({
       month = e.target.value.split("-")[1];
     }
 
-    setFormValue({ year, month });
+    onChange({
+      year,
+      month: month - 1,
+    });
     setValues({
       year,
       month,
@@ -109,25 +112,19 @@ export function Calendar({
 
   useEffect(() => {
     generateCalendar(
-      new Date(Date.now()).getFullYear(),
-      new Date(Date.now()).getMonth(),
+      2026,
+      7,
+      // new Date(Date.now()).getFullYear(),
+      // new Date(Date.now()).getMonth(),
     );
   }, []);
-  useEffect(() => {
-    if (setFormValue) {
-      setFormValue((prev: any) => {
-        return { ...prev, ...values };
-      });
-    }
-    generateCalendar(values.year, values.month);
-  }, [values]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-md shadow-sm p-3">
+    <div className=" self-end">
       <div
         className={`flex flex-col w-full justify-center pr-0.5 ${gridCols[cols]}`}
       >
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className={`block text-sm font-medium text-slate-700`}>
           {text}
         </label>
         <input
@@ -136,7 +133,8 @@ export function Calendar({
           name={name}
           required={required}
           onChange={(e) => handleCalendar(e)}
-          className="bg-white py-1 px-2 text-sm rounded-md border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+          className="bg-white py-1.5 px-2 text-sm rounded border text-ellipsis font-medium border-slate-300 focus:ring-1 focus:ring-blue-400 outline-none transition-transform shadow-sm appearance-none"
+          // className={`w-full bg-white pl-2 pr-8 py-1.5 `}
         />
       </div>
 

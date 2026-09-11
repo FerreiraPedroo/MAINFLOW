@@ -1,70 +1,47 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
 import { tableConfig } from "./table.config";
+import type { TableInput } from "./table.types";
 
-type Headers = {
-  text: string;
-  size: number;
-  position?: string;
-};
-type TableInput = {
-  headers: Headers[];
-  data: {
-    url: string;
-    urlFieldParam: string;
-    rows: Record<string, any>[];
-  } | null;
-};
-/**
- *
- * @param headers [ { text: string, size: number, position?: string} ]
- * @param headers [ { url: string, urlFieldParam: string, rows: Record<string, any>[ ] } ]
- * @returns
- */
-export function Table({ headers, data }: TableInput) {
-  const navigate = useNavigate();
-
+export function Table({ columns, data, onClick }: TableInput) {
   return (
     <div className="bg-white rounded-md border border-slate-400 w-full">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="">
             <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-200 border-b border-b-slate-400">
-              {headers?.map((header, index, array) => (
+              {columns?.map((column, index) => (
                 <th
-                  key={index}
+                  key={column.key}
                   className={`px-2 py-1 font-medium
                     ${!index && "rounded-tl-md pl-4"}
-                    ${index == array.length - 1 && "rounded-tr-md pr-4"}
-                    ${tableConfig.size[header.size]}
-                    ${tableConfig.position?.[header.position ?? "start"]}`}
+                    ${index == columns.length - 1 && "rounded-tr-md pr-4"}
+                    ${tableConfig.size[column.size ?? 1]}
+                    ${tableConfig.position?.[column.position ?? "start"]}`}
                 >
-                  {header.text}
+                  {column.header}
                 </th>
               ))}
             </tr>
           </thead>
+
           <tbody className="divide-y divide-slate-200">
-            {data?.rows?.map((row) => (
+            {data?.map((row, index) => (
               <tr
-                key={row[data.urlFieldParam]}
-                onClick={() =>
-                  navigate(`${data.url}${row[data.urlFieldParam]}`)
-                }
-                className="text-sm hover:bg-blue-100 transition-colors hover:cursor-pointer"
+                key={columns[index]?.key}
+                onClick={onClick ? () => onClick(row) : undefined}
+                className={`text-sm transition-colors ${onClick ? "hover:cursor-pointer hover:bg-blue-100 " : ""}`}
               >
-                {headers.map((data, index, array) => (
+                {columns.map((column, index) => (
                   <td
-                    key={data.text}
+                    key={column.key}
                     className={`px-2 py-1 text-
-                        ${tableConfig.position[headers[index].position ?? ""]}
+                        ${tableConfig.position[column.position ?? "start"]}
                         ${!index && "rounded-bl-md pl-4"}
-                        ${index == array.length - 1 && "rounded-br-md pr-4"}
+                        ${index == columns.length - 1 && "rounded-br-md pr-4"}
                         `}
                   >
                     <span className="font-medium text-slate-800">
-                      {row[data.text]}
+                      {column.render ? column.render(row) : row[column.key]}
                     </span>
                   </td>
                 ))}

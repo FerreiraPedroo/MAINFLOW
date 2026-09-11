@@ -36,6 +36,12 @@ const ManagerModule = lazy(() =>
 //   })),
 // );
 
+const MaintenanceFeatures = lazy(() =>
+  import("@/features/asset-management/maintenance").then((m) => ({
+    default: m.MaintenanceRouter,
+  })),
+);
+
 const FacilitiesFeatures = lazy(() =>
   import("@/features/asset-management/facilities").then((m) => ({
     default: m.FacilitiesRouter,
@@ -51,6 +57,7 @@ export const Approuter = createBrowserRouter(
         {/* <Route path="persons/*" element={<PersonsModule />} /> */}
         <Route path="manager/*" element={<ManagerModule />} />
         <Route path="facilities/*" element={<FacilitiesFeatures />} />
+        <Route path="maintenance/*" element={<MaintenanceFeatures />} />
       </Route>
       <Route element={<LayoutPublic />}>
         <Route path="login" element={<AuthModule />} />

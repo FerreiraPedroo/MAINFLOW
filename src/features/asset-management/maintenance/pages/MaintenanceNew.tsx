@@ -15,7 +15,7 @@ type FormData = {
   maintenance_type: string;
 };
 
-export function MaintenanceCreatePage() {
+export function MaintenanceNew() {
   const navigate = useNavigate();
   const [equipament, setEquipament] = useState({});
 

@@ -15,7 +15,6 @@ export function BlockSection({ children, className }: BlockSection) {
       border-slate-200
       rounded-md
       shadow-sm
-      space-y-3
       ${className}
     `}
     >
