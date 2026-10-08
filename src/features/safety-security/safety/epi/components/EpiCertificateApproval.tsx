@@ -4,7 +4,7 @@ import type { Epi } from "../../epi/types/epi.types";
 
 import { CheckInput } from "@shared/components/input/CheckInput";
 import { DateInput } from "@/shared/components/input/DateInput";
-import { TextInput } from "@/shared/components/input/Input";
+import { Input } from "@/shared/components/input/Input";
 
 export function EpiCertificateApproval({
   formData,
@@ -19,7 +19,7 @@ export function EpiCertificateApproval({
         Certificado de aprovação (CA)
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <TextInput
+        <Input
           text="Número do CA"
           name="ca"
           value={formData.ca}
@@ -35,7 +35,7 @@ export function EpiCertificateApproval({
           cols={1}
         />
 
-        <TextInput
+        <Input
           text="Fabricante"
           name="manufacturer"
           value={formData.manufacturer}

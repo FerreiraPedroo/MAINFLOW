@@ -1,11 +1,23 @@
-# 📦 supply-chain / logistics (Cadeia de Suprimentos e Estoque)
+5. Supply Chain
 
-Gerencia a aquisição de mercadorias, relacionamento com fornecedores e a movimentação física de produtos.
+Domínio responsável pelo gerenciamento da cadeia de suprimentos, desde aquisição e relacionamento com fornecedores até estoque, armazenagem e logística.
 
-procurement-purchasing: Geração de requisições de compra, cotações automáticas com fornecedores e ordens de compra.
+procurement/
 
-inventory-control: Controle de estoque mínimo/máximo, inventário rotativo, rastreamento por lote e validade.
+Gerencia o processo estratégico de aquisição de bens e serviços, incluindo necessidades, cotações, fornecedores, negociações e processos de compra.
 
-warehouse-management (WMS): Organização física do armazém, rotas de coleta (picking) e recebimento de mercadorias.
+purchasing/
 
-supplier-portal: Portal externo para fornecedores atualizarem certidões, enviarem XML de notas e acompanharem pagamentos.
+Responsável pela execução das compras, pedidos, itens, quantidades, preços, condições e acompanhamento dos pedidos.
+
+inventory/
+
+Controla estoques, movimentações, saldos, entradas, saídas, ajustes e disponibilidade de materiais.
+
+warehouse/
+
+Gerencia operações de armazenagem, incluindo localização física, recebimento, separação, movimentação e expedição de materiais.
+
+logistics/
+
+Gerencia movimentações e transporte de materiais, produtos e recursos entre diferentes locais.

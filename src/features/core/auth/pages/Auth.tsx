@@ -22,19 +22,101 @@ export function AuthPage() {
 
   const handleLogin = useCallback(async () => {
     setLoading(true);
-    try {
-      const apiResponse = await apiClient(`/auth/login`, {
-        method: "POST",
-        body: JSON.stringify(user),
-      });
-      setLogin(apiResponse.tokenInfo);
-      setUserInfo(apiResponse.userInfo);
-      setDepartments(apiResponse.userActivityInfo);
-      setLoading(false);
-    } catch (error: any) {
-      setLoading(false);
-      showSnackBar("Erro", error.message, "FAIL");
-    }
+    setLogin(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjEsImJ1c2luZXNzX2lkIjoxfSwiaWF0IjoxNzg4NzQ3NDMxfQ.TDhHjetRRKMnNeptaoniYrmAa1HE8dwOIIa6hwA8imE",
+    );
+    setUserInfo({
+      id: 1,
+      name: "Usuário Admin",
+      photo: null,
+      email: "email@email.com",
+    });
+    setDepartments([
+      {
+        id: 1,
+        title: "Gerenciamento",
+        url: "backoffice/management",
+        icon: null,
+        activities: [
+          {
+            id: 1,
+            title: "Gerenciamento",
+            url: "backoffice/management",
+            icon: null,
+          },
+          {
+            id: 1,
+            department_id: 1,
+            title: "Localização",
+            icon: null,
+            activities: [
+              {
+                id: 2,
+                title: "Localização",
+                url: "backoffice/management/localizations",
+                icon: null,
+              },
+              {
+                id: 3,
+                title: "Prédio",
+                url: "backoffice/management/localizations/buildings",
+                icon: null,
+              },
+              {
+                id: 4,
+                title: "Andar",
+                url: "backoffice/management/localizations/building-floors",
+                icon: null,
+              },
+              {
+                id: 5,
+                title: "Espaços",
+                url: "backoffice/management/localizations/building-spaces",
+                icon: null,
+              },
+              {
+                id: 6,
+                title: "Divisão",
+                url: "backoffice/management/localizations/building-divisions",
+                icon: null,
+              },
+            ],
+          },
+          {
+            id: 7,
+            title: "Centro de custo",
+            url: "backoffice/management/cost-center",
+            icon: null,
+          },
+          {
+            id: 8,
+            title: "Grupos de pagamentos",
+            url: "backoffice/management/payment-groups",
+            icon: null,
+          },
+          {
+            id: 9,
+            title: "Controle de pagamentos",
+            url: "backoffice/payment-control",
+            icon: null,
+          },
+        ],
+      },
+    ]);
+    setLoading(false);
+    // try {
+    //   const apiResponse = await apiClient(`/auth/login`, {
+    //     method: "POST",
+    //     body: JSON.stringify(user),
+    //   });
+    //   setLogin(apiResponse.tokenInfo);
+    //   setUserInfo(apiResponse.userInfo);
+    //   setDepartments(apiResponse.userActivityInfo);
+    //   setLoading(false);
+    // } catch (error: any) {
+    //   setLoading(false);
+    //   showSnackBar("Erro", error.message, "FAIL");
+    // }
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { DateInput } from "@/shared/components/input/DateInput";
-import { TextInput } from "@/shared/components/input/Input";
+import { Input } from "@/shared/components/input/Input";
 import { ImagemUpload } from "@shared/components/input/Imagem";
 
 export function BasicPersonInfo({
@@ -18,7 +18,7 @@ export function BasicPersonInfo({
         Informações Básicas
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <TextInput
+        <Input
           text="Nome completo"
           name="name"
           value={formData.name}
@@ -26,7 +26,7 @@ export function BasicPersonInfo({
           cols={2}
         />
 
-        <TextInput
+        <Input
           text="Registro"
           name="registration"
           value={formData.registration}

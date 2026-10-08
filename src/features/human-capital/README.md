@@ -1,11 +1,25 @@
-# 👥 human-capital / hcm (Gestão de Pessoas e Recursos Humanos)
+6. Human Capital
 
-Agrupa funcionalidades que servem para manter a infraestrutura da própria empresa funcionando. É o motor de suporte do negócio.
+Domínio responsável pela gestão das pessoas e dos processos relacionados ao ciclo de vida dos colaboradores na organização.
 
-time-tracking: Controle de ponto eletrônico, banco de horas, justificativas e escalas de plantão.
+people/
 
-recruitment-selection: Abertura de vagas, triagem de currículos (ATS) e etapas de entrevistas.
+Gerencia informações cadastrais e funcionais das pessoas vinculadas à organização.
 
-payroll-benefits: Fechamento de folha de pagamento, cálculo de férias, rescisões e gestão de benefícios (vale-refeição, plano de saúde).
+payroll/
+
+Responsável pelos processos relacionados à folha de pagamento, cálculos, proventos, descontos e obrigações relacionadas.
+
+recruitment/
+
+Gerencia processos de recrutamento e seleção, incluindo vagas, candidatos, etapas e avaliações.
+
+benefits/
+
+Gerencia benefícios disponibilizados aos colaboradores, incluindo elegibilidade, adesão, controle e movimentações.
+
+training/
+
+Gerencia treinamentos e desenvolvimento profissional dos colaboradores, incluindo cursos, capacitações, participantes e histórico.
 
 

@@ -5,7 +5,7 @@ import type { Epi } from "../types/epi.types";
 import { ImagemUpload } from "@shared/components/input/Imagem";
 import { SelectInput } from "@shared/components/input/SelectInput";
 import { Textarea } from "@shared/components/input/Textarea";
-import { TextInput } from "@/shared/components/input/Input";
+import { Input } from "@/shared/components/input/Input";
 
 const inputCompose = [
   {
@@ -35,7 +35,7 @@ export function EpiBasic({
         Informações Básicas
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <TextInput
+        <Input
           text="Nome do EPI"
           name="name"
           value={formData.name}
@@ -43,7 +43,7 @@ export function EpiBasic({
           cols={2}
         />
 
-        <TextInput
+        <Input
           text="Código"
           name="code"
           value={formData.code}

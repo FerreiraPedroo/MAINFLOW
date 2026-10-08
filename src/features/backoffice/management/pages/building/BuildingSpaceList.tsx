@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { apiClient } from "@/shared/lib/apiClient";
@@ -6,52 +6,44 @@ import { apiClient } from "@/shared/lib/apiClient";
 import { Header } from "@shared/components/header/Header";
 import { Container } from "@/shared/components/Container";
 
+import { ImagemUpload } from "@/shared/components/input/Imagem";
 import { Input } from "@/shared/components/input/Input";
 import { TextButton } from "@/shared/components/button/TextButton";
 
-import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
-import { CheckInput } from "@/shared/components/input/CheckInput";
-import { PillBadge } from "@/shared/components/badge/PillBadge";
+import type {
+  BuildingSpace,
+  buildingSpace,
+} from "../../interfaces/building-space";
 
-const itemList: Risk[] = [
+const typeList: buildingSpace[] = [
   {
     id: 1,
-    name: "1321305 - Adiantamento para imobilização",
-    active: true,
+    name: "Corredor",
+    imagem: "string",
   },
   {
     id: 2,
-    name: "45050330 - Material HID/SER/ELE/MAR/CIV",
-    active: true,
+    name: "Escada",
+    imagem: "string",
   },
   {
     id: 3,
-    name: "45090109	- ENERGIA ELETRICA",
-    active: true,
+    name: "Sala",
+    imagem: "string",
   },
   {
     id: 4,
-    name: "45090101	- AGUA E ESGOTO",
-    active: true,
+    name: "Rampa",
+    imagem: "string",
   },
   {
     id: 5,
-    name: "45010101	- Alugueis - Imoveis",
-    active: true,
-  },
-  {
-    id: 6,
-    name: "45050317	- MATERIAL P/COPA, COZINHA E REFEITORIO",
-    active: true,
-  },
-  {
-    id: 7,
-    name: "45030191	- OUTROS SERVICOS PRESTADOS POR P.JURIDICA",
-    active: true,
+    name: "Pátio",
+    imagem: "string",
   },
 ];
 
-export function RiskListPage() {
+export function BuildingSpaceList() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -59,44 +51,38 @@ export function RiskListPage() {
   const [showModal, setShowModal] = useState("");
   const [searchTerm, setSearchTerm] = useState({
     search_name: "",
+    search_address: "",
   });
 
-  const [items, setItems] = useState<PaymentGroup[]>(itemList);
+  const [buildingSpace, setBuildingSpace] = useState<BuildingSpace[]>(typeList);
 
-  const [formDataNew, setFormDataNew] = useState<Partial<PaymentGroup>>({
+  const [formData, setFormData] = useState<Partial<BuildingSpace>>({
     name: "",
-    active: true,
+    imagem: "",
   });
-  const handleModalNew = useCallback((modal: string) => {
-    setFormDataNew({ name: "", active: true });
+  function handleFormData(modal: string) {
+    setFormData({
+      name: "",
+      imagem: "",
+    });
     setShowModal(modal);
-  }, []);
+  }
 
   const [formDataEdit, setFormDataEdit] =
-    useState<Partial<PaymentGroup> | null>(null);
-  const handleModalEdit = useCallback(
-    (item: PaymentGroup | null, modal: string) => {
-      setFormDataEdit(item);
-      setShowModal(modal);
-    },
-    [],
-  );
-
-  const handleSearch = async () => {
-    setIsLoading(true);
-    const data = await apiClient("payment-groups");
-    setItems(data);
-    setIsLoading(false);
-  };
+    useState<Partial<BuildingSpace> | null>(null);
+  function handleEditSpaceType(spaceType: BuildingSpace | null, modal: string) {
+    setFormDataEdit(spaceType);
+    setShowModal(modal);
+  }
 
   useEffect(() => {
-    const loadList = async () => {
+    const loadBuildingSpace = async () => {
       setIsLoading(true);
-      const data = await apiClient("payment-groups");
-      setItems(data);
+      const data = await apiClient("buildingspace-list");
+      setBuildingSpace(data);
       setIsLoading(false);
     };
-    // loadList();
+    // loadBuildingSpace();
   }, []);
 
   return (
@@ -104,27 +90,34 @@ export function RiskListPage() {
       <div className="w-full space-y-6">
         {/* Header */}
         <Header
-          title="Grupo de pagamento"
-          subTitle="Cadastre um novo grupo de pagamento para organizar as configurações de pagamento."
+          title="Tipos de espaço"
+          subTitle="Cadastre um novo tipo de espaço para ser usando na localização."
         />
         <div className="flex gap-4">
           <TextButton
-            text="Cadastrar grupo de pagamento"
+            text="Cadastrar espaço"
             type="stone"
-            onClick={() => handleModalNew("new")}
+            onClick={() => handleFormData("new")}
           />
         </div>
 
         {/* Filters */}
         <div className="bg-white rounded-2xl border border-slate-200 p-4">
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
-            <SearchButtonTextInput
+            <Input
               name={"search_name"}
-              text={"Nome"}
-              value={searchTerm.search_name}
+              value={searchTerm?.["search_name"]}
               required={false}
-              setSearchValue={setSearchTerm}
-              handleSearch={handleSearch}
+              setFormValue={setSearchTerm}
+              text={"Nome"}
+              cols={2}
+            />
+            <Input
+              name={"search_address"}
+              value={searchTerm?.["search_address"]}
+              required={false}
+              setFormValue={setSearchTerm}
+              text={"Endereço"}
               cols={2}
             />
           </div>
@@ -133,13 +126,13 @@ export function RiskListPage() {
         {/* Grid */}
         {isLoading ? (
           <></>
-        ) : items.length === 0 ? (
+        ) : buildingSpace.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
             <h3 className="text-lg font-semibold text-slate-800 mb-2">
-              Nenhum grupo de pagamento encontrada
+              Nenhum prédio encontrada
             </h3>
             <p className="text-slate-500 mb-6">
-              Cadastre uma novo grupo de pagamento para começar
+              Cadastre uma novo predio para começar
             </p>
             <Link
               to={"#"}
@@ -158,7 +151,7 @@ export function RiskListPage() {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Cadastrar grupo de pagamento
+              Cadastrar prédio
             </Link>
           </div>
         ) : (
@@ -168,31 +161,29 @@ export function RiskListPage() {
                 <thead>
                   <tr className="text-left text-xs text-slate-500 uppercase tracking-wide bg-slate-100 border-b border-slate-200">
                     <th className="w-1/10 px-6 py-4 font-medium">Id</th>
-                    <th className="w-8/10 px-4 py-4 font-medium">Nome</th>
-                    <th className="w-2/10 px-4 py-4 font-medium">Ativo</th>
-                    <th className="w-1/10 px-4 py-4 font-medium text-center">
-                      Ação
-                    </th>
+                    <th className="w-6/10 px-4 py-4 font-medium">Nome</th>
+                    <th className="w-3/10 px-4 py-4 font-medium">Imagem</th>
+                    <th className="w-1/10 px-4 py-4 font-medium">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {items.map((item) => (
+                  {buildingSpace.map((spacetype) => (
                     <tr
-                      key={item.id}
+                      key={spacetype.id}
                       onClick={() => null}
-                      className="text-sm transition-colors " //hover:bg-slate-50 hover:cursor-pointer"
+                      className="text-sm hover:bg-slate-50 transition-colors hover:cursor-pointer"
                     >
                       <td className="px-6 py-3">
                         <span className="font-medium text-slate-800">
-                          {item.id}
+                          {spacetype.id}
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700">{item.name}</span>
+                        <span className="text-slate-700">{spacetype.name}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="text-slate-700">
-                          <PillBadge name={item.active ? "Ativo" : "Inativo"} />
+                        <span className="text-slate-700 ">
+                          {spacetype.imagem && <img src={spacetype.imagem} />}
                         </span>
                       </td>
                       <td className="px-4 py-2">
@@ -200,7 +191,9 @@ export function RiskListPage() {
                           <TextButton
                             type="white"
                             text="Editar"
-                            onClick={() => handleModalEdit(item, "edit")}
+                            onClick={() =>
+                              handleEditSpaceType(spacetype, "edit")
+                            }
                           />
                         </span>
                       </td>
@@ -213,16 +206,13 @@ export function RiskListPage() {
         )}
       </div>
 
-      {/* Modal New */}
       {showModal == "new" && (
         <div className="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-800">
-                Novo grupo de pagamento
-              </h2>
+              <h2 className="text-xl font-bold text-slate-800">Novo espaço</h2>
               <button
-                onClick={() => handleModalNew("")}
+                onClick={() => handleFormData("")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -249,17 +239,20 @@ export function RiskListPage() {
               <Input
                 name="name"
                 text="Nome"
-                value={formDataNew.name}
-                setFormValue={setFormDataNew}
+                value={formData.name}
+                setFormValue={setFormData}
                 cols={2}
                 required={true}
                 disable={isSaving}
               />
-              <CheckInput
-                text={"Ativo"}
-                name={"active"}
-                value={formDataNew.active}
-                setFormValue={setFormDataNew}
+
+              <ImagemUpload
+                name="imagem"
+                text="Imagem"
+                value={formData.imagem}
+                setFormValue={setFormData}
+                cols={2}
+                required={false}
                 disable={isSaving}
               />
             </form>
@@ -294,10 +287,10 @@ export function RiskListPage() {
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-800">
-                Editar grupo de pagamento
+                Editar espaço
               </h2>
               <button
-                onClick={() => handleModalEdit(null, "")}
+                onClick={() => handleEditSpaceType(null, "")}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <svg
@@ -330,11 +323,14 @@ export function RiskListPage() {
                 required={true}
                 disable={isSaving}
               />
-              <CheckInput
-                name={"active"}
-                text={"Ativo"}
-                value={formDataEdit.active}
+
+              <ImagemUpload
+                name="imagem"
+                text="Imagem"
+                value={formDataEdit.imagem}
                 setFormValue={setFormDataEdit}
+                cols={2}
+                required={false}
                 disable={isSaving}
               />
             </form>
@@ -345,7 +341,7 @@ export function RiskListPage() {
                 type="white"
                 text="Cancelar"
                 disable={isSaving}
-                onClick={() => handleModalEdit(null, "")}
+                onClick={() => handleEditSpaceType(null, "")}
               />
 
               <TextButton

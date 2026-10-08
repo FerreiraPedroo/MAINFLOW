@@ -9,11 +9,12 @@ import { Container } from "@/shared/components/Container";
 import { Input } from "@/shared/components/input/Input";
 import { TextButton } from "@/shared/components/button/TextButton";
 
+import type { PaymentGroup } from "../../interfaces/payment-group";
 import { SearchButtonTextInput } from "@/shared/components/input/SearchButtonTextInput";
 import { CheckInput } from "@/shared/components/input/CheckInput";
 import { PillBadge } from "@/shared/components/badge/PillBadge";
 
-const itemList: Risk[] = [
+const itemList: PaymentGroup[] = [
   {
     id: 1,
     name: "1321305 - Adiantamento para imobilização",
@@ -51,7 +52,7 @@ const itemList: Risk[] = [
   },
 ];
 
-export function RiskListPage() {
+export function PaymentGroupList() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);

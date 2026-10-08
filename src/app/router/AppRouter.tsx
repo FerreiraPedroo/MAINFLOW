@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   Navigate,
   Route,
+  Routes,
 } from "react-router-dom";
 
 import { LayoutPrivate } from "@/shared/layouts/LayoutPrivate";
@@ -18,9 +19,15 @@ const AuthModule = lazy(() =>
   })),
 );
 
-const ManagerModule = lazy(() =>
-  import("@/features/backoffice/manager").then((m) => ({
-    default: m.ManagerRouter,
+const BackofficeModule = lazy(() =>
+  import("@/features/backoffice/BackofficeRouter").then((m) => ({
+    default: m.BackofficeRouter,
+  })),
+);
+
+const OperationFeatures = lazy(() =>
+  import("@/features/operations/OperationRoutes").then((m) => ({
+    default: m.OperationRouter,
   })),
 );
 
@@ -36,34 +43,30 @@ const ManagerModule = lazy(() =>
 //   })),
 // );
 
-const MaintenanceFeatures = lazy(() =>
-  import("@/features/asset-management/maintenance").then((m) => ({
-    default: m.MaintenanceRouter,
-  })),
-);
-
-const FacilitiesFeatures = lazy(() =>
-  import("@/features/asset-management/facilities").then((m) => ({
-    default: m.FacilitiesRouter,
-  })),
-);
-
 export const Approuter = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route element={<LayoutPrivate />}>
         <Route path="home" element={<Home />} />
-        {/* <Route path="safety/*" element={<SafetyModule />} /> */}
-        {/* <Route path="persons/*" element={<PersonsModule />} /> */}
-        <Route path="manager/*" element={<ManagerModule />} />
-        <Route path="facilities/*" element={<FacilitiesFeatures />} />
-        <Route path="maintenance/*" element={<MaintenanceFeatures />} />
+
+        <Route path="backoffice/*" element={<BackofficeModule />} />
+        {/* <Route path="operations" element={<OperationFeatures />} /> */}
       </Route>
       <Route element={<LayoutPublic />}>
-        <Route path="login" element={<AuthModule />} />
+        <Route path="login/*" element={<AuthModule />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/home" />} />
     </Route>,
   ),
 );
+
+{
+  /* <Route path="safety/*" element={<SafetyModule />} /> */
+}
+{
+  /* <Route path="persons/*" element={<PersonsModule />} /> */
+}
+{
+  /* <Route path="maintenance/*" element={<MaintenanceFeatures />} /> */
+}

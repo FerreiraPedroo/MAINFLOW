@@ -1,7 +1,7 @@
 import React from "react";
 import { DateInput } from "@/shared/components/input/DateInput";
 import { SelectInput } from "@/shared/components/input/SelectInput";
-import { TextInput } from "@/shared/components/input/Input";
+import { Input } from "@/shared/components/input/Input";
 
 export function OccupationPerson({
   jobs,
@@ -28,7 +28,7 @@ export function OccupationPerson({
           options={jobs}
         />
 
-        <TextInput
+        <Input
           text="CBO"
           name="cbo"
           value={formData.cbo}

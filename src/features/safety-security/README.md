@@ -1,10 +1,23 @@
-# 🛡️ safety-security (Segurança, Portaria e Conformidade)
+4. Safety
 
-Este super-domínio centraliza tudo o que protege as pessoas e o patrimônio físico da empresa.
+Domínio responsável pela gestão de segurança do trabalho, prevenção de riscos e controle das atividades relacionadas à segurança ocupacional.
 
-portaria: Controle de fluxo, entrada e saída de pedestres, veículos e visitantes.
+risk-management/
 
-cameras: Monitoramento por CFTV, visualização de grades de vídeo e gravação de ocorrências.
+Gerencia identificação, avaliação, classificação, tratamento e acompanhamento de riscos ocupacionais.
 
-seguranca-trabalho: Controle de EPIs, emissão de CAT, laudos (PPRA/PCMSO) e conformidade com normas regulamentadoras (NRs).
+epi/
 
+Gerencia Equipamentos de Proteção Individual, incluindo cadastro, distribuição, controle de utilização, validade e histórico.
+
+training/
+
+Controla treinamentos relacionados à segurança, capacitações obrigatórias, participantes, validade e evidências.
+
+inspection/
+
+Gerencia inspeções de segurança, checklists, não conformidades, evidências e ações decorrentes das inspeções.
+
+incident/
+
+Registra e acompanha incidentes, acidentes e ocorrências relacionadas à segurança, incluindo investigação e ações corretivas.
