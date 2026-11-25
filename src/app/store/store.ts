@@ -1,11 +1,12 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { DepartmentType } from "@/components/AppSidebar/types/sidebar.types";
+import type { DepartmentType } from "@shared/ui/AppSidebar/types/sidebar.types";
 
 interface UserType {
   name: string;
   occupations: string;
-  avatar: string;
+  avatar: string | null;
+  email: string;
 }
 interface AppVersionType {
   userVersion: number | null;
@@ -28,88 +29,88 @@ interface MenuStore {
   setDepartmentSelected: (department: DepartmentType) => void;
 }
 
-// const dataSample = [
-//   {
-//     id: 2,
-//     title: "Gerenciamento",
-//     url: "/manager",
-//     icon: "default",
-//     activities: [
-//       {
-//         id: 1,
-//         item_id: 1,
-//         title: "Centros de custo",
-//         order: 1,
-//         url: "/manager/cost-center",
-//         icon: "default",
-//       },
-//       {
-//         id: 1,
-//         item_id: 1,
-//         title: "Grupos de pagamento",
-//         order: 1,
-//         url: "/manager/payment-groups",
-//         icon: "default",
-//       },
-//       {
-//         id: 1,
-//         title: "Localização",
-//         department_id: 1,
-//         order: 1,
-//         icon: "default",
-//         activities: [
-//           {
-//             id: 1,
-//             item_id: 1,
-//             title: "Localizações",
-//             order: 1,
-//             url: "/manager/localizations",
-//             icon: "default",
-//           },
-//           {
-//             id: 2,
-//             item_id: 1,
-//             title: "Unidades",
-//             order: 1,
-//             url: "/manager/localizations/buildings",
-//             icon: "default",
-//           },
-//           {
-//             id: 3,
-//             item_id: 1,
-//             title: "Andares",
-//             order: 1,
-//             url: "/manager/localizations/building-floors",
-//             icon: "default",
-//           },
-//           {
-//             id: 4,
-//             item_id: 1,
-//             title: "Divisões",
-//             order: 1,
-//             url: "/manager/localizations/building-divisions",
-//             icon: "default",
-//           },
-//           {
-//             id: 5,
-//             item_id: 1,
-//             title: "Tipos de espaços",
-//             order: 1,
-//             url: "/manager/localizations/building-spaces",
-//             icon: "default",
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     title: "Operações",
-//     url: "/operations",
-//     icon: "default",
-//     activities: [],
-//   },
-// ];
+const dataSample = [
+  {
+    id: 2,
+    title: "Backoffice",
+    url: "/backoffice",
+    icon: "default",
+    activities: [
+      {
+        id: 1,
+        item_id: 1,
+        title: "Centros de custo",
+        order: 1,
+        url: "/manager/cost-center",
+        icon: "default",
+      },
+      {
+        id: 1,
+        item_id: 1,
+        title: "Grupos de pagamento",
+        order: 1,
+        url: "/manager/payment-groups",
+        icon: "default",
+      },
+      {
+        id: 1,
+        title: "Localização",
+        department_id: 1,
+        order: 1,
+        icon: "default",
+        activities: [
+          {
+            id: 1,
+            item_id: 1,
+            title: "Localizações",
+            order: 1,
+            url: "/manager/localizations",
+            icon: "default",
+          },
+          {
+            id: 2,
+            item_id: 1,
+            title: "Unidades",
+            order: 1,
+            url: "/manager/localizations/buildings",
+            icon: "default",
+          },
+          {
+            id: 3,
+            item_id: 1,
+            title: "Andares",
+            order: 1,
+            url: "/manager/localizations/building-floors",
+            icon: "default",
+          },
+          {
+            id: 4,
+            item_id: 1,
+            title: "Divisões",
+            order: 1,
+            url: "/manager/localizations/building-divisions",
+            icon: "default",
+          },
+          {
+            id: 5,
+            item_id: 1,
+            title: "Tipos de espaços",
+            order: 1,
+            url: "/manager/localizations/building-spaces",
+            icon: "default",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Operações",
+    url: "/operations",
+    icon: "default",
+    activities: [],
+  },
+];
 
 const useAppStore = create<AppStore>()(
   persist(
@@ -147,7 +148,7 @@ const useAppStore = create<AppStore>()(
 const useMenuStore = create<MenuStore>()(
   persist(
     (set) => ({
-      departments: [],
+      departments: dataSample, //[],
       departmentSelected: null,
       setDepartments: (departments) =>
         set((state) => ({ ...state, departments })),

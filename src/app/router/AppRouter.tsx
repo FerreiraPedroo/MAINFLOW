@@ -4,17 +4,16 @@ import {
   createRoutesFromElements,
   Navigate,
   Route,
-  Routes,
 } from "react-router-dom";
 
 import { LayoutPrivate } from "@/shared/layouts/LayoutPrivate";
 import { LayoutPublic } from "@/shared/layouts/LayoutPublic";
 import { RootLayout } from "@/shared/layouts/RootLayout";
-import { Home } from "@/features/core/home";
+import { Home } from "@/features/home";
 // import { NotFoundPage } from "@/pages/errors/NotFoundPage";
 
 const AuthModule = lazy(() =>
-  import("@/features/core/auth").then((m) => ({
+  import("@/features/auth/auth-routes").then((m) => ({
     default: m.AuthRouter,
   })),
 );
@@ -25,11 +24,11 @@ const BackofficeModule = lazy(() =>
   })),
 );
 
-const OperationFeatures = lazy(() =>
-  import("@/features/operations/OperationRoutes").then((m) => ({
-    default: m.OperationRouter,
-  })),
-);
+// const OperationFeatures = lazy(() =>
+//   import("@/features/operations/OperationRoutes").then((m) => ({
+//     default: m.OperationRouter,
+//   })),
+// );
 
 // const SafetyModule = lazy(() =>
 //   import("@/features/safety-security/safety").then((m) => ({
@@ -48,14 +47,13 @@ export const Approuter = createBrowserRouter(
     <Route element={<RootLayout />}>
       <Route element={<LayoutPrivate />}>
         <Route path="home" element={<Home />} />
-
         <Route path="backoffice/*" element={<BackofficeModule />} />
         {/* <Route path="operations" element={<OperationFeatures />} /> */}
       </Route>
       <Route element={<LayoutPublic />}>
-        <Route path="login/*" element={<AuthModule />} />
+        <Route path="auth/*" element={<AuthModule />} />
       </Route>
-
+      /
       <Route path="*" element={<Navigate to="/home" />} />
     </Route>,
   ),

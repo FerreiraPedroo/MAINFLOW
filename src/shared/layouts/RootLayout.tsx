@@ -1,8 +1,10 @@
 import React, { Suspense, useMemo } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { Modal } from "../components/modal/Modal";
+
 import { useAppStore } from "@/app/store/store";
 import { SnackBarProvider } from "@/app/provider/SnackBarProvider";
+
+import { Modal } from "../components/modal/Modal";
 import { Loading } from "../components/loading/Loading";
 
 export function RootLayout() {
@@ -10,24 +12,36 @@ export function RootLayout() {
   const token = useAppStore((state) => state.token);
 
   const ModalDisconnect = useMemo(() => {
-    if (token && (location.pathname == "/" || location.pathname == "/login")) {
+    const publicPaths = [
+      "/auth/login",
+      "/auth/register",
+      "/auth/forgot-password",
+      "/",
+    ];
+
+    // console.log("================>", location.pathname);
+    // console.log("1º:", token, publicPaths.includes(location.pathname));
+    // console.log("2º:", !token, publicPaths.includes(location.pathname));
+    // console.log("3º:", !token, !publicPaths.includes(location.pathname));
+
+    if (token && publicPaths.includes(location.pathname)) {
       return <Navigate to={"/home"} />;
-    } else if (
-      token ||
-      location.pathname == "/" ||
-      location.pathname == "/login"
-    ) {
+    } else if (!token && publicPaths.includes(location.pathname)) {
       return null;
-    } else {
+    } else if (!token && !publicPaths.includes(location.pathname)) {
       return (
         <div className="absolute top-0 left-0 w-full h-full z-200 backdrop-blur-xs">
           <Modal
             title="Você foi desconectado."
             info="Faça login novamente."
             description=""
-            type="red"
+            type="fail"
             buttons={[
-              { text: "Sair", type: "red", onClick: () => navigate("/login") },
+              {
+                text: "Sair",
+                color: "red",
+                onClick: () => navigate("/auth/login"),
+              },
             ]}
           />
         </div>
@@ -36,13 +50,11 @@ export function RootLayout() {
   }, [token, location.pathname]);
 
   return (
-    <>
-      <Suspense fallback={<Loading />}>
-        <SnackBarProvider>
-          {ModalDisconnect}
-          <Outlet />
-        </SnackBarProvider>
-      </Suspense>
-    </>
+    <Suspense fallback={<Loading />}>
+      <SnackBarProvider>
+        {ModalDisconnect}
+        <Outlet />
+      </SnackBarProvider>
+    </Suspense>
   );
 }

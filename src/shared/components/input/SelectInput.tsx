@@ -22,7 +22,7 @@ export function SelectInput({
   options = [],
   defaultOption = true,
   required = true,
-  disabled = false,
+  disabled,
   onChange,
   onBlur,
   hiddenText = false,
@@ -50,12 +50,38 @@ export function SelectInput({
       </label>
       <select
         name={name}
-        defaultValue={value}
+        // defaultValue={value}
+        value={value}
         required={required}
         disabled={disabled}
         onChange={onChange}
         onBlur={onBlur}
-        className={`w-full peer bg-white pl-2 pr-8 py-1.5 text-ellipsis text-sm font-medium rounded border border-slate-300 focus:ring-1 focus:ring-blue-400 outline-none transition-transform shadow-sm appearance-none`}
+        className={`
+          w-full
+          peer
+          bg-white
+          pl-2 
+          pr-8 
+          py-1.5 
+          text-ellipsis 
+          text-sm 
+          font-medium 
+          rounded 
+          border 
+          border-slate-300 
+          focus:ring-1 
+          focus:ring-blue-400 
+          outline-none 
+          transition-transform 
+          shadow-sm 
+          appearance-none
+        
+          disabled:ring-0
+        disabled:bg-stone-300
+        disabled:border-stone-400
+        disabled:text-stone-500
+          disabled:cursor-default
+        `}
       >
         {defaultOption && <option value="">Selecione...</option>}
         {options.map((opt) => {

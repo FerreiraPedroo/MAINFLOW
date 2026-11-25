@@ -1,13 +1,16 @@
 import React from "react";
-import { colorTypes } from "./colors/colors";
+import { colorTypes } from "./config/colors";
+import { sizeClasses } from "./config/sizes";
 
 export function TextButton({
   color = "stone",
+  size = "sm",
   text,
   disable = false,
   onClick,
 }: {
   color: keyof typeof colorTypes;
+  size: keyof typeof sizeClasses;
   text: string;
   disable?: boolean;
   onClick: () => void;
@@ -20,8 +23,6 @@ export function TextButton({
       className={`
         font-semibold
         flex
-        px-4
-        py-2
 
         border
         hover:ring-1
@@ -32,6 +33,7 @@ export function TextButton({
         shadow-md
         rounded-md
         justify-center
+        whitespace-nowrap
 
         disabled:ring-0
         disabled:bg-stone-300
@@ -39,6 +41,7 @@ export function TextButton({
         disabled:text-stone-500
 
         ${colorTypes[color] ?? colorTypes["stone"]}
+        ${sizeClasses[size] ?? sizeClasses["sm"]}
         `}
     >
       {text}

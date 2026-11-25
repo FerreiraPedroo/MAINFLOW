@@ -23,7 +23,7 @@ export function SearchButtonTextInput({
 }) {
   return (
     <div className={gridCols[cols]}>
-      <label className="block text-sm font-medium text-slate-700 mb-1 pl-2">
+      <label className="block text-sm font-medium text-slate-700 mb-1 pl-1">
         {text}
         {required && <span className="text-red-500">*</span>}
       </label>

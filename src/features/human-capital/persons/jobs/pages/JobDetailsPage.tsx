@@ -7,7 +7,7 @@ import { Header } from "@/shared/components/header/Header";
 
 // import { Modal } from "@/shared/components/modal/Modal";
 import type { Job } from "@/features/persons/jobs/types/jobs.types";
-import { Breadcrumb } from "@/shared/components/Breadcrumb";
+import { Breadcrumb } from "@/shared/components/breadcrumb/Breadcrumb";
 
 export function JobDetailsPage() {
   const navigate = useNavigate();

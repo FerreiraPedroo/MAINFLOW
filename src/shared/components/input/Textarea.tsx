@@ -37,7 +37,26 @@ export function Textarea({
         value={value}
         required={required}
         readOnly={readOnly}
-        className={`w-full bg-white px-2 py-1.5 text-sm rounded border border-slate-300 focus:ring-1 focus:ring-blue-400 outline-none transition-all shadow-sm`}
+        className={`w-full 
+          bg-white 
+          px-2 
+          py-1.5 
+          text-sm 
+          rounded 
+          border 
+          border-slate-300 
+          focus:ring-1 
+          focus:ring-blue-400 
+          outline-none 
+          transition-all 
+          shadow-sm
+          
+          disabled:ring-0
+        disabled:bg-stone-300
+        disabled:border-stone-400
+        disabled:text-stone-500
+          disabled:cursor-default
+          `}
         placeholder={`${placeholder && "Ex: " + placeholder}`}
         disabled={disabled}
         onChange={onChange}

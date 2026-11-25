@@ -19,7 +19,9 @@ export function Header({
         <h1 className={`w-full text-4xl font-bold ${center && "text-center"}`}>
           {title}
         </h1>
-        <p className="text-slate-500">{subTitle}</p>
+        <p className={`text-slate-500 ${center && "text-center"}`}>
+          {subTitle}
+        </p>
       </div>
     </header>
   );

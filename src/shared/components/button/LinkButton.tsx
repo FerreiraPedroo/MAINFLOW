@@ -1,18 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { colorTypes } from "./colors/colors";
+import { colorTypes } from "./config/colors";
+import { sizeClasses } from "./config/sizes";
 
-export function LinkButton({ to, text }: { to: string; text: string }) {
+export function LinkButton({
+  to,
+  text,
+  size = "md",
+}: {
+  to: string;
+  text: string;
+  size: keyof typeof sizeClasses;
+}) {
   return (
     <Link
       to={to}
       className={`
         font-semibold
         flex
-        px-4
-        py-2
 
-        justify-center
         hover:ring-1
         hover:cursor-pointer
         transition
@@ -20,6 +26,7 @@ export function LinkButton({ to, text }: { to: string; text: string }) {
         duration-200
         shadow-md
         rounded-md
+        whitespace-nowrap
 
         disabled:ring-0
         disabled:bg-stone-300
@@ -29,6 +36,7 @@ export function LinkButton({ to, text }: { to: string; text: string }) {
 
 
       ${colorTypes.blue}
+      ${sizeClasses[size] ?? sizeClasses["sm"]}
       `}
     >
       {text}

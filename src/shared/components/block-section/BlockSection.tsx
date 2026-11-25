@@ -7,7 +7,7 @@ type BlockSection = {
 
 export function BlockSection({ children, className }: BlockSection) {
   return (
-    <div
+    <section
       className={`
       p-4
       bg-white
@@ -19,7 +19,7 @@ export function BlockSection({ children, className }: BlockSection) {
     `}
     >
       {children}
-    </div>
+    </section>
   );
 }
 

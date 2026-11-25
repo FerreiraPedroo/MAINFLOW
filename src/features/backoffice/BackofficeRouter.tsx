@@ -1,8 +1,10 @@
 import React, { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { paymentControlPagesConfig } from "./payment-control";
-import { managementPagesConfig } from "./management";
+import { costCenterPagesConfig } from "./center-cost/config";
+import { paymentGroupPagesConfig } from "./payment-group/config";
+import { paymentSubmissionPagesConfig } from "./payment-submission";
+import { backofficePagesConfig } from "./config/backoffice-pages.config";
 
 export function BackofficeRouter() {
   const createRoute = useCallback((pageList: any) => {
@@ -10,19 +12,19 @@ export function BackofficeRouter() {
       ({
         path,
         element: Component,
-        permission,
       }: {
         path: string;
         element: React.ComponentType;
-        permission: string;
       }) => <Route key={path} path={path} element={<Component />} />,
     );
   }, []);
 
   return (
     <Routes>
-      {createRoute(paymentControlPagesConfig)}
-      {createRoute(managementPagesConfig)}
+      {createRoute(backofficePagesConfig)}
+      {createRoute(paymentSubmissionPagesConfig)}
+      {createRoute(costCenterPagesConfig)}
+      {createRoute(paymentGroupPagesConfig)}
     </Routes>
   );
 }

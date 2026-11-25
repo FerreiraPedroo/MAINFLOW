@@ -7,7 +7,9 @@ export function BackButton() {
     <button
       onClick={() => navigate(-1)}
       className="
-      h-10
+      max-h-8
+      min-h-8
+      h-8
       px-1
       font-semibold
         bg-blue-100

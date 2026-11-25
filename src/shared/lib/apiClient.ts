@@ -38,8 +38,11 @@ export async function apiClient(
 
     return await response.json();
   } catch (error: any) {
-    console.log(error)
-    const errorJson = await error.json();
-    throw errorJson;
+    if (error.message == "Failed to fetch") {
+      throw error;
+    } else {
+      const errorJson = await error.json();
+      throw errorJson;
+    }
   }
 }

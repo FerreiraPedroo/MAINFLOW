@@ -1,3 +1,5 @@
+import React from "react";
+
 const colors: any = {
   error: {
     bg1: "bg-rose-50 border-rose-200",
